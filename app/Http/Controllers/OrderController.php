@@ -66,7 +66,7 @@ class OrderController extends Controller
             'status' => [
                 'required',
                 'string',
-                'in:pending,confirmed,preparing,ready,completed',
+                'in:pending,confirmed,preparing,ready,completed,cancelled',
             ],
         ]);
 

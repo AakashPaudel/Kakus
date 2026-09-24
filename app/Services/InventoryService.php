@@ -61,15 +61,13 @@ class InventoryService
             );
         }
 
-        return DB::transaction(function () use ($menuItem, $quantity) {
-            $inventory = $menuItem->inventory()
-                ->lockForUpdate()
-                ->firstOrFail();
+        $inventory = $menuItem->inventory()
+            ->lockForUpdate()
+            ->firstOrFail();
 
-            $inventory->increment('quantity', $quantity);
+        $inventory->increment('quantity', $quantity);
 
-            return $inventory->fresh();
-        });
+        return $inventory->fresh();
     }
 
     public function isLowStock(MenuItem $menuItem): bool

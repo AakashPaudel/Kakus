@@ -45,7 +45,7 @@ class OrderService
             }
 
             $subtotal = $cart->cartItems->sum(
-                fn ($cartItem) => $cartItem->subtotal
+                fn($cartItem) => $cartItem->subtotal
             );
 
             $discount = 0;
@@ -112,22 +112,35 @@ class OrderService
             $newStatus
         ) {
             $allowedTransitions = [
-                'pending' => ['confirmed'],
-                'confirmed' => ['preparing'],
-                'preparing' => ['ready'],
-                'ready' => ['completed'],
+                'pending' => ['confirmed', 'cancelled'],
+                'confirmed' => ['preparing', 'cancelled'],
+                'preparing' => ['ready', 'cancelled'],
+                'ready' => ['completed', 'cancelled'],
                 'completed' => [],
+                'cancelled' => [],
             ];
 
             $currentStatus = $order->status;
 
-            if (! in_array(
+            if (!in_array(
                 $newStatus,
                 $allowedTransitions[$currentStatus] ?? []
             )) {
                 throw new RuntimeException(
                     "Order cannot move from {$currentStatus} to {$newStatus}."
                 );
+            }
+
+            if ($newStatus === 'cancelled') {
+
+                $order->load('orderItems.menuItem');
+
+                foreach ($order->orderItems as $orderItem) {
+                    $this->inventoryService->restoreStock(
+                        $orderItem->menuItem,
+                        $orderItem->quantity
+                    );
+                }
             }
 
             $order->status = $newStatus;
