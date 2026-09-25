@@ -13,6 +13,13 @@ return new class extends Migration
     {
         Schema::create('restaurant_tables', function (Blueprint $table) {
             $table->id();
+
+            $table->string('table_number')->unique();
+
+            $table->unsignedSmallInteger('capacity');
+
+            $table->string('status')->default('available');
+
             $table->timestamps();
         });
     }
