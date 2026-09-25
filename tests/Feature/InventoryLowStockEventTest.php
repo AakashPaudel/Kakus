@@ -19,7 +19,7 @@ class InventoryLowStockEventTest extends TestCase
         Event::fake([
             LowStockDetected::class,
         ]);
-
+        
         $menuItem = MenuItem::factory()->create();
 
         Inventory::create([

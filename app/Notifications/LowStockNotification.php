@@ -9,7 +9,7 @@ use Illuminate\Notifications\Notification;
 use App\Models\MenuItem;
 use App\Models\Inventory;
 
-class LowStockNotification extends Notification
+class LowStockNotification extends Notification implements ShouldQueue
 {
     use Queueable;
 
@@ -34,20 +34,20 @@ class LowStockNotification extends Notification
     /**
      * Get the mail representation of the notification.
      */
-    public function toMail(object $notifiable): MailMessage
-    {
-        return (new MailMessage)
-            ->line('The introduction to the notification.')
-            ->action('Notification Action', url('/'))
-            ->line('Thank you for using our application!');
-    }
+    // public function toMail(object $notifiable): MailMessage
+    // {
+    //     return (new MailMessage)
+    //         ->line('The introduction to the notification.')
+    //         ->action('Notification Action', url('/'))
+    //         ->line('Thank you for using our application!');
+    // }
 
     /**
      * Get the array representation of the notification.
      *
      * @return array<string, mixed>
      */
-    public function toArray(object $notifiable): array
+    public function toDatabase(object $notifiable): array
     {
         return [
             //
