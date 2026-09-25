@@ -5,6 +5,7 @@ use App\Http\Controllers\OrderController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use App\Http\Controllers\RestaurantTableController;
 
 Route::inertia('/', 'Home')->name('home');
 Route::inertia('/menu', 'menu/Menu')->name('menu');
@@ -79,4 +80,23 @@ Route::middleware('auth')->group(function () {
     )->name('orders.status.update');
 });
 
-require __DIR__.'/settings.php';
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::resource(
+        'admin/tables',
+        RestaurantTableController::class
+    )->except(['show'])->names([
+        'index' => 'admin.tables.index',
+        'create' => 'admin.tables.create',
+        'store' => 'admin.tables.store',
+        'edit' => 'admin.tables.edit',
+        'update' => 'admin.tables.update',
+        'destroy' => 'admin.tables.destroy',
+    ]);
+
+    Route::patch(
+        'admin/tables/{restaurantTable}/status',
+        [RestaurantTableController::class, 'updateStatus']
+    )->name('admin.tables.update-status');
+});
+
+require __DIR__ . '/settings.php';
