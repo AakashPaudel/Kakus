@@ -6,6 +6,8 @@ use App\Models\Inventory;
 use App\Models\MenuItem;
 use Illuminate\Support\Facades\DB;
 use RuntimeException;
+use App\Events\LowStockDetected;
+use App\Models\Order;
 
 class InventoryService
 {
@@ -28,7 +30,8 @@ class InventoryService
 
     public function deductStock(
         MenuItem $menuItem,
-        int $quantity
+        int $quantity,
+        ?Order $order = null
     ): Inventory {
         if ($quantity <= 0) {
             throw new RuntimeException(
@@ -46,9 +49,36 @@ class InventoryService
             );
         }
 
+        /*
+         * Remember whether the inventory was already
+         * in the low-stock state before this deduction.
+         */
+        $wasLowStock = $inventory->quantity <= $inventory->reorder_level;
+
         $inventory->decrement('quantity', $quantity);
 
-        return $inventory->fresh();
+        $inventory = $inventory->fresh();
+
+        /*
+         * Notify only when the stock crosses INTO
+         * the low-stock state.
+         *
+         * Example:
+         *
+         * 6 -> 5  = notify
+         * 5 -> 4  = no notification
+         * 4 -> 3  = no notification
+         */
+        $isLowStock = $inventory->quantity <= $inventory->reorder_level;
+
+        if (!$wasLowStock && $isLowStock) {
+            LowStockDetected::dispatch(
+                $menuItem,
+                $inventory
+            );
+        }
+
+        return $inventory;
     }
 
     public function restoreStock(

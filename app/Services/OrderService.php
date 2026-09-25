@@ -85,7 +85,8 @@ class OrderService
 
                 $this->inventoryService->deductStock(
                     $cartItem->menuItem,
-                    $cartItem->quantity
+                    $cartItem->quantity,
+                    $order
                 );
             }
 
