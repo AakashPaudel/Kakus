@@ -28,6 +28,8 @@ class Reservation extends Model
             'reservation_date' => 'date',
             'guest_count' => 'integer',
             'status' => ReservationStatus::class,
+            'start_time' => 'datetime:H:i',
+            'end_time' => 'datetime:H:i',
         ];
     }
 

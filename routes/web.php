@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\RestaurantTableController;
+use App\Http\Controllers\ReservationController;
 
 Route::inertia('/', 'Home')->name('home');
 Route::inertia('/menu', 'menu/Menu')->name('menu');
@@ -80,6 +81,36 @@ Route::middleware('auth')->group(function () {
     )->name('orders.status.update');
 });
 
+Route::middleware('auth')->group(function () {
+
+    Route::post(
+        '/reservations',
+        [ReservationController::class, 'store']
+    )->name('reservations.store');
+
+    Route::get(
+        '/reservations/{reservation}',
+        [ReservationController::class, 'show']
+    )->name('reservations.show');
+
+    Route::patch(
+        '/reservations/{reservation}/cancel',
+        [ReservationController::class, 'cancel']
+    )->name('reservations.cancel');
+});
+
+Route::middleware('auth')->group(function () {
+    Route::get(
+        '/admin/reservations',
+        [ReservationController::class, 'index']
+    )->name('admin.reservations.index');
+});
+
+Route::patch(
+    '/admin/reservations/{reservation}/status',
+    [ReservationController::class, 'updateStatus']
+)->name('admin.reservations.update-status');
+
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::resource(
         'admin/tables',
@@ -99,6 +130,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
         'admin/tables/{restaurantTable}/status',
         [RestaurantTableController::class, 'updateStatus']
     )->name('admin.tables.update-status');
+
+
 });
 
 require __DIR__ . '/settings.php';
