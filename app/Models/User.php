@@ -68,4 +68,9 @@ class User extends Authenticatable implements PasskeyUser
             'changed_by'
         );
     }
+
+    public function reservations(): HasMany
+    {
+        return $this->hasMany(Reservation::class);
+    }
 }

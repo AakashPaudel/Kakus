@@ -84,7 +84,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::resource(
         'admin/tables',
         RestaurantTableController::class
-    )->except(['show'])->names([
+    )->except(['show'])->parameters([
+        'admin/tables' => 'restaurantTable',
+    ])->names([
         'index' => 'admin.tables.index',
         'create' => 'admin.tables.create',
         'store' => 'admin.tables.store',

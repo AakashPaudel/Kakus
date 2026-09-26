@@ -19,7 +19,7 @@ class StoreRestaurantTableRequest extends FormRequest
                 'required',
                 'string',
                 'max:20',
-                Rule::unique('restaurant_tables', 'table_number'),
+                Rule::unique('restaurant_tables', 'table_number')
             ],
             'capacity' => [
                 'required',

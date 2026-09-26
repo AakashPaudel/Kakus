@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use Inertia\Response;
 use App\RestaurantTableStatus;
+use Illuminate\Validation\Rule;
 
 
 class RestaurantTableController extends Controller
@@ -61,12 +62,12 @@ class RestaurantTableController extends Controller
 
     public function update(
         UpdateRestaurantTableRequest $request,
-        RestaurantTable $restaurantTable
+        RestaurantTable $table
     ): RedirectResponse {
-        Gate::authorize('update', $restaurantTable);
+        Gate::authorize('update', $table);
 
         $this->tableService->updateTable(
-            $restaurantTable,
+            $table,
             $request->validated('table_number'),
             $request->integer('capacity')
         );
@@ -76,11 +77,11 @@ class RestaurantTableController extends Controller
     }
 
     public function destroy(
-        RestaurantTable $restaurantTable
+        RestaurantTable $table
     ): RedirectResponse {
-        Gate::authorize('delete', $restaurantTable);
+        Gate::authorize('delete', $table);
 
-        $this->tableService->deactivate($restaurantTable);
+        $this->tableService->deactivate($table);
 
         return to_route('admin.tables.index')
             ->with('success', 'Restaurant table deactivated successfully.');
