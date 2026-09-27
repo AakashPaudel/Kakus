@@ -9,6 +9,7 @@ use App\Models\RestaurantTable;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use RuntimeException;
+use App\Notifications\ReservationStatusNotification;
 
 class ReservationService
 {
@@ -131,6 +132,14 @@ class ReservationService
             $reservation->update([
                 'status' => $newStatus,
             ]);
+
+        
+
+            $reservation->user->notify(
+                new ReservationStatusNotification(
+                    $reservation->fresh()
+                )
+            );
 
             return $reservation->fresh();
         });
