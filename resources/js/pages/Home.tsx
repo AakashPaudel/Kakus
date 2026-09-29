@@ -1,14 +1,5 @@
-export default function Home() {
-    return (
-        <main className="container mx-auto px-4 py-8">
-            <h1 className="text-3xl font-bold text-amber-400">
-                Welcome to our restaurant
-            </h1>
+import HeroSection from '../components/restaurant/HeroSection';
 
-            <p className="mt-2 text-gray-600">
-                Discover delicious meals prepared with fresh ingredients.
-            </p>
-            {/* <MenuSection /> */}
-        </main>
-    );
+export default function Home() {
+    return <HeroSection />;
 }

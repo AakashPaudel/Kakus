@@ -89,6 +89,13 @@ Route::middleware('auth')->group(function () {
     )->name('reservations.store');
 
     Route::get(
+        '/reservations',
+        [ReservationController::class, 'index']
+    )->name('reservations.index');
+
+
+
+    Route::get(
         '/reservations/{reservation}',
         [ReservationController::class, 'show']
     )->name('reservations.show');
