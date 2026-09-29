@@ -33,7 +33,7 @@ class ReservationController extends Controller
         ])->latest()->get();
 
         return Inertia::render(
-            'admin/reservations/Index',
+            'admin/reservations/index',
             [
                 'reservations' => $reservations,
             ]
@@ -51,7 +51,7 @@ class ReservationController extends Controller
         ]);
 
         return Inertia::render(
-            'reservations/Show',
+            'admin/reservations/show',
             [
                 'reservation' => $reservation,
             ]
