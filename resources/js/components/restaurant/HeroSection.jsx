@@ -29,7 +29,7 @@ export default function HeroSection() {
                     </Link>
 
                     <Link
-                        href="/reservations"
+                        href="/reservations/create"
                         className="rounded-lg border border-stone-300 bg-white px-6 py-3 font-semibold text-stone-700 transition hover:bg-stone-100"
                     >
                         Reserve a Table

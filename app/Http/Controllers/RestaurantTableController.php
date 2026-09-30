@@ -24,7 +24,7 @@ class RestaurantTableController extends Controller
     {
         Gate::authorize('viewAny', RestaurantTable::class);
 
-        return inertia('admin/tables/Index', [
+        return inertia('admin/tables/index', [
             'tables' => $this->tableService->getAllTables(),
         ]);
     }
@@ -33,7 +33,7 @@ class RestaurantTableController extends Controller
     {
         Gate::authorize('create', RestaurantTable::class);
 
-        return inertia('admin/tables/Create');
+        return inertia('admin/tables/create');
     }
 
     public function store(
@@ -55,7 +55,7 @@ class RestaurantTableController extends Controller
     ): Response {
         Gate::authorize('update', $restaurantTable);
 
-        return inertia('admin/tables/Edit', [
+        return inertia('admin/tables/edit', [
             'table' => $restaurantTable,
         ]);
     }

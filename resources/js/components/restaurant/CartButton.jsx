@@ -12,7 +12,7 @@ export default function CartButton() {
         >
             🛒
             {cartCount > 0 && (
-                <span className="absolute -top-1 -right-1 flex h-5 min-w-5 items-center justify-center rounded-full bg-amber-700 text-xs text-white">
+                <span className="absolute -top-1 -right-1 flex h-5 min-w-5 items-center justify-center rounded-full bg-amber-700 text-xs text-amber-500">
                     {cartCount}
                 </span>
             )}

@@ -22,6 +22,14 @@ class ReservationController extends Controller
         protected ReservationService $reservationService
     ) {}
 
+    public function create(): Response
+    {
+        
+        return Inertia::render(
+            'admin/reservations/create'
+        );
+    }
+
 
     public function index(): Response
     {

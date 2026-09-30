@@ -83,6 +83,13 @@ Route::middleware('auth')->group(function () {
 
 Route::middleware('auth')->group(function () {
 
+
+    Route::get(
+        '/reservations/create',
+        [ReservationController::class, 'create']
+    )->name('reservations.create');
+
+    
     Route::post(
         '/reservations',
         [ReservationController::class, 'store']
