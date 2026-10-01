@@ -1,12 +1,14 @@
+
 import { Link, useForm } from '@inertiajs/react';
 
-export default function Create({ availableTables = [] }) {
+export default function Create({ availableTables }) {
     const { data, setData, post, processing, errors } = useForm({
         reservation_date: '',
-        reservation_time: '',
-        number_of_guests: '',
-        table_id: '',
-        notes: '',
+        start_time: '',
+        end_time: '',
+        guest_count: '',
+        restaurant_table_id: '',
+        special_request: '',
     });
 
     function submit(event) {
@@ -38,7 +40,7 @@ export default function Create({ availableTables = [] }) {
                 onSubmit={submit}
                 className="space-y-6 rounded-xl border border-stone-200 bg-black p-6 shadow-sm"
             >
-                {/* Date */}
+                {/* Reservation Date */}
                 <div>
                     <label
                         htmlFor="reservation_date"
@@ -64,55 +66,81 @@ export default function Create({ availableTables = [] }) {
                     )}
                 </div>
 
-                {/* Time */}
+                {/* Start Time */}
                 <div>
                     <label
-                        htmlFor="reservation_time"
+                        htmlFor="start_time"
                         className="block text-sm font-medium text-stone-700"
                     >
-                        Reservation Time
+                        Start Time
                     </label>
 
                     <input
-                        id="reservation_time"
+                        id="start_time"
                         type="time"
-                        value={data.reservation_time}
+                        value={data.start_time}
                         onChange={(event) =>
-                            setData('reservation_time', event.target.value)
+                            setData('start_time', event.target.value)
                         }
                         className="mt-2 w-full rounded-lg border border-stone-300 px-4 py-3 outline-none focus:border-amber-500"
                     />
 
-                    {errors.reservation_time && (
+                    {errors.start_time && (
                         <p className="mt-1 text-sm text-red-600">
-                            {errors.reservation_time}
+                            {errors.start_time}
                         </p>
                     )}
                 </div>
 
-                {/* Guests */}
+                {/* End Time */}
                 <div>
                     <label
-                        htmlFor="number_of_guests"
+                        htmlFor="end_time"
+                        className="block text-sm font-medium text-stone-700"
+                    >
+                        End Time
+                    </label>
+
+                    <input
+                        id="end_time"
+                        type="time"
+                        value={data.end_time}
+                        onChange={(event) =>
+                            setData('end_time', event.target.value)
+                        }
+                        className="mt-2 w-full rounded-lg border border-stone-300 px-4 py-3 outline-none focus:border-amber-500"
+                    />
+
+                    {errors.end_time && (
+                        <p className="mt-1 text-sm text-red-600">
+                            {errors.end_time}
+                        </p>
+                    )}
+                </div>
+
+                {/* Number of Guests */}
+                <div>
+                    <label
+                        htmlFor="guest_count"
                         className="block text-sm font-medium text-stone-700"
                     >
                         Number of Guests
                     </label>
 
                     <input
-                        id="number_of_guests"
+                        id="guest_count"
                         type="number"
                         min="1"
-                        value={data.number_of_guests}
+                        value={data.guest_count}
                         onChange={(event) =>
-                            setData('number_of_guests', event.target.value)
+                            setData('guest_count', event.target.value)
                         }
                         className="mt-2 w-full rounded-lg border border-stone-300 px-4 py-3 outline-none focus:border-amber-500"
                     />
 
-                    {errors.number_of_guests && (
+                    {errors.guest_count && (
                         <p className="mt-1 text-sm text-red-600">
-                            {errors.number_of_guests}
+                            {errors.guest_count}
                         </p>
                     )}
                 </div>
@@ -120,26 +148,31 @@ export default function Create({ availableTables = [] }) {
                 {/* Table */}
                 <div>
                     <label
-                        htmlFor="table_id"
+                        htmlFor="restaurant_table_id"
                         className="block text-sm font-medium text-stone-700"
                     >
                         Choose Table
                     </label>
 
                     <select
-                        id="table_id"
-                        value={data.table_id}
+                        id="restaurant_table_id"
+                        value={data.restaurant_table_id}
                         onChange={(event) =>
-                            setData('table_id', event.target.value)
+                            setData(
+                                'restaurant_table_id',
+                                event.target.value,
+                            )
                         }
                         className="mt-2 w-full rounded-lg border border-stone-300 px-4 py-3 outline-none focus:border-amber-500"
                     >
                         <option value="">Select a table</option>
 
                         {availableTables.map((table) => (
-                            <option key={table.id} value={table.id}>
-                                Table {table.table_number} — {table.capacity}{' '}
-                                seats
+                            <option
+                                key={table.id}
+                                value={table.id}
+                            >
+                                {table.table_number}
                             </option>
                         ))}
                     </select>
@@ -150,36 +183,39 @@ export default function Create({ availableTables = [] }) {
                         </p>
                     )}
 
-                    {errors.table_id && (
+                    {errors.restaurant_table_id && (
                         <p className="mt-1 text-sm text-red-600">
-                            {errors.table_id}
+                            {errors.restaurant_table_id}
                         </p>
                     )}
                 </div>
 
-                {/* Notes */}
+                {/* Special Request */}
                 <div>
                     <label
-                        htmlFor="notes"
+                        htmlFor="special_request"
                         className="block text-sm font-medium text-stone-700"
                     >
                         Additional Notes
                     </label>
 
                     <textarea
-                        id="notes"
+                        id="special_request"
                         rows="4"
-                        value={data.notes}
+                        value={data.special_request}
                         onChange={(event) =>
-                            setData('notes', event.target.value)
+                            setData(
+                                'special_request',
+                                event.target.value,
+                            )
                         }
                         placeholder="Any special requests?"
                         className="mt-2 w-full rounded-lg border border-stone-300 px-4 py-3 outline-none focus:border-amber-500"
                     />
 
-                    {errors.notes && (
+                    {errors.special_request && (
                         <p className="mt-1 text-sm text-red-600">
-                            {errors.notes}
+                            {errors.special_request}
                         </p>
                     )}
                 </div>
@@ -205,3 +241,4 @@ export default function Create({ availableTables = [] }) {
         </div>
     );
 }
+

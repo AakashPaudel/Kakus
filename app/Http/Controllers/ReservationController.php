@@ -14,6 +14,7 @@ use Inertia\Response;
 use Illuminate\Support\Facades\Gate;
 use App\ReservationStatus;
 use Illuminate\Validation\Rule;
+use App\Models\RestaurantTable;
 
 
 class ReservationController extends Controller
@@ -24,9 +25,12 @@ class ReservationController extends Controller
 
     public function create(): Response
     {
-        
+        $availableTables = RestaurantTable::where('status', 'available')->get();
+        // @dd($availableTables);
         return Inertia::render(
-            'admin/reservations/create'
+            'admin/reservations/create',[
+                'availableTables' => $availableTables,
+            ]
         );
     }
 
@@ -41,7 +45,7 @@ class ReservationController extends Controller
         ])->latest()->get();
 
         return Inertia::render(
-            'admin/reservations/index',
+            'admin/reservations/Index',
             [
                 'reservations' => $reservations,
             ]
@@ -82,6 +86,8 @@ class ReservationController extends Controller
         StoreReservationRequest $request
     ): RedirectResponse {
         try {
+            // @dd($request->validated());
+
             $this->reservationService->createReservation(
                 $request->user(),
                 $request->validated()

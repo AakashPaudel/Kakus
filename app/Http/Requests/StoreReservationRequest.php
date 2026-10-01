@@ -9,6 +9,9 @@ use Illuminate\Validation\Validator;
 
 class StoreReservationRequest extends FormRequest
 {
+    /**
+     * Determine if the user is authorized to make this request.
+     */
     public function authorize(): bool
     {
         return Auth::check();
@@ -72,3 +75,5 @@ class StoreReservationRequest extends FormRequest
         });
     }
 }
+
+
