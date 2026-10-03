@@ -7,9 +7,22 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\RestaurantTableController;
 use App\Http\Controllers\ReservationController;
+use App\Models\MenuItem;
+
+
 
 Route::inertia('/', 'Home')->name('home');
-Route::inertia('/menu', 'menu/Menu')->name('menu');
+
+Route::get('/menu', function () {
+    $items = MenuItem::query()
+        ->where('is_available', true)
+        ->get();
+
+    return Inertia::render('menu/Menu', [
+        'items' => $items,
+    ]);
+})->name('menu');
+// Route::inertia('/menu', 'menu/Menu')->name('menu');
 
 Route::get('/dashboard', function (Request $request) {
     return match ($request->user()->role) {
@@ -89,7 +102,7 @@ Route::middleware('auth')->group(function () {
         [ReservationController::class, 'create']
     )->name('reservations.create');
 
-    
+
     Route::post(
         '/reservations',
         [ReservationController::class, 'store']

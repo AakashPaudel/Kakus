@@ -122,5 +122,5 @@
         "resources/js/pages/orders/Index.jsx",
         "resources/js/pages/orders/ShowOrder.jsx",
         "resources/js/layouts/RestaurantLayout.jsx"
-    ]
+, "resources/js/pages/menu/Menu.jsx"    ]
 }
