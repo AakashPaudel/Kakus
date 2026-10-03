@@ -11,7 +11,17 @@ use App\Models\MenuItem;
 
 
 
-Route::inertia('/', 'Home')->name('home');
+Route::get('/', function () {
+
+    $todaysSpecials = MenuItem::query()
+        ->where('is_available', true)
+        ->where('is_featured', true)
+        ->get();
+
+    return Inertia::render('Home', [
+        'todaysSpecials' => $todaysSpecials,
+    ]);
+})->name('home');
 
 Route::get('/menu', function () {
     $items = MenuItem::query()
