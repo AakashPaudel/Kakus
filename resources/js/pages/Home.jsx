@@ -7,7 +7,7 @@ export default function Home({ todaysSpecials,galleryItems }) {
     
     return (
     <>
-            <HeroSection />;
+            <HeroSection />
             <TodaysSpecialSection items={todaysSpecials} />
             <DishGallery items={galleryItems} />
 

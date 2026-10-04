@@ -9,7 +9,7 @@ export default function Logo() {
 
             <div className="leading-tight">
                 <span className="block text-xl font-bold tracking-wide text-stone-900">
-                    La Maison
+                    Kaku's
                 </span>
 
                 <span className="hidden text-xs tracking-[0.2em] text-amber-700 uppercase sm:block">

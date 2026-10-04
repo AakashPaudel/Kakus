@@ -2,7 +2,7 @@ import MenuCard from '@/components/restaurant/MenuCard';
 
 export default function TodaysSpecialSection({ items }) {
     return (
-        <section className="py-16">
+        <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
             <div className="mb-8 text-center">
                 <p className="text-sm font-semibold uppercase tracking-wider text-gray-500">
                     Today's Special

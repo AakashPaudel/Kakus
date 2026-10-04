@@ -15,7 +15,7 @@ Route::get('/', function () {
 
     $todaysSpecials = MenuItem::query()
         ->where('is_available', true)
-        ->where('is_featured', true)
+        // ->where('is_featured', true)
         ->get();
     $galleryItems = MenuItem::query()
         ->where('is_available', true)

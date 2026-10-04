@@ -16,7 +16,7 @@ export default function DesktopNavigation() {
                 <Link
                     key={item.name}
                     href={item.href}
-                    className="text-sm font-medium text-stone-600 transition hover:text-amber-700"
+                    className="text-md font-medium transition hover:text-amber-300"
                 >
                     {item.name}
                 </Link>

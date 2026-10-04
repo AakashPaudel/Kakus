@@ -42,7 +42,7 @@ export default function UserMenu() {
                 {user.name?.charAt(0).toUpperCase()}
             </button>
 
-            <p className="text-black">{open ? 'OPEN' : 'CLOSED'}</p>
+            {/* <p className="text-black">{open ? 'OPEN' : 'CLOSED'}</p> */}
 
             {open && (
                 <div className="absolute right-0 mt-3 w-48 rounded-lg border bg-white shadow-lg">

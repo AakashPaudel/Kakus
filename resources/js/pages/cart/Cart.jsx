@@ -27,7 +27,8 @@ export default function Cart({ cart }) {
 
     return (
         <>
-            <div className="bg-black">
+        <section className="bg-black">
+            <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
                 <h1 className="text-3xl font-bold">Your Cart</h1>
 
                 {!cart || cart.cartItems.length === 0 ? (
@@ -108,6 +109,7 @@ export default function Cart({ cart }) {
                     </div>
                 )}
             </div>
+        </section>
         </>
     );
 }
