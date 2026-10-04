@@ -30,6 +30,10 @@ Route::get('/', function () {
     ]);
 })->name('home');
 
+Route::get('/contact', function () {
+    return Inertia::render('Contact');
+})->name('contact');
+
 Route::get('/about', function () {
     $featuredItem = MenuItem::query()
         ->where('is_available', true)

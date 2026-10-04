@@ -1,23 +1,23 @@
 import WhyChooseUs from "../components/restaurant/about/WhyChooseUs";
 export default function About({ featuredItem }) {
     const stats = [
-    {
-        value: '1,000+',
-        label: 'Happy Customers',
-    },
-    {
-        value: '4.8',
-        label: 'Average Rating',
-    },
-    {
-        value: '50+',
-        label: 'Customer Reviews',
-    },
-    {
-        value: '30+',
-        label: 'Menu Varieties',
-    },
-];
+        {
+            value: '1,000+',
+            label: 'Happy Customers',
+        },
+        {
+            value: '4.8',
+            label: 'Average Rating',
+        },
+        {
+            value: '50+',
+            label: 'Customer Reviews',
+        },
+        {
+            value: '30+',
+            label: 'Menu Varieties',
+        },
+    ];
     return (
         <>
             <section className="py-20">

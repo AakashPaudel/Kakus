@@ -28,6 +28,7 @@ void createInertiaApp({
             case name === 'orders/ShowOrder':
             case name === 'admin/reservations/create':
             case name === 'About':
+            case name === 'Contact':
                 // case name === 'cart/MenuItem':
                 return RestaurantLayout;
 

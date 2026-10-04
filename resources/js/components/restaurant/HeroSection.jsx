@@ -1,6 +1,24 @@
 import { Link } from '@inertiajs/react';
 
 export default function HeroSection() {
+    const stats = [
+        {
+            value: '1,000+',
+            label: 'Happy Customers',
+        },
+        {
+            value: '4.8',
+            label: 'Rating',
+        },
+        {
+            value: '50+',
+            label: 'Customer Reviews',
+        },
+        {
+            value: '30+',
+            label: 'Menu Varieties',
+        },
+    ];
     return (
         <section className="grid min-h-[500px] items-center gap-12 lg:grid-cols-2">
             <div>
@@ -50,6 +68,22 @@ export default function HeroSection() {
                     </p>
                 </div>
             </div>
+            <section className="py-16 lg:col-span-2 w-full">
+                <div className="mx-auto max-w-7xl px-4">
+                    <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
+                        {stats.map((stat, index) => (
+                            <div key={index} className="text-center">
+                                <p className="text-3xl font-bold text-gray-900">
+                                    {stat.value}
+                                </p>
+                                <p className="mt-2 text-sm font-semibold uppercase tracking-widest text-gray-500">
+                                    {stat.label}
+                                </p>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </section>
         </section>
     );
 }
