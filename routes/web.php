@@ -17,11 +17,31 @@ Route::get('/', function () {
         ->where('is_available', true)
         ->where('is_featured', true)
         ->get();
+    $galleryItems = MenuItem::query()
+        ->where('is_available', true)
+        ->with('images')
+        ->latest()
+        ->take(6)
+        ->get();
 
     return Inertia::render('Home', [
         'todaysSpecials' => $todaysSpecials,
+        'galleryItems' => $galleryItems,
     ]);
 })->name('home');
+
+Route::get('/about', function () {
+    $featuredItem = MenuItem::query()
+        ->where('is_available', true)
+        ->where('is_featured', true)
+        ->with('images')->skip(1)
+        ->first();
+
+    return Inertia::render('About', [
+        'featuredItem' => $featuredItem,
+    ]);
+})->name('about');
+
 
 Route::get('/menu', function () {
     $items = MenuItem::query()

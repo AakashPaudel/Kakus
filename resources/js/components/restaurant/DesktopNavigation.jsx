@@ -4,9 +4,10 @@ export default function DesktopNavigation() {
     const navigation = [
         { name: 'Home', href: '/' },
         { name: 'Menu', href: '/menu' },
-        { name: "Today's Specials", href: '/specials' },
-        { name: 'Table Reservation', href: '/reservation' },
         { name: 'Orders', href: '/orders' },
+        {name: 'About', href: '/about'},
+        { name: "Contact", href: '/contact' },
+        { name: 'FAQs', href: '/faq' },
     ];
 
     return (
