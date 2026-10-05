@@ -43,8 +43,9 @@ export default function About({ featuredItem }) {
                     <div className="overflow-hidden rounded-2xl">
                         <img
                             src={
-                                featuredItem?.images?.[0]?.image_path ??
-                                'https://images.unsplash.com/photo-1565299624946-b28f40a0ae38'
+                                featuredItem?.images?.[0]?.image_path
+                                    ? `/storage/${featuredItem.images[0].image_path}`
+                                    : null
                             }
                             alt={featuredItem?.name ?? "Kaku's dish"}
                             className="h-full min-h-[400px] w-full object-cover"

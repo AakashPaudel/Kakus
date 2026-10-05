@@ -29,9 +29,9 @@ export default function DishGallery({ items }) {
 
                 <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
                     {items.map((item, index) => {
-                        const image =
-                            item.images?.[0]?.image_path ??
-                            fallbackImages[index % fallbackImages.length];
+                        const image = item.images?.[0]?.image_path
+                            ? `/storage/${item.images[0].image_path}`
+                            : fallbackImages[index % fallbackImages.length];
 
                         return (
                             <div

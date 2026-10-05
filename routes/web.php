@@ -10,9 +10,6 @@ use App\Http\Controllers\ReservationController;
 use App\Models\MenuItem;
 use App\Http\Controllers\ContactController;
 
-
-
-
 Route::get('/', function () {
 
     $todaysSpecials = MenuItem::query()

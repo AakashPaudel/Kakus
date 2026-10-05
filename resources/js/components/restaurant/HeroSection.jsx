@@ -65,7 +65,7 @@ export default function HeroSection() {
                             <div className="w-full text-center">
                                 <div className="overflow-hidden rounded-2xl">
                                     <img
-                                        src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38"
+                                        src="/storage/menu-items/four-cheese-pizza.jpg"
                                         alt="Kaku's dish"
                                         className="h-[300px] w-full object-cover"
                                     />
