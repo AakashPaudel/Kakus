@@ -46,7 +46,7 @@ export default function HeroSection() {
                             <div className="mt-8 flex flex-wrap gap-4">
                                 <Link
                                     href="/menu"
-                                    className="rounded-lg px-6 py-3 font-semibold text-white transition hover:bg-amber-600"
+                                    className="rounded-lg px-6 py-3 font-semibold text-white transition hover:bg-black"
                                 >
                                     Explore Menu
                                 </Link>

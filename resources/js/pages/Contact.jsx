@@ -119,7 +119,7 @@ export default function ContactSection() {
                                             setData('name', event.target.value)
                                         }
                                         placeholder="John Doe"
-                                        className="w-full rounded-xl border border-gray-200 px-4 py-3 outline-none transition focus:border-gray-900 focus:ring-1 focus:ring-gray-900"
+                                        className="w-full rounded-xl border text-black border-gray-200 px-4 py-3 outline-none transition focus:border-gray-900 focus:ring-1 focus:ring-gray-900"
                                     />
 
                                     {errors.name && (
@@ -145,7 +145,7 @@ export default function ContactSection() {
                                             setData('email', event.target.value)
                                         }
                                         placeholder="john@example.com"
-                                        className="w-full rounded-xl border border-gray-200 px-4 py-3 outline-none transition focus:border-gray-900 focus:ring-1 focus:ring-gray-900"
+                                        className="w-full rounded-xl border text-black border-gray-200 px-4 py-3 outline-none transition focus:border-gray-900 focus:ring-1 focus:ring-gray-900"
                                     />
 
                                     {errors.email && (
@@ -174,7 +174,7 @@ export default function ContactSection() {
                                         setData('subject', event.target.value)
                                     }
                                     placeholder="How can we help?"
-                                    className="w-full rounded-xl border border-gray-200 px-4 py-3 outline-none transition focus:border-gray-900 focus:ring-1 focus:ring-gray-900"
+                                    className="w-full rounded-xl border text-black border-gray-200 px-4 py-3 outline-none transition focus:border-gray-900 focus:ring-1 focus:ring-gray-900"
                                 />
 
                                 {errors.subject && (
@@ -201,7 +201,7 @@ export default function ContactSection() {
                                         setData('message', event.target.value)
                                     }
                                     placeholder="Write your message..."
-                                    className="w-full resize-none rounded-xl border border-gray-200 px-4 py-3 outline-none transition focus:border-gray-900 focus:ring-1 focus:ring-gray-900"
+                                    className="w-full resize-none rounded-xl border text-black border-gray-200 px-4 py-3 outline-none transition focus:border-gray-900 focus:ring-1 focus:ring-gray-900"
                                 />
 
                                 {errors.message && (

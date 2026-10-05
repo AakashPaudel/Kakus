@@ -8,6 +8,8 @@ use Inertia\Inertia;
 use App\Http\Controllers\RestaurantTableController;
 use App\Http\Controllers\ReservationController;
 use App\Models\MenuItem;
+use App\Http\Controllers\ContactController;
+
 
 
 
@@ -30,9 +32,14 @@ Route::get('/', function () {
     ]);
 })->name('home');
 
+
 Route::get('/contact', function () {
     return Inertia::render('Contact');
 })->name('contact');
+
+
+Route::post('/contact', [ContactController::class, 'store'])
+    ->name('contact.store');
 
 Route::get('/about', function () {
     $featuredItem = MenuItem::query()
