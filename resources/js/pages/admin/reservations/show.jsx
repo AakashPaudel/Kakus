@@ -30,7 +30,7 @@ export default function Show({ reservation }) {
                         <p className="text-sm text-stone-500">Guests</p>
 
                         <p className="mt-1 font-semibold text-stone-900">
-                            {reservation.number_of_guests}
+                            {reservation.guest_count}
                         </p>
                     </div>
                 </div>
@@ -46,14 +46,14 @@ export default function Show({ reservation }) {
                     <div>
                         <p className="text-sm text-stone-500">Time</p>
                         <p className="mt-1 font-medium text-stone-900">
-                            {reservation.reservation_time}
+                            {reservation.start_time} – {reservation.end_time}
                         </p>
                     </div>
 
                     <div>
                         <p className="text-sm text-stone-500">Table</p>
                         <p className="mt-1 font-medium text-stone-900">
-                            {reservation.table?.table_number ?? 'Not assigned'}
+                            {reservation.restaurant_table?.table_number || 'N/A'}
                         </p>
                     </div>
 

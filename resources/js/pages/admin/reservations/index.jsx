@@ -1,90 +1,97 @@
+
 import { Link } from '@inertiajs/react';
 
 export default function Index({ reservations = [] }) {
     return (
         <div className="space-y-8">
+            {/* Header */}
             <div className="flex items-center justify-between">
                 <div>
-                    <h1 className="text-3xl font-bold text-stone-900">
+                    <h1 className="text-3xl font-bold tracking-tight text-stone-900">
                         My Reservations
                     </h1>
 
-                    <p className="mt-2 text-stone-600">
+                    <p className="mt-2 text-sm text-stone-600">
                         View and manage your restaurant reservations.
                     </p>
                 </div>
 
                 <Link
                     href="/reservations/create"
-                    className="rounded-lg bg-amber-600 px-5 py-3 font-semibold text-white transition hover:bg-amber-700"
+                    className="rounded-lg bg-amber-600 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-amber-700"
                 >
                     Make Reservation
                 </Link>
             </div>
 
+            {/* Empty State */}
             {reservations.length === 0 ? (
                 <div className="rounded-xl border border-dashed border-stone-300 bg-white p-12 text-center">
-                    <h2 className="text-xl font-semibold text-stone-800">
+                    <h2 className="text-lg font-semibold text-stone-800">
                         No reservations yet
                     </h2>
 
-                    <p className="mt-2 text-stone-500">
+                    <p className="mt-2 text-sm text-stone-500">
                         You don't have any reservations at the moment.
                     </p>
 
                     <Link
                         href="/reservations/create"
-                        className="mt-6 inline-block font-semibold text-amber-600 hover:text-amber-700"
+                        className="mt-5 inline-block text-sm font-semibold text-amber-600 hover:text-amber-700"
                     >
                         Reserve a table →
                     </Link>
                 </div>
             ) : (
-                <div className="grid gap-6 md:grid-cols-2">
-                    {reservations.map((reservation) => (
+                /* Reservation List */
+                <div className="overflow-hidden rounded-xl border border-stone-200 bg-white shadow-sm">
+                    {reservations.map((reservation, index) => (
                         <div
                             key={reservation.id}
-                            className="rounded-xl border border-stone-200 bg-white p-6 shadow-sm"
+                            className={`flex flex-col gap-4 px-6 py-5 sm:flex-row sm:items-center sm:justify-between ${
+                                index !== reservations.length - 1
+                                    ? 'border-b border-stone-200'
+                                    : ''
+                            }`}
                         >
-                            <div className="flex items-start justify-between">
-                                <div>
-                                    <p className="text-sm text-stone-500">
-                                        Reservation #{reservation.id}
-                                    </p>
-
-                                    <h2 className="mt-1 text-xl font-semibold text-stone-900">
-                                        {reservation.reservation_date}
-                                    </h2>
+                            {/* Reservation Information */}
+                            <div className="flex items-center gap-5">
+                                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-amber-100 text-sm font-bold text-amber-700">
+                                    #{reservation.id}
                                 </div>
 
-                                <span className="rounded-full bg-amber-100 px-3 py-1 text-sm font-medium text-amber-700">
+                                <div>
+                                    <h2 className="font-semibold text-stone-900">
+                                        Kaku's Restaurant
+                                    </h2>
+
+                                    <p className="mt-1 text-sm text-stone-500">
+                                        {reservation.reservation_date}
+                                    </p>
+                                </div>
+                            </div>
+
+                            {/* Status + Action */}
+                            <div className="flex items-center justify-between gap-6 sm:justify-end">
+                                <span
+                                    className={`rounded-full px-3 py-1 text-xs font-semibold capitalize ${
+                                        reservation.status === 'confirmed'
+                                            ? 'bg-green-100 text-green-700'
+                                            : reservation.status === 'cancelled'
+                                              ? 'bg-red-100 text-red-700'
+                                              : 'bg-amber-100 text-amber-700'
+                                    }`}
+                                >
                                     {reservation.status}
                                 </span>
+
+                                <Link
+                                    href={`/reservations/${reservation.id}`}
+                                    className="text-sm font-semibold text-amber-600 transition hover:text-amber-700"
+                                >
+                                    View Reservation →
+                                </Link>
                             </div>
-
-                            <div className="mt-5 space-y-2 text-sm text-stone-600">
-                                <p>
-                                    <strong>Time:</strong>{' '}
-                                    {reservation.reservation_time}
-                                </p>
-
-                                <p>
-                                    <strong>Guests:</strong>{' '}
-                                    {reservation.number_of_guests}
-                                </p>
-
-                                <p>
-                                    <strong>Table:</strong>{' '}
-                                    {reservation.table?.table_number ?? '—'}
-                                </p>
-                            </div>
-
-                            <Link
-                                href={`/reservations/${reservation.id}`}
-                                className="mt-5 inline-block font-semibold text-amber-600 hover:text-amber-700"
-                            >
-                                View reservation →
-                            </Link>
                         </div>
                     ))}
                 </div>
@@ -92,3 +99,4 @@ export default function Index({ reservations = [] }) {
         </div>
     );
 }
+

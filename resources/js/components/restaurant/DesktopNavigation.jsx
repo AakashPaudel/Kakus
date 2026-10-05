@@ -7,7 +7,7 @@ export default function DesktopNavigation() {
         { name: 'Orders', href: '/orders' },
         {name: 'About', href: '/about'},
         { name: "Contact", href: '/contact' },
-        { name: 'FAQs', href: '/faq' },
+        { name: 'Reservations', href: '/reservations/customer' },
     ];
 
     return (

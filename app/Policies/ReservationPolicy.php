@@ -16,8 +16,7 @@ class ReservationPolicy
         return in_array($user->role, [
             'admin',
             'staff',
-            'customer',
-        ]);
+           ]);
     }
 
     /**

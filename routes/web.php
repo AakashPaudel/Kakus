@@ -135,6 +135,9 @@ Route::middleware('auth')->group(function () {
     )->name('orders.status.update');
 });
 
+
+//Reservation routes
+
 Route::middleware('auth')->group(function () {
 
 
@@ -143,6 +146,10 @@ Route::middleware('auth')->group(function () {
         [ReservationController::class, 'create']
     )->name('reservations.create');
 
+    Route::get(
+        '/reservations/customer',
+        [ReservationController::class, 'indexCustomer']
+    )->name('reservations.index.customer');
 
     Route::post(
         '/reservations',
@@ -153,8 +160,6 @@ Route::middleware('auth')->group(function () {
         '/reservations',
         [ReservationController::class, 'index']
     )->name('reservations.index');
-
-
 
     Route::get(
         '/reservations/{reservation}',
@@ -173,6 +178,8 @@ Route::middleware('auth')->group(function () {
         [ReservationController::class, 'index']
     )->name('admin.reservations.index');
 });
+
+
 
 Route::patch(
     '/admin/reservations/{reservation}/status',

@@ -28,7 +28,8 @@ class ReservationController extends Controller
         $availableTables = RestaurantTable::where('status', 'available')->get();
         // @dd($availableTables);
         return Inertia::render(
-            'admin/reservations/create',[
+            'admin/reservations/create',
+            [
                 'availableTables' => $availableTables,
             ]
         );
@@ -52,11 +53,25 @@ class ReservationController extends Controller
         );
     }
 
+    public function indexCustomer(Request $request)
+    {
+        $reservations = Reservation::query()
+            ->where('user_id', $request->user()->id)
+            ->with('restaurantTable')
+            ->latest()
+            ->get();
+
+        return Inertia::render('customer/reservations/Index', [
+            'reservations' => $reservations,
+        ]);
+    }
+
     public function show(
         Reservation $reservation
     ): Response {
         Gate::authorize('view', $reservation);
 
+        // eager load the related user and restaurant table to avoid N+1 queries
         $reservation->load([
             'user',
             'restaurantTable',
