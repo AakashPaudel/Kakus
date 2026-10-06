@@ -49,9 +49,9 @@ export default function DishGallery({ items }) {
                                         {item.name}
                                     </h3>
 
-                                    <p className="mt-1 text-sm text-white/80">
+                                    {/* <p className="mt-1 text-sm text-white/80">
                                         Rs. {item.price}
-                                    </p>
+                                    </p> */}
                                 </div>
                             </div>
                         );

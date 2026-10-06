@@ -13,7 +13,7 @@ use App\Http\Controllers\ContactController;
 Route::get('/', function () {
 
     $todaysSpecials = MenuItem::query()
-        ->where('is_available', true)
+        ->where('is_available', true)->with('images')
         // ->where('is_featured', true)
         ->get();
     $galleryItems = MenuItem::query()
@@ -53,7 +53,7 @@ Route::get('/about', function () {
 
 Route::get('/menu', function () {
     $items = MenuItem::query()
-        ->where('is_available', true)
+        ->where('is_available', true)->with('images')
         ->get();
 
     return Inertia::render('menu/Menu', [
