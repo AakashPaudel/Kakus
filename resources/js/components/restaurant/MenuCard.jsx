@@ -38,7 +38,7 @@ export default function MenuCard({ item }) {
             </div>
 
             {/* Content */}
-            ```jsx
+            
             <div className="flex min-h-[190px] flex-col p-5">
                 <h2 className="text-xl font-bold text-stone-900 transition group-hover:text-amber-700">
                     {item.name}
@@ -68,7 +68,7 @@ export default function MenuCard({ item }) {
                     </button>
                 </div>
             </div>
-            ```
+            
 
         </div>
 

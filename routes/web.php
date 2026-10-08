@@ -9,6 +9,8 @@ use App\Http\Controllers\RestaurantTableController;
 use App\Http\Controllers\ReservationController;
 use App\Models\MenuItem;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\Admin\AdminOrderController;
+use App\Http\Controllers\Admin\AdminReservationController;
 
 Route::get('/', function () {
 
@@ -131,6 +133,19 @@ Route::middleware('auth')->group(function () {
         [OrderController::class, 'updateStatus']
     )->name('orders.status.update');
 });
+
+
+Route::middleware(['auth', 'verified', 'role:admin,staff'])
+    ->prefix('admin')
+    ->name('admin.')
+    ->group(function () {
+
+        Route::get('/orders', [AdminOrderController::class, 'index'])
+            ->name('orders.index');
+
+        Route::get('/reservations', [AdminReservationController::class, 'index'])
+            ->name('reservations.index');
+    });
 
 
 //Reservation routes
