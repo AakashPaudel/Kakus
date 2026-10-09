@@ -127,7 +127,6 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/orders/{order}', [OrderController::class, 'show'])
         ->name('orders.show');
-
     Route::patch(
         '/orders/{order}/status',
         [OrderController::class, 'updateStatus']
@@ -142,6 +141,8 @@ Route::middleware(['auth', 'verified', 'role:admin,staff'])
 
         Route::get('/orders', [AdminOrderController::class, 'index'])
             ->name('orders.index');
+
+
 
         Route::get('/reservations', [AdminReservationController::class, 'index'])
             ->name('reservations.index');
@@ -178,18 +179,18 @@ Route::middleware('auth')->group(function () {
         [ReservationController::class, 'show']
     )->name('reservations.show');
 
+    Route::get(
+        '/admin/reservations',
+        [ReservationController::class, 'index']
+    )->name('admin.reservations.index');
+
     Route::patch(
         '/reservations/{reservation}/cancel',
         [ReservationController::class, 'cancel']
     )->name('reservations.cancel');
 });
 
-Route::middleware('auth')->group(function () {
-    Route::get(
-        '/admin/reservations',
-        [ReservationController::class, 'index']
-    )->name('admin.reservations.index');
-});
+
 
 
 
@@ -217,8 +218,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
         'admin/tables/{restaurantTable}/status',
         [RestaurantTableController::class, 'updateStatus']
     )->name('admin.tables.update-status');
-
-
 });
 
 require __DIR__ . '/settings.php';

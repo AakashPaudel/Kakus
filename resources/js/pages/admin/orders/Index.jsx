@@ -1,9 +1,9 @@
 import { Head, Link } from '@inertiajs/react';
-import AppLayout from '@/layouts/app-layout';
+import OrderStatusSelect from '@/components/restaurant/OrderStatus';
 
 export default function Index({ orders }) {
     return (
-        <AppLayout>
+        <>
             <Head title="Orders" />
 
             <div className="space-y-6 p-6">
@@ -40,6 +40,9 @@ export default function Index({ orders }) {
                                 <th className="px-6 py-4 text-left text-sm">
                                     Date
                                 </th>
+                                <th className="px-6 py-4 text-left text-sm">
+                                    Status Update
+                                </th>
                             </tr>
                         </thead>
 
@@ -68,12 +71,15 @@ export default function Index({ orders }) {
                                     <td className="px-6 py-4">
                                         {order.created_at}
                                     </td>
+                                    <td className="px-6 py-4">
+                                        <OrderStatusSelect order={order} />
+                                    </td>
                                 </tr>
                             ))}
                         </tbody>
                     </table>
                 </div>
             </div>
-        </AppLayout>
+        </>
     );
 }
