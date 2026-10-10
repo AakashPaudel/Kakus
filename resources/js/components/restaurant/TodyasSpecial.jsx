@@ -4,7 +4,7 @@ export default function TodaysSpecialSection({ items }) {
     return (
         <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
             <div className="mb-8 text-center">
-                <p className="text-sm font-semibold uppercase tracking-wider text-gray-500">
+                <p className="text-sm font-semibold uppercase tracking-wider text-amber-600">
                     Today's Special
                 </p>
 

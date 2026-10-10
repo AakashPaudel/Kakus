@@ -133,8 +133,8 @@ Route::middleware('auth')->group(function () {
     )->name('orders.status.update');
 });
 
-
-Route::middleware(['auth', 'verified', 'role:admin,staff'])
+// for admin and staff to view all orders and reservations, and update their status
+Route::middleware(['auth', 'verified', 'role:admin'])
     ->prefix('admin')
     ->name('admin.')
     ->group(function () {
@@ -144,7 +144,7 @@ Route::middleware(['auth', 'verified', 'role:admin,staff'])
 
 
 
-        Route::get('/reservations', [AdminReservationController::class, 'index'])
+        Route::get('/reservation', [AdminReservationController::class, 'index'])
             ->name('reservations.index');
     });
 

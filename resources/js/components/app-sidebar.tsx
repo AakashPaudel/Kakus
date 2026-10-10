@@ -1,5 +1,5 @@
 import { Link } from '@inertiajs/react';
-import { BookOpen, FolderGit2, LayoutGrid,ShoppingBag,CalendarDays } from 'lucide-react';
+import { BookOpen, FolderGit2, LayoutGrid, ShoppingBag, CalendarDays } from 'lucide-react';
 import AppLogo from '@/components/app-logo';
 import { NavFooter } from '@/components/nav-footer';
 import { NavMain } from '@/components/nav-main';
@@ -15,24 +15,8 @@ import {
 } from '@/components/ui/sidebar';
 import { dashboard } from '@/routes';
 import type { NavItem } from '@/types';
+import { usePage } from '@inertiajs/react';
 
-const mainNavItems: NavItem[] = [
-    {
-        title: 'Dashboard',
-        href: dashboard(),
-        icon: LayoutGrid,
-    },
-    {
-        title: 'Orders',
-        href: '/admin/orders',
-        icon: ShoppingBag,
-    },
-    {
-        title: 'Reservations',
-        href: '/admin/reservations',
-        icon: CalendarDays,
-    },
-];
 
 const footerNavItems: NavItem[] = [
     {
@@ -46,8 +30,41 @@ const footerNavItems: NavItem[] = [
         icon: BookOpen,
     },
 ];
+// Keep your existing imports
 
 export function AppSidebar() {
+    const { auth } = usePage().props as {
+        auth: {
+            user: {
+                role?: string;
+            };
+        };
+    };
+
+    const isAdmin = auth.user?.role === 'admin';
+
+    const mainNavItems: NavItem[] = [
+        {
+            title: 'Dashboard',
+            href: dashboard(),
+            icon: LayoutGrid,
+        },
+        ...(isAdmin
+            ? [
+                {
+                    title: 'Orders',
+                    href: '/admin/orders',
+                    icon: ShoppingBag,
+                },
+                {
+                    title: 'Reservations',
+                    href: '/admin/reservation',
+                    icon: CalendarDays,
+                },
+            ]
+            : []),
+    ];
+
     return (
         <Sidebar collapsible="icon" variant="inset">
             <SidebarHeader>
@@ -67,7 +84,10 @@ export function AppSidebar() {
             </SidebarContent>
 
             <SidebarFooter>
-                <NavFooter items={footerNavItems} className="mt-auto" />
+                <NavFooter
+                    items={footerNavItems}
+                    className="mt-auto"
+                />
                 <NavUser />
             </SidebarFooter>
         </Sidebar>

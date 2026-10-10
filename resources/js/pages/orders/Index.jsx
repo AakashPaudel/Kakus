@@ -21,7 +21,7 @@ export default function Index({ orders }) {
                         {orders.map((order) => (
                             <div
                                 key={order.id}
-                                className="rounded-lg bg-black p-6 shadow"
+                                className="rounded-lg bg-white p-6 shadow"
                             >
                                 <div className="flex items-center justify-between">
                                     <div>

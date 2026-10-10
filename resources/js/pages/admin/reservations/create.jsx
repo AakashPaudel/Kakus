@@ -38,7 +38,7 @@ export default function Create({ availableTables }) {
 
             <form
                 onSubmit={submit}
-                className="space-y-6 rounded-xl border border-stone-200 bg-black p-6 shadow-sm"
+                className="space-y-6 rounded-xl border border-stone-200 bg-white p-6 shadow-sm"
             >
                 {/* Reservation Date */}
                 <div>
@@ -80,6 +80,7 @@ export default function Create({ availableTables }) {
                         type="time"
                         value={data.start_time}
                         onChange={(event) =>
+                        
                             setData('start_time', event.target.value)
                         }
                         className="mt-2 w-full rounded-lg border border-stone-300 px-4 py-3 outline-none focus:border-amber-500"
@@ -130,6 +131,7 @@ export default function Create({ availableTables }) {
                     <input
                         id="guest_count"
                         type="number"
+                        placeholder="Enter number of guests"
                         min="1"
                         value={data.guest_count}
                         onChange={(event) =>
