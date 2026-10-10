@@ -58,7 +58,7 @@ export function AppSidebar() {
                 },
                 {
                     title: 'Reservations',
-                    href: '/admin/reservation',
+                    href: '/admin/reservations',
                     icon: CalendarDays,
                 },
             ]

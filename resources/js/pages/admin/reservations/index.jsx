@@ -72,7 +72,7 @@ export default function Index({ reservations }) {
                             </thead>
 
                             <tbody className="divide-y divide-stone-100">
-                                {reservations.map((reservation) => (
+                                {reservations.data.map((reservation) => (
                                     <tr
                                         key={reservation.id}
                                         className="transition hover:bg-amber-50/40"

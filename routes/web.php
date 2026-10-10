@@ -144,7 +144,7 @@ Route::middleware(['auth', 'verified', 'role:admin'])
 
 
 
-        Route::get('/reservation', [AdminReservationController::class, 'index'])
+        Route::get('/reservations', [AdminReservationController::class, 'index'])
             ->name('reservations.index');
     });
 
@@ -179,10 +179,10 @@ Route::middleware('auth')->group(function () {
         [ReservationController::class, 'show']
     )->name('reservations.show');
 
-    Route::get(
-        '/admin/reservations',
-        [ReservationController::class, 'index']
-    )->name('admin.reservations.index');
+    // Route::get(
+    //     '/admin/reservations',
+    //     [ReservationController::class, 'index']
+    // )->name('admin.reservations.index');
 
     Route::patch(
         '/reservations/{reservation}/cancel',
