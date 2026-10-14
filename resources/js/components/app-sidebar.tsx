@@ -1,5 +1,12 @@
-import { Link } from '@inertiajs/react';
-import { BookOpen, FolderGit2, LayoutGrid, ShoppingBag, CalendarDays } from 'lucide-react';
+import { usePage, Link } from '@inertiajs/react';
+import {
+    BookOpen,
+    CalendarDays,
+    FolderGit2,
+    LayoutGrid,
+    ShoppingBag,
+} from 'lucide-react';
+
 import AppLogo from '@/components/app-logo';
 import { NavFooter } from '@/components/nav-footer';
 import { NavMain } from '@/components/nav-main';
@@ -13,10 +20,10 @@ import {
     SidebarMenuButton,
     SidebarMenuItem,
 } from '@/components/ui/sidebar';
-import { dashboard } from '@/routes';
-import type { NavItem } from '@/types';
-import { usePage } from '@inertiajs/react';
 
+import { dashboard } from '@/routes';
+import { dashboardNavigation } from '@/config/dashboard-navigation';
+import type { NavItem } from '@/types';
 
 const footerNavItems: NavItem[] = [
     {
@@ -30,40 +37,34 @@ const footerNavItems: NavItem[] = [
         icon: BookOpen,
     },
 ];
-// Keep your existing imports
+
+const iconMap = {
+    Dashboard: LayoutGrid,
+    Orders: ShoppingBag,
+    Reservations: CalendarDays,
+    'My Orders': ShoppingBag,
+    'My Reservations': CalendarDays,
+};
 
 export function AppSidebar() {
     const { auth } = usePage().props as {
         auth: {
             user: {
                 role?: string;
-            };
+            } | null;
         };
     };
 
-    const isAdmin = auth.user?.role === 'admin';
+    const role = auth?.user?.role ?? 'customer';
 
-    const mainNavItems: NavItem[] = [
-        {
-            title: 'Dashboard',
-            href: dashboard(),
-            icon: LayoutGrid,
-        },
-        ...(isAdmin
-            ? [
-                {
-                    title: 'Orders',
-                    href: '/admin/orders',
-                    icon: ShoppingBag,
-                },
-                {
-                    title: 'Reservations',
-                    href: '/admin/reservations',
-                    icon: CalendarDays,
-                },
-            ]
-            : []),
-    ];
+    const navigationItems =
+        dashboardNavigation[role as keyof typeof dashboardNavigation] ??
+        dashboardNavigation.customer;
+
+    const mainNavItems: NavItem[] = navigationItems.map((item) => ({
+        ...item,
+        icon: iconMap[item.title as keyof typeof iconMap] ?? LayoutGrid,
+    }));
 
     return (
         <Sidebar collapsible="icon" variant="inset">

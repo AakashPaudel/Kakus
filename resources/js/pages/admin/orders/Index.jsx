@@ -17,9 +17,9 @@ export default function Index({ orders }) {
                     </p>
                 </div>
 
-                <div className="overflow-hidden rounded-2xl border border-stone-200 bg-white">
+                <div className="overflow-hidden rounded-2xl border border-black bg-black">
                     <table className="w-full">
-                        <thead className="bg-stone-50">
+                        <thead className="bg-black">
                             <tr>
                                 <th className="px-6 py-4 text-left text-sm">
                                     Order
