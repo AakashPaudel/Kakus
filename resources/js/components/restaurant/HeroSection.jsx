@@ -117,49 +117,107 @@ export default function HeroSection() {
                     </div>
 
                     {/* Right side */}
-                    <div className="relative">
-                        {/* Ambient glow */}
+
+                    <div className="relative mx-auto w-full max-w-2xl px-2 py-12 sm:px-4">
+
+                        {/* Ambient Glow */}
                         <div
                             aria-hidden="true"
-                            className="
-                                absolute left-1/2 top-1/2
-                                h-72 w-72 -translate-x-1/2 -translate-y-1/2
-                                rounded-full bg-orange-300/60
-                                blur-3xl
-                                motion-safe:animate-[ambientGlow_6s_ease-in-out_infinite]
-                            "
+                            className="absolute left-1/2 top-1/2 h-72 w-72
+            -translate-x-1/2 -translate-y-1/2 rounded-full
+            bg-orange-300/40 blur-3xl
+            motion-safe:animate-[ambientGlow_6s_ease-in-out_infinite]"
                         />
 
-                        {/* Food card */}
-                        <div
-                            className="
-                                relative flex min-h-[350px]
-                                items-center justify-center
-                                rounded-3xl bg-amber-100
-                                p-4 shadow-2xl shadow-amber-900/10
-                                sm:p-6
-                                motion-safe:animate-[foodBreathing_5s_ease-in-out_infinite]
-                            "
-                        >
-                            <div className="w-full text-center">
-                                <div className="overflow-hidden rounded-2xl shadow-xl">
+                        {/* Floating Food Gallery */}
+                        <div className="relative flex items-center justify-center gap-3 sm:gap-5">
+
+                    
+                            {/* Left Image */}
+                            <div
+                                className="w-[27%] shrink-0
+        motion-safe:animate-[foodReveal_1s_ease-out_both]"
+                            >
+                                <div
+                                    className="overflow-hidden rounded-2xl
+            rotate-[-7deg] shadow-xl shadow-amber-900/10
+            transition-all duration-500
+            hover:scale-110 hover:rotate-0 hover:shadow-2xl
+            motion-safe:animate-[foodLeft_5s_ease-in-out_infinite]"
+                                >
                                     <img
-                                        src="/storage/menu-items/four-cheese-pizza.jpg"
-                                        alt="Kaku's dish"
-                                        className="h-[300px] w-full object-cover"
+                                        src="/storage/menu-items/chicken-burger.jpg"
+                                        alt="Freshly prepared pizza"
+                                        className="aspect-[3/4] w-full object-cover
+                transition-transform duration-700 hover:scale-110"
                                     />
                                 </div>
-
-                                <p className="mt-5 text-xl font-bold text-stone-800">
-                                    Freshly prepared
-                                </p>
-
-                                <p className="mt-2 text-sm leading-6 text-stone-600 sm:text-base">
-                                    Made for every occasion.
-                                </p>
                             </div>
+                            
+
+                            {/* Center Image */}
+                            <div
+                                className="relative z-[1] w-[42%] shrink-0
+                overflow-hidden rounded-3xl border-4 border-white
+                bg-amber-100 shadow-2xl shadow-amber-900/20
+                transition-all duration-500
+                hover:z-10 hover:scale-105 hover:shadow-amber-900/30
+                motion-safe:animate-[foodCenter_5s_ease-in-out_infinite]
+                motion-safe:animate-[foodReveal_1s_ease-out_0.2s_both]"
+                            >
+                                <img
+                                    src="/storage/menu-items/four-cheese-pizza.jpg"
+                                    alt="Kaku's signature four-cheese pizza"
+                                    className="aspect-[3/4] w-full object-cover
+                    transition-transform duration-700 hover:scale-110"
+                                />
+
+                                {/* Image Caption */}
+                                <div className="absolute inset-x-0 bottom-0
+                bg-gradient-to-t from-stone-950/80 to-transparent
+                px-2 pb-3 pt-10 text-center sm:px-4 sm:pb-5">
+                                    <p className="text-xs font-bold text-white sm:text-base">
+                                        Chef's Special
+                                    </p>
+                                    <p className="mt-1 text-[10px] text-white/80 sm:text-xs">
+                                        Freshly prepared
+                                    </p>
+                                </div>
+                            </div>
+
+                            {/* Right Image */}
+                            <div
+                                className="w-[27%] shrink-0 rotate-[7deg]
+                overflow-hidden rounded-2xl shadow-xl
+                shadow-amber-900/10 transition-all duration-500
+                hover:z-10 hover:scale-110 hover:rotate-0
+                hover:shadow-2xl
+                motion-safe:animate-[foodRight_5s_ease-in-out_infinite]
+                motion-safe:animate-[foodReveal_1s_ease-out_0.4s_both]"
+                            >
+                                <img
+                                    src="/storage/menu-items/chicken-momo.jpg"
+                                    alt="Delicious cheese pizza"
+                                    className="aspect-[3/4] w-full object-cover
+                    transition-transform duration-700 hover:scale-110"
+                                />
+                            </div>
+
                         </div>
+
+                        {/* Bottom Label */}
+                        <div className="relative mt-8 text-center
+        motion-safe:animate-[foodReveal_1s_ease-out_0.6s_both]">
+                            <p className="text-lg font-bold tracking-tight text-stone-800 sm:text-xl">
+                                A Taste Worth Sharing
+                            </p>
+                            <p className="mt-2 text-sm text-stone-600">
+                                Fresh ingredients. Unforgettable flavors.
+                            </p>
+                        </div>
+
                     </div>
+
                 </div>
             </div>
 
