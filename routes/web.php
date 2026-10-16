@@ -11,6 +11,7 @@ use App\Models\MenuItem;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\Admin\AdminOrderController;
 use App\Http\Controllers\Admin\AdminReservationController;
+use App\Http\Controllers\DashboardController;
 
 Route::get('/', function () {
 
@@ -78,22 +79,17 @@ Route::get('/dashboard', function (Request $request) {
 // })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware(['auth', 'verified', 'role:customer'])
-    ->get('/customer/dashboard', function () {
-        return Inertia::render('customer/CustomerDashboard');
-    })
+    ->get('/customer/dashboard', [DashboardController::class, 'customer'])
     ->name('customer.dashboard');
 
 Route::middleware(['auth', 'verified', 'role:staff'])
-    ->get('/staff/dashboard', function () {
-        return Inertia::render('staff/StaffDashboard');
-    })
+    ->get('/staff/dashboard', [DashboardController::class, 'staff'])
     ->name('staff.dashboard');
 
 Route::middleware(['auth', 'verified', 'role:admin'])
-    ->get('/admin/dashboard', function () {
-        return Inertia::render('admin/AdminDashboard');
-    })
+    ->get('/admin/dashboard', [DashboardController::class, 'admin'])
     ->name('admin.dashboard');
+    
 
 // cart routes
 Route::middleware('auth')->group(function () {

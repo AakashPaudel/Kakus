@@ -9,40 +9,10 @@ import {
     UtensilsCrossed,
 } from 'lucide-react';
 
-import  StatCard  from '@/components/dashboard/StatCard';
+import StatCard from '@/components/dashboard/StatCard';
 
-const stats = [
-    {
-        title: 'Total Orders',
-        value: '12',
-        description: 'Orders placed so far',
-        // icon: ShoppingBag,
-    },
-    {
-        title: 'Active Orders',
-        value: '2',
-        description: 'Currently being processed',
-        // icon: Clock,
-    },
-    {
-        title: 'Completed Orders',
-        value: '10',
-        description: 'Successfully delivered',
-        // icon: CheckCircle2,
-    },
-    {
-        title: 'Upcoming Reservations',
-        value: '1',
-        description: 'Your next dining visit',
-        // icon: CalendarDays,
-    },
-];
 
-const recentOrders = [
-    { id: '#ORD-1042', date: 'Oct 13, 2026', items: 'Chicken Pizza, Fries', total: 850, status: 'Preparing' },
-    { id: '#ORD-1035', date: 'Oct 10, 2026', items: 'Classic Burger, Juice', total: 550, status: 'Completed' },
-    { id: '#ORD-1028', date: 'Oct 06, 2026', items: 'Veg Pizza', total: 650, status: 'Completed' },
-];
+
 
 const statusStyles = {
     Preparing: 'bg-blue-100 text-blue-700',
@@ -71,7 +41,37 @@ const shortcuts = [
     },
 ];
 
-function CustomerDashboard() {
+function CustomerDashboard({
+    stats: dashboardStats = {},
+    recentOrders = [],
+    upcomingReservation = [], }) {
+
+    const statCards = [
+        {
+            title: "Total Orders",
+            value: dashboardStats.totalOrders ?? 0,
+            description: 'Orders received',
+            icon: 'shopping-bag',
+        },
+        {
+            title: 'Active Orders',
+            value: dashboardStats.activeOrders ?? 0,
+            description: 'Orders waiting for processing',
+            icon: 'clock',
+        },
+        {
+            title: "Upcoming Reservations",
+            value: dashboardStats.upcomingReservations ?? 0,
+            description: 'Reservations scheduled for the future',
+            icon: 'calendar-days',
+        },
+        {
+            title: 'Orders Completed',
+            value: dashboardStats.completedOrders ?? 0,
+            description: 'Orders completed',
+            icon: 'check-circle',
+        },
+    ];
     return (
         <>
             <Head title="My Dashboard" />
@@ -87,7 +87,7 @@ function CustomerDashboard() {
                 </div>
 
                 <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
-                    {stats.map((stat) => (
+                    {statCards.map((stat) => (
                         <StatCard key={stat.title} {...stat} />
                     ))}
                 </div>
@@ -158,17 +158,50 @@ function CustomerDashboard() {
                                 </h2>
                             </div>
 
-                            <div className="mt-4 rounded-lg bg-orange-50 p-4">
-                                <p className="text-sm font-semibold text-stone-800">
-                                    Saturday, October 17
-                                </p>
-                                <p className="mt-1 text-sm text-stone-600">
-                                    7:00 PM · 2 guests
-                                </p>
-                                <span className="mt-3 inline-block rounded-full bg-amber-100 px-2.5 py-1 text-xs font-medium text-amber-700">
-                                    Pending confirmation
-                                </span>
-                            </div>
+                            
+                            {upcomingReservation ? (
+                                <div className="mt-4 rounded-lg bg-orange-50 p-4">
+                                    <p className="text-sm font-semibold text-stone-800">
+                                        {new Date(
+                                            `${upcomingReservation.reservation_date}T00:00:00`
+                                        ).toLocaleDateString('en-US', {
+                                            weekday: 'long',
+                                            month: 'long',
+                                            day: 'numeric',
+                                        })}
+                                    </p>
+
+                                    <p className="mt-1 text-sm text-stone-600">
+                                        {upcomingReservation.start_time
+                                            ? new Date(
+                                                `2000-01-01T${upcomingReservation.start_time}`
+                                            ).toLocaleTimeString('en-US', {
+                                                hour: 'numeric',
+                                                minute: '2-digit',
+                                                hour12: true,
+                                            })
+                                            : 'Time not specified'}
+                                        {' · '}
+                                        {upcomingReservation.guest_count}{' '}
+                                        {upcomingReservation.guest_count === 1 ? 'guest' : 'guests'}
+                                    </p>
+
+                                    <span className="mt-3 inline-block rounded-full bg-amber-100 px-2.5 py-1 text-xs font-medium text-amber-700">
+                                        {upcomingReservation.status === 'pending'
+                                            ? 'Pending confirmation'
+                                            : upcomingReservation.status === 'confirmed'
+                                                ? 'Confirmed'
+                                                : upcomingReservation.status}
+                                    </span>
+                                </div>
+                            ) : (
+                                <div className="mt-4 rounded-lg bg-stone-50 p-4">
+                                    <p className="text-sm text-stone-600">
+                                        You have no upcoming reservations.
+                                    </p>
+                                </div>
+                            )}
+                            
 
                             <Link
                                 href="/my-reservations"

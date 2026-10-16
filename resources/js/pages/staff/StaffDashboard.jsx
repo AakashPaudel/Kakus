@@ -1,37 +1,36 @@
 import { Head } from '@inertiajs/react';
 
-import AppLayout from '@/layouts/app-layout';
 import StatCard  from '@/components/dashboard/StatCard';
 import RecentOrders from '@/components/dashboard/RecentOrders';
 import RecentReservations from '@/components/dashboard/RecentReservations';
 import QuickActions from '@/components/dashboard/QuickActions';
 
-const stats = [
-    {
-        title: "Today's Orders",
-        value: 0,
-        description: 'Orders received today',
-        icon: 'shopping-bag',
-    },
-    {
-        title: 'Pending Orders',
-        value: 0,
-        description: 'Orders waiting for processing',
-        icon: 'clock',
-    },
-    {
-        title: "Today's Reservations",
-        value: 0,
-        description: 'Reservations scheduled today',
-        icon: 'calendar-days',
-    },
-    {
-        title: 'Orders Completed',
-        value: 0,
-        description: 'Orders completed today',
-        icon: 'check-circle',
-    },
-];
+// const stats = [
+//     {
+//         title: "Today's Orders",
+//         value: 0,
+//         description: 'Orders received today',
+//         icon: 'shopping-bag',
+//     },
+//     {
+//         title: 'Pending Orders',
+//         value: 0,
+//         description: 'Orders waiting for processing',
+//         icon: 'clock',
+//     },
+//     {
+//         title: "Today's Reservations",
+//         value: 0,
+//         description: 'Reservations scheduled today',
+//         icon: 'calendar-days',
+//     },
+//     {
+//         title: 'Orders Completed',
+//         value: 0,
+//         description: 'Orders completed today',
+//         icon: 'check-circle',
+//     },
+// ];
 
 const quickActions = [
     {
@@ -47,6 +46,7 @@ const quickActions = [
 ];
 
 export default function StaffDashboard({
+    // stats read as dashboardStats to avoid naming conflict with the local stats variable
     stats: dashboardStats = {},
     recentOrders = [],
     recentReservations = [],
@@ -103,6 +103,7 @@ export default function StaffDashboard({
                 {/* Recent Activity */}
                 <div className="grid gap-6 xl:grid-cols-2">
                     <RecentOrders orders={recentOrders} />
+
 
                     <RecentReservations
                         reservations={recentReservations}
