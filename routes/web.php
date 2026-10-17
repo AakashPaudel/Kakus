@@ -27,9 +27,16 @@ Route::get('/', function () {
         ->take(6)
         ->get();
 
+    $categories = Category::query()
+        ->where('is_active', true)
+        ->orderBy('name')
+        ->get(['id', 'name', 'slug']);
+
+
     return Inertia::render('Home', [
         'todaysSpecials' => $todaysSpecials,
         'galleryItems' => $galleryItems,
+        'categories' => $categories,
     ]);
 })->name('home');
 

@@ -6,12 +6,12 @@ export default function CategoryFilter({
 }) {
     return (
         <section className="mt-8 flex flex-col items-center justify-center gap-4">
-            <h1 className="mb-4 text-4xl font-semibold text-stone-900 dark:text-stone-100">
+            {/* <h1 className="mb-4 text-4xl font-semibold text-stone-900 dark:text-stone-100">
                 Explore Our Menu
             </h1>
             <p className="mb-6 max-w-2xl text-center text-lg text-stone-600 dark:text-stone-300">
                 Experience a symphony of flavors with our carefully curated menu. Each dish is designed to delight your senses and leave.
-            </p>
+            </p> */}
 
             <div className="flex flex-wrap gap-3">
                 <button

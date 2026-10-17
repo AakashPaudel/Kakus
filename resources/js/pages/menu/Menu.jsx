@@ -1,32 +1,10 @@
-import { Head } from '@inertiajs/react';
-import MenuSection from '../../components/restaurant/MenuSection';
-import CategoryFilter from '../../components/restaurant/CategoryFilter';
-import { useState } from 'react';
-
-export default function Menu({ categories = [], items = [] }) {
-    const [selectedCategory, setSelectedCategory] = useState(null);
-
-    const filteredItems =
-        selectedCategory === null
-            ? items
-            : items.filter(
-                  (item) =>
-                      String(item.category_id) ===
-                      String(selectedCategory)
-              );
-
+import Menu from "../../components/restaurant/MenuSection";
+export default function MenuPage({ categories , items }) {
     return (
-        <div>
-            {/* Keep your existing menu heading and introduction here */}
-
-            <CategoryFilter
-                categories={categories}
-                selectedCategory={selectedCategory}
-                onCategoryChange={setSelectedCategory}
-            />
-
-            {/* Keep your existing menu section and card components */}
-            <MenuSection items={filteredItems} />
-        </div>
+        <main className="min-h-screen bg-stone-50 text-stone-900 transition-colors">
+            <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 sm:py-14 lg:px-8 lg:py-16">
+                <Menu items={items} categories={categories} />
+            </div>
+        </main>
     );
 }
