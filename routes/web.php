@@ -12,6 +12,7 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\Admin\AdminOrderController;
 use App\Http\Controllers\Admin\AdminReservationController;
 use App\Http\Controllers\DashboardController;
+use App\Models\Category;
 
 Route::get('/', function () {
 
@@ -55,11 +56,19 @@ Route::get('/about', function () {
 
 
 Route::get('/menu', function () {
+    $categories = Category::query()
+        ->where('is_active', true)
+        ->orderBy('name')
+        ->get(['id', 'name', 'slug']);
+
     $items = MenuItem::query()
-        ->where('is_available', true)->with('images')
-        ->get();
+    ->with(['category', 'images']) // Added 'images' relationship
+    ->where('is_available', true)
+    ->get();
+
 
     return Inertia::render('menu/Menu', [
+        'categories' => $categories,
         'items' => $items,
     ]);
 })->name('menu');
@@ -89,7 +98,7 @@ Route::middleware(['auth', 'verified', 'role:staff'])
 Route::middleware(['auth', 'verified', 'role:admin'])
     ->get('/admin/dashboard', [DashboardController::class, 'admin'])
     ->name('admin.dashboard');
-    
+
 
 // cart routes
 Route::middleware('auth')->group(function () {

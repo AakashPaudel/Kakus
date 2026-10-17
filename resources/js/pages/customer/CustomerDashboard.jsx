@@ -30,13 +30,13 @@ const shortcuts = [
     {
         title: 'My Orders',
         description: 'Track orders and view your order history.',
-        href: '/my-orders',
+        href: '/orders',
         icon: Package,
     },
     {
         title: 'My Reservations',
         description: 'Review your upcoming dining visits.',
-        href: '/my-reservations',
+        href: '/reservations/customer',
         icon: CalendarDays,
     },
 ];
@@ -325,7 +325,7 @@ export default function CustomerDashboard({
                                 )}
 
                                 <Link
-                                    href="/my-reservations"
+                                    href="/reservations/customer"
                                     className="mt-5 inline-flex w-full items-center justify-center gap-2 rounded-xl border border-stone-200 px-4 py-3 text-sm font-semibold text-stone-700 transition hover:border-orange-300 hover:bg-orange-50 hover:text-orange-800 dark:border-stone-700 dark:text-stone-200 dark:hover:border-orange-800 dark:hover:bg-orange-950/30 dark:hover:text-orange-300"
                                 >
                                     Manage Reservations
