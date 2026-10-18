@@ -1,37 +1,106 @@
-import { useState } from 'react';
+
+import { useEffect, useRef, useState } from 'react';
 import { Link, usePage, router } from '@inertiajs/react';
 
 export default function UserMenu() {
     const { auth } = usePage().props;
 
     const [open, setOpen] = useState(false);
+    const menuRef = useRef(null);
+    const buttonRef = useRef(null);
 
     const user = auth?.user;
 
+    // Close the dropdown when clicking outside or pressing Escape.
+    useEffect(() => {
+        if (!open) return;
+
+        const handleClickOutside = (event) => {
+            if (
+                menuRef.current &&
+                !menuRef.current.contains(event.target)
+            ) {
+                setOpen(false);
+            }
+        };
+
+        const handleEscape = (event) => {
+            if (event.key === 'Escape') {
+                setOpen(false);
+                buttonRef.current?.focus();
+            }
+        };
+
+        document.addEventListener('mousedown', handleClickOutside);
+        document.addEventListener('touchstart', handleClickOutside);
+        document.addEventListener('keydown', handleEscape);
+
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+            document.removeEventListener('touchstart', handleClickOutside);
+            document.removeEventListener('keydown', handleEscape);
+        };
+    }, [open]);
+
+    const closeMenu = () => {
+        setOpen(false);
+    };
+
     const logout = () => {
+        closeMenu();
         router.post('/logout');
     };
 
+    // Guest navigation
     if (!user) {
         return (
-            <div className="hidden items-center gap-3 sm:flex">
+            <div className="flex shrink-0 items-center gap-2 sm:gap-3">
                 <Link
                     href="/login"
-                    className="group inline-flex items-center justify-center rounded-full border border-amber-800/20 bg-white px-5 py-2.5 text-sm font-semibold text-stone-800 shadow-sm transition-all duration-300 hover:border-amber-700 hover:bg-amber-50 hover:text-amber-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-600 focus-visible:ring-offset-2"
+                    className="
+                        inline-flex items-center justify-center
+                        rounded-full border border-amber-800/20
+                        bg-white px-3 py-2 text-xs font-semibold
+                        text-stone-800 shadow-sm
+                        transition-all duration-300
+                        hover:border-amber-700 hover:bg-amber-50
+                        hover:text-amber-800
+                        focus-visible:outline-none
+                        focus-visible:ring-2 focus-visible:ring-amber-600
+                        focus-visible:ring-offset-2
+                        sm:px-5 sm:py-2.5 sm:text-sm
+                    "
                 >
                     Login
                 </Link>
 
                 <Link
                     href="/register"
-                    className="group inline-flex items-center justify-center gap-2 rounded-full bg-amber-800 px-5 py-2.5 text-sm font-semibold text-white shadow-md shadow-amber-900/15 transition-all duration-300 hover:-translate-y-0.5 hover:bg-amber-900 hover:shadow-lg hover:shadow-amber-900/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-600 focus-visible:ring-offset-2"
+                    className="
+                        group inline-flex items-center justify-center
+                        gap-1.5 rounded-full bg-amber-800
+                        px-3 py-2 text-xs font-semibold text-white
+                        shadow-md shadow-amber-900/15
+                        transition-all duration-300
+                        hover:-translate-y-0.5 hover:bg-amber-900
+                        hover:shadow-lg hover:shadow-amber-900/20
+                        focus-visible:outline-none
+                        focus-visible:ring-2 focus-visible:ring-amber-600
+                        focus-visible:ring-offset-2
+                        sm:gap-2 sm:px-5 sm:py-2.5 sm:text-sm
+                    "
                 >
-                    Create Account
+                    <span>Create Account</span>
+
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
                         viewBox="0 0 20 20"
                         fill="currentColor"
-                        className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5"
+                        className="
+                            h-4 w-4 shrink-0
+                            transition-transform duration-300
+                            group-hover:translate-x-0.5
+                        "
                         aria-hidden="true"
                     >
                         <path
@@ -45,86 +114,130 @@ export default function UserMenu() {
         );
     }
 
-
+    // Authenticated user navigation
     return (
-        <div className="relative hidden sm:block">
-            {/* User Avatar */}
+        <div
+            ref={menuRef}
+            className="relative shrink-0"
+        >
+            {/* User Avatar Button */}
             <button
+                ref={buttonRef}
                 type="button"
-                onClick={() => setOpen(!open)}
+                onClick={() => setOpen((previous) => !previous)}
                 aria-expanded={open}
-                aria-label="Open user menu"
-                className={`flex h - 10 w - 10 items - center justify - center rounded - full
-    bg - amber - 700 text - sm font - bold text - white shadow - sm
-    ring - 2 ring - amber - 100 transition - all duration - 200
-    hover: bg - amber - 800 hover: shadow - md
-    focus: outline - none focus: ring - 2 focus: ring - amber - 500
-    focus: ring - offset - 2 ${open ? "ring-amber-400" : ""
-                    } `}
+                aria-haspopup="true"
+                aria-label={open ? 'Close user menu' : 'Open user menu'}
+                className={`
+                    flex h-10 w-10 items-center justify-center
+                    rounded-full bg-amber-800 text-sm font-bold
+                    text-white shadow-sm ring-2 ring-amber-100
+                    transition-all duration-200
+                    hover:bg-amber-900 hover:shadow-md
+                    focus-visible:outline-none focus-visible:ring-2
+                    focus-visible:ring-amber-500 focus-visible:ring-offset-2
+                    ${open ? 'ring-amber-400' : ''}
+                `}
             >
-                {user.name?.charAt(0).toUpperCase()}
+                {user.name?.charAt(0).toUpperCase() ?? 'U'}
             </button>
 
-            {/* Dropdown */}
+            {/* Responsive Dropdown */}
             {open && (
                 <div
-                    className="absolute right-0 z-50 mt-3 w-64
-                    overflow-hidden rounded-2xl border border-stone-200
-                    bg-white shadow-xl shadow-stone-900/10
-                    animate-in fade-in slide-in-from-top-2 duration-200"
+                    className="
+                        absolute right-0 top-full z-[100]
+                        mt-3 w-[min(18rem,calc(100vw-2rem))]
+                        overflow-hidden rounded-2xl
+                        border border-stone-200 bg-white
+                        shadow-xl shadow-stone-900/10
+                        animate-in fade-in slide-in-from-top-2 duration-200
+                    "
                 >
                     {/* User Information */}
-                    <div className="border-b border-stone-100 bg-stone-50/80 px-4 py-4">
+                    <div className="border-b border-stone-100 bg-stone-50 px-4 py-4">
                         <p className="truncate text-sm font-semibold text-stone-900">
                             {user.name}
                         </p>
-                        <p className="mt-1 text-xs text-stone-500">
-                            Welcome to Kaku’s
+
+                        {user.email && (
+                            <p className="mt-1 truncate text-xs text-stone-500">
+                                {user.email}
+                            </p>
+                        )}
+
+                        <p className="mt-2 text-xs text-stone-500">
+                            Welcome to Kaku's
                         </p>
                     </div>
 
                     {/* Navigation Links */}
-                    <div className="p-2">
+                    <nav
+                        aria-label="User navigation"
+                        className="p-2"
+                    >
                         <Link
                             href="/profile"
-                            onClick={() => setOpen(false)}
-                            className="flex items-center gap-3 rounded-xl
-                            px-3 py-2.5 text-sm font-medium text-stone-700
-                            transition-colors hover:bg-amber-50
-                            hover:text-amber-800"
+                            onClick={closeMenu}
+                            className="
+                                flex items-center gap-3 rounded-xl
+                                px-3 py-3 text-sm font-medium
+                                text-stone-700 transition-colors
+                                hover:bg-amber-50 hover:text-amber-800
+                                focus-visible:outline-none
+                                focus-visible:ring-2
+                                focus-visible:ring-amber-600
+                            "
                         >
-                            <span className="text-base">👤</span>
-                            My Profile
+                            <span aria-hidden="true" className="text-base">
+                                👤
+                            </span>
+
+                            <span>My Profile</span>
                         </Link>
 
                         <Link
                             href="/dashboard"
-                            onClick={() => setOpen(false)}
-                            className="flex items-center gap-3 rounded-xl
-                            px-3 py-2.5 text-sm font-medium text-stone-700
-                            transition-colors hover:bg-amber-50
-                            hover:text-amber-800"
+                            onClick={closeMenu}
+                            className="
+                                flex items-center gap-3 rounded-xl
+                                px-3 py-3 text-sm font-medium
+                                text-stone-700 transition-colors
+                                hover:bg-amber-50 hover:text-amber-800
+                                focus-visible:outline-none
+                                focus-visible:ring-2
+                                focus-visible:ring-amber-600
+                            "
                         >
-                            <span className="text-base">▦</span>
-                            Dashboard
+                            <span aria-hidden="true" className="text-base">
+                                ▦
+                            </span>
+
+                            <span>Dashboard</span>
                         </Link>
-                    </div>
+                    </nav>
 
                     {/* Logout */}
                     <div className="border-t border-stone-100 p-2">
                         <button
                             type="button"
-                            onClick={() => {
-                                setOpen(false);
-                                logout();
-                            }}
-                            className="flex w-full items-center gap-3
-                            rounded-xl px-3 py-2.5 text-left text-sm
-                            font-medium text-red-600 transition-colors
-                            hover:bg-red-50 hover:text-red-700"
+                            onClick={logout}
+                            className="
+                                flex w-full items-center gap-3
+                                rounded-xl px-3 py-3 text-left
+                                text-sm font-medium text-red-600
+                                transition-colors
+                                hover:bg-red-50 hover:text-red-700
+                                focus-visible:outline-none
+                                focus-visible:ring-2
+                                focus-visible:ring-red-500
+                            "
                         >
-                            <span className="text-base">↪</span>
-                            Logout
+                            <span aria-hidden="true" className="text-base">
+                                ↪
+                            </span>
+
+                            <span>Logout</span>
                         </button>
                     </div>
                 </div>

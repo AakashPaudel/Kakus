@@ -67,7 +67,7 @@ export default function Menu({ items = [], categories = [] }) {
                 {/* Search and filters */}
                 <section
                     aria-label="Search and filter menu"
-                    className="mb-10 rounded-2xl border border-stone-200 bg-white p-4 shadow-sm sm:p-6"
+                    className="mb-10 rounded-2xl border border-stone-200  p-4 shadow-sm sm:p-6"
                 >
                     <div className="mb-6">
                         <label
