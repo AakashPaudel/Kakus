@@ -6,6 +6,7 @@ import AboutSection from '../components/restaurant/AboutHome';
 import ContactCTA from '../components/restaurant/CTA';
 import Menu from '../components/restaurant/MenuSection';
 import FlashMessage from '../components/layout/FlashMessages';
+import ThisWeekSpecialsSection from '../components/restaurant/ThisWeekSpecials';
 
 
 export default function Home({ todaysSpecials, galleryItems, categories }) {
@@ -13,9 +14,10 @@ export default function Home({ todaysSpecials, galleryItems, categories }) {
     return (
         <>
             <HeroSection />
+            <TodaysSpecialSection items={todaysSpecials} />
+            <ThisWeekSpecialsSection />
             <FlashMessage />
             <Menu items={galleryItems} categories={categories} />
-            <TodaysSpecialSection items={todaysSpecials} />
             <DishGallery items={galleryItems} />
             <AboutSection />
             <ContactCTA />

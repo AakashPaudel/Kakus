@@ -20,7 +20,7 @@ export default function CategoryFilter({
                     className={`rounded-full px-5 py-2.5 text-sm font-medium transition-colors ${
                         selectedCategory === null
                             ? 'bg-orange-600 text-white shadow-sm'
-                            : 'bg-stone-100 text-stone-700 hover:bg-orange-100 dark:bg-stone-800 dark:text-stone-200 dark:hover:bg-stone-700'
+                            : 'bg-white text-stone-700 hover:bg-orange-100 '
                     }`}
                 >
                     All Items
@@ -38,7 +38,7 @@ export default function CategoryFilter({
                             className={`rounded-full px-5 py-2.5 text-sm font-medium transition-colors ${
                                 isSelected
                                     ? 'bg-orange-600 text-white shadow-sm'
-                                    : 'bg-stone-100 text-stone-700 hover:bg-orange-100 dark:bg-stone-800 dark:text-stone-200 dark:hover:bg-stone-700'
+                                    : 'bg-white text-stone-700 hover:bg-orange-100 '
                             }`}
                         >
                             {category.name}

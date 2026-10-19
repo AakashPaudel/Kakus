@@ -32,6 +32,7 @@ Route::get('/', function () {
         ->orderBy('name')
         ->get(['id', 'name', 'slug']);
 
+    // dd($todaysSpecials->toArray());
 
     return Inertia::render('Home', [
         'todaysSpecials' => $todaysSpecials,
