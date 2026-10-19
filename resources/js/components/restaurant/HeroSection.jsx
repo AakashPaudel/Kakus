@@ -135,7 +135,7 @@ export default function HeroSection() {
                                     className="
                                         flex size-10 shrink-0 items-center
                                         justify-center rounded-full
-                                        bg-amber-100 text-lg
+                                        bg-amber-100 text-lg text-black
                                     "
                                 >
                                     ✦

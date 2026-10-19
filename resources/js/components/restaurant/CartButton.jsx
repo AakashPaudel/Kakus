@@ -3,7 +3,7 @@ import { Link, usePage } from '@inertiajs/react';
 export default function CartButton() {
     const { cart } = usePage().props;
 
-    const cartCount = cart?.itemCount ?? 0;
+    const cartCount = cart?.cartCount ?? 0;
 
     return (
         <Link

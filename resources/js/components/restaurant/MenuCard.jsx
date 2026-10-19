@@ -3,9 +3,17 @@ import { router } from '@inertiajs/react';
 
 export default function MenuCard({ item }) {
     function addToCart() {
-        router.post('/cart/items', {
+        router.post('/cart/items', 
+            {
             menu_item_id: item.id,
             quantity: 1,
+        },
+        {
+            // preserveState: true,
+
+
+            // to prevent the page from scrolling to the top after adding an item to the cart, we can use preserveScroll: true
+            preserveScroll: true,
         });
     }
 

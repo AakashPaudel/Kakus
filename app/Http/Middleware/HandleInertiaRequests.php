@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Illuminate\Http\Request;
 use Inertia\Middleware;
+use App\Models\Cart;
 
 class HandleInertiaRequests extends Middleware
 {
@@ -46,12 +47,19 @@ class HandleInertiaRequests extends Middleware
             'sidebarOpen' => ! $request->hasCookie('sidebar_state') || $request->cookie('sidebar_state') === 'true',
             'cart' => fn() => $request->user()
                 ? [
-                    'itemCount' => $request->user()
-                        ->cart()
-                        ->withCount('cartItems')
-                        ->first()?->cart_items_count ?? 0,
+                    'cartCount' => fn() => (int) (
+                        Cart::where('user_id', $request->user()?->id)
+                        ->first()
+                        ?->cartItems()
+                        ->sum('quantity') ?? 0
+                    ),
                 ]
                 : null,
+            'flash' => [
+                'success' => fn() => $request->session()->get('success'),
+                'id' => fn() => $request->session()->get('flash_id'),
+                // 'error' => fn() => $request->session()->get('error'),
+            ],
         ];
     }
 }
