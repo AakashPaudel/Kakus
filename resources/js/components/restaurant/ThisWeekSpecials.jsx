@@ -2,8 +2,7 @@
 import { Link } from '@inertiajs/react';
 
 export default function ThisWeekSpecialsSection({
-    specials = [],
-    todayDate,
+    specials = [], special_date,
 }) {
     const formatDay = (date) => {
         const [year, month, day] = date.split('-');
@@ -62,7 +61,7 @@ export default function ThisWeekSpecialsSection({
                     <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
                         {specials.map((special) => {
                             const isToday =
-                                special.special_date === todayDate;
+                                special.special_date === special_date;
 
                             const item = special.menu_item;
 

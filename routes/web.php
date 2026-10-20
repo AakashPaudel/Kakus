@@ -13,33 +13,36 @@ use App\Http\Controllers\Admin\AdminOrderController;
 use App\Http\Controllers\Admin\AdminReservationController;
 use App\Http\Controllers\DashboardController;
 use App\Models\Category;
+use App\Http\Controllers\HomeController;
 
-Route::get('/', function () {
+Route::get('/', HomeController::class)->name('home');
 
-    $todaysSpecials = MenuItem::query()
-        ->where('is_available', true)->with('images')
-        // ->where('is_featured', true)
-        ->get();
-    $galleryItems = MenuItem::query()
-        ->where('is_available', true)
-        ->with('images')
-        ->latest()
-        ->take(6)
-        ->get();
+// Route::get('/', function () {
 
-    $categories = Category::query()
-        ->where('is_active', true)
-        ->orderBy('name')
-        ->get(['id', 'name', 'slug']);
+//     // $todaysSpecials = MenuItem::query()
+//     //     ->where('is_available', true)->with('images')
+//     //     // ->where('is_featured', true)
+//     //     ->get();
+//     $galleryItems = MenuItem::query()
+//         ->where('is_available', true)
+//         ->with('images')
+//         ->latest()
+//         ->take(6)
+//         ->get();
 
-    // dd($todaysSpecials->toArray());
+//     $categories = Category::query()
+//         ->where('is_active', true)
+//         ->orderBy('name')
+//         ->get(['id', 'name', 'slug']);
 
-    return Inertia::render('Home', [
-        'todaysSpecials' => $todaysSpecials,
-        'galleryItems' => $galleryItems,
-        'categories' => $categories,
-    ]);
-})->name('home');
+//     // dd($todaysSpecials->toArray());
+
+//     return Inertia::render('Home', [
+//         'todaysSpecials' => $todaysSpecials,
+//         'galleryItems' => $galleryItems,
+//         'categories' => $categories,
+//     ]);
+// })->name('home');
 
 
 Route::get('/contact', function () {

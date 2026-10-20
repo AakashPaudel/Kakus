@@ -1,8 +1,8 @@
 
 import { Link } from '@inertiajs/react';
 
-export default function TodaysSpecialSection({ items = [] }) {
-    if (!items || items.length === 0) {
+export default function TodaysSpecialSection({ special = [] }) {
+    if (!special || special.length === 0) {
         return (
             <section
                 className="bg-amber-50 py-16 sm:py-20"
@@ -38,13 +38,11 @@ export default function TodaysSpecialSection({ items = [] }) {
         );
     }
 
-    const item = items[0]?.menu_item ?? items[0];
+    const item = special?.menu_item
+        ?? special?.menuItem
+        ?? special;
 
-    const imageUrl =
-        item?.images?.[0]?.image_path ??
-        item?.image_path ??
-        item?.image ??
-        null;
+    const imageUrl = item?.image_url;
 
     return (
         <section
@@ -78,7 +76,7 @@ export default function TodaysSpecialSection({ items = [] }) {
                     <div className="relative min-h-64 overflow-hidden bg-stone-200 sm:min-h-80 lg:min-h-[480px]">
                         {imageUrl ? (
                             <img
-                                src={`/storage/${imageUrl}`}
+                                src={imageUrl}
                                 alt={item.name}
                                 className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 hover:scale-105"
                             />

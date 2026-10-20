@@ -9,13 +9,13 @@ import FlashMessage from '../components/layout/FlashMessages';
 import ThisWeekSpecialsSection from '../components/restaurant/ThisWeekSpecials';
 
 
-export default function Home({ todaysSpecials, galleryItems, categories }) {
+export default function Home({ todaysSpecial, galleryItems, categories, weeklySpecials,todayDate}) {
 
     return (
         <>
             <HeroSection />
-            <TodaysSpecialSection items={todaysSpecials} />
-            <ThisWeekSpecialsSection />
+            <TodaysSpecialSection special={todaysSpecial} />
+            <ThisWeekSpecialsSection specials={weeklySpecials} special_date={todayDate} />
             <FlashMessage />
             <Menu items={galleryItems} categories={categories} />
             <DishGallery items={galleryItems} />
