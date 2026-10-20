@@ -1,5 +1,6 @@
 
 import { Link } from '@inertiajs/react';
+import { useEffect, useState } from 'react';
 
 export default function HeroSection() {
     const stats = [
@@ -21,6 +22,25 @@ export default function HeroSection() {
         },
     ];
 
+    const [isOpen, setIsOpen] = useState(false);
+
+    useEffect(() => {
+        const checkOpeningHours = () => {
+            const now = new Date();
+            const hour = now.getHours();
+
+            setIsOpen(hour >= 10 && hour < 22);
+        };
+
+        checkOpeningHours();
+
+        const interval = setInterval(checkOpeningHours, 60000);
+
+        return () => clearInterval(interval);
+    }, []);
+
+
+
     return (
         <>
             {/* Hero Section */}
@@ -32,15 +52,44 @@ export default function HeroSection() {
                             {/* Eyebrow */}
                             <div
                                 className="
-                                    mb-6 inline-flex items-center gap-3
-                                    motion-safe:animate-[heroReveal_0.7s_ease-out_both]
-                                "
+        mb-6 inline-flex max-w-full items-center gap-3
+        animate-[heroReveal_0.7s_ease-out_both]
+    "
                             >
-                                <span className="h-px w-10 bg-amber-700" />
+                                {/* Opening status indicator */}
+                                <span className="relative flex h-2.5 w-2.5 shrink-0">
+                                    <span
+                                        className={`
+                absolute inline-flex h-full w-full rounded-full opacity-75
+                ${isOpen ? 'animate-ping bg-green-400' : ''}
+            `}
+                                    />
 
-                                <p className="text-xs font-bold uppercase tracking-[0.24em] text-amber-900 sm:text-sm">
-                                    Welcome to Kaku's
+                                    <span
+                                        className={`
+                relative inline-flex h-2.5 w-2.5 rounded-full
+                ${isOpen ? 'bg-green-400' : 'bg-amber-400'}
+            `}
+                                    />
+                                </span>
+
+                                {/* Status label */}
+                                <p
+                                    className="
+            min-w-0 text-xs font-bold uppercase
+            tracking-[0.16em] text-amber-300
+            sm:text-sm sm:tracking-[0.2em]
+        "
+                                    aria-live="polite"
+                                >
+                                    {isOpen ? "Open Now, kitchen closes at 10 PM" : "Currently Closed — See You Soon"}
                                 </p>
+
+                                {/* Decorative divider */}
+                                {/* <span
+                                    className="hidden h-px w-8 shrink-0 bg-amber-100/70 sm:block"
+                                    aria-hidden="true"
+                                /> */}
                             </div>
 
                             {/* Main Heading */}
@@ -287,7 +336,7 @@ export default function HeroSection() {
             </section>
 
             {/* Statistics Section */}
-            <section className="border-t border-amber-500/40 bg-amber-700/30 py-12 sm:py-14">
+            <section className="border-t border-amber-600 bg-amber-600 py-12 sm:py-14">
                 <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                     <div className="grid grid-cols-2 gap-y-10 md:grid-cols-4 md:divide-x md:divide-amber-500/40">
                         {stats.map((stat, index) => (

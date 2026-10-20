@@ -23,10 +23,11 @@ class HomeController extends Controller
             ->whereDate(
                 'special_date',
                 '<=',
-                $today->copy()->endOfWeek()->toDateString()
+                $today->copy()->addDays(6)->toDateString()
             )
             ->orderBy('special_date')
             ->get();
+        // dd($weeklySpecials->toArray());
 
         $galleryItems = MenuItem::query()
             ->where('is_available', true)
