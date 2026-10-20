@@ -4,18 +4,17 @@ namespace App\Http\Controllers;
 
 use App\Exceptions\ReservationConflictException;
 use App\Http\Requests\StoreReservationRequest;
+use App\Models\Reservation;
+use App\Models\RestaurantTable;
+use App\ReservationStatus;
 use App\Services\ReservationService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use RuntimeException;
-use App\Models\Reservation;
+use Illuminate\Support\Facades\Gate;
+use Illuminate\Validation\Rule;
 use Inertia\Inertia;
 use Inertia\Response;
-use Illuminate\Support\Facades\Gate;
-use App\ReservationStatus;
-use Illuminate\Validation\Rule;
-use App\Models\RestaurantTable;
-
+use RuntimeException;
 
 class ReservationController extends Controller
 {
@@ -26,6 +25,7 @@ class ReservationController extends Controller
     public function create(): Response
     {
         $availableTables = RestaurantTable::where('status', 'available')->get();
+
         // @dd($availableTables);
         return Inertia::render(
             'admin/reservations/create',
@@ -34,7 +34,6 @@ class ReservationController extends Controller
             ]
         );
     }
-
 
     public function index(): Response
     {
@@ -84,18 +83,30 @@ class ReservationController extends Controller
             ]
         );
     }
+
     public function cancel(
+        Request $request,
         Reservation $reservation
     ): RedirectResponse {
         Gate::authorize('cancel', $reservation);
 
-        // Cancellation logic will be added in
-        // the Reservation Status milestone.
+        try {
+            $this->reservationService->updateStatus(
+                $request->user(),
+                $reservation,
+                ReservationStatus::Cancelled
+            );
+        } catch (RuntimeException $exception) {
+            return back()->withErrors([
+                'reservation' => $exception->getMessage(),
+            ]);
+        }
 
-        return back();
+        return back()->with(
+            'success',
+            'Reservation cancelled successfully.'
+        );
     }
-
-
 
     public function store(
         StoreReservationRequest $request
@@ -122,7 +133,6 @@ class ReservationController extends Controller
             'Reservation created successfully.'
         );
     }
-
 
     public function updateStatus(
         Request $request,

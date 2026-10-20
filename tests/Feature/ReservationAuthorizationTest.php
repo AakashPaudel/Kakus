@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use App\Models\Reservation;
 use App\Models\User;
+use App\ReservationStatus;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -154,6 +155,54 @@ class ReservationAuthorizationTest extends TestCase
         $this->assertTrue(
             $customer->can('cancel', $reservation)
         );
+    }
+
+    public function test_customer_cannot_cancel_a_completed_reservation(): void
+    {
+        $customer = User::factory()->create([
+            'role' => 'customer',
+        ]);
+
+        $reservation = Reservation::factory()->create([
+            'user_id' => $customer->id,
+            'status' => ReservationStatus::Completed,
+        ]);
+
+        $response = $this->actingAs($customer)->patch(
+            route('reservations.cancel', $reservation)
+        );
+
+        $response->assertForbidden();
+
+        $this->assertDatabaseHas('reservations', [
+            'id' => $reservation->id,
+            'status' => 'completed',
+        ]);
+    }
+
+    public function test_customer_can_cancel_their_pending_reservation(): void
+    {
+        $customer = User::factory()->create([
+            'role' => 'customer',
+        ]);
+
+        $reservation = Reservation::factory()->create([
+            'user_id' => $customer->id,
+            'status' => ReservationStatus::Pending,
+        ]);
+
+        $response = $this->actingAs($customer)->patch(
+            route('reservations.cancel', $reservation)
+        );
+
+        $response
+            ->assertRedirect()
+            ->assertSessionHas('success', 'Reservation cancelled successfully.');
+
+        $this->assertDatabaseHas('reservations', [
+            'id' => $reservation->id,
+            'status' => 'cancelled',
+        ]);
     }
 
     public function test_customer_cannot_cancel_another_customers_reservation(): void

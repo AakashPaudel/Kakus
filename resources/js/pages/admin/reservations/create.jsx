@@ -56,7 +56,7 @@ export default function Create({ availableTables }) {
                         onChange={(event) =>
                             setData('reservation_date', event.target.value)
                         }
-                        className="mt-2 w-full rounded-lg border border-stone-300 px-4 py-3 outline-none focus:border-amber-500"
+                        className="mt-2 w-full rounded-lg border  text-black  border-stone-300 px-4 py-3 outline-none focus:border-amber-500 scheme-light"
                     />
 
                     {errors.reservation_date && (
@@ -80,10 +80,10 @@ export default function Create({ availableTables }) {
                         type="time"
                         value={data.start_time}
                         onChange={(event) =>
-                        
+
                             setData('start_time', event.target.value)
                         }
-                        className="mt-2 w-full rounded-lg border border-stone-300 px-4 py-3 outline-none focus:border-amber-500"
+                        className="mt-2 w-full rounded-lg border  text-black  border-stone-300 px-4 py-3 outline-none focus:border-amber-500 scheme-light"
                     />
 
                     {errors.start_time && (
@@ -109,8 +109,8 @@ export default function Create({ availableTables }) {
                         onChange={(event) =>
                             setData('end_time', event.target.value)
                         }
-                        className="mt-2 w-full rounded-lg border border-stone-300 px-4 py-3 outline-none focus:border-amber-500"
-                    />
+                        className="mt-2 w-full rounded-lg border text-black  border-stone-300 px-4 py-3 outline-none focus:border-amber-500 scheme-light" />
+
 
                     {errors.end_time && (
                         <p className="mt-1 text-sm text-red-600">
@@ -137,8 +137,9 @@ export default function Create({ availableTables }) {
                         onChange={(event) =>
                             setData('guest_count', event.target.value)
                         }
-                        className="mt-2 w-full rounded-lg border border-stone-300 px-4 py-3 outline-none focus:border-amber-500"
+                        className="mt-2 w-full rounded-lg border text-black  border-stone-300 px-4 py-3 outline-none focus:border-amber-500 scheme-light "
                     />
+
 
                     {errors.guest_count && (
                         <p className="mt-1 text-sm text-red-600">
@@ -165,7 +166,7 @@ export default function Create({ availableTables }) {
                                 event.target.value,
                             )
                         }
-                        className="mt-2 w-full rounded-lg border border-stone-300 px-4 py-3 outline-none focus:border-amber-500"
+                        className="mt-2 w-full rounded-lg border text-black  border-stone-300 px-4 py-3 outline-none focus:border-amber-500 scheme-light"
                     >
                         <option value="">Select a table</option>
 
@@ -198,7 +199,7 @@ export default function Create({ availableTables }) {
                         htmlFor="special_request"
                         className="block text-sm font-medium text-stone-700"
                     >
-                        Additional Notes
+                        Additional Requests (Optional)
                     </label>
 
                     <textarea
@@ -212,7 +213,7 @@ export default function Create({ availableTables }) {
                             )
                         }
                         placeholder="Any special requests?"
-                        className="mt-2 w-full rounded-lg border border-stone-300 px-4 py-3 outline-none focus:border-amber-500"
+                        className="mt-2 w-full rounded-lg border text-black  border-stone-300 px-4 py-3 outline-none focus:border-amber-500"
                     />
 
                     {errors.special_request && (

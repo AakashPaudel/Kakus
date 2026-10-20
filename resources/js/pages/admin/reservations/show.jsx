@@ -5,7 +5,7 @@ export default function Show({ reservation }) {
         <div className="mx-auto max-w-3xl space-y-6">
             <div>
                 <Link
-                    href="/reservations"
+                    href="/reservations/customer"
                     className="text-sm font-medium text-amber-600 hover:text-amber-700"
                 >
                     ← Back to reservations
@@ -65,12 +65,12 @@ export default function Show({ reservation }) {
                     </div>
                 </div>
 
-                {reservation.notes && (
+                {reservation.special_request && (
                     <div className="border-t border-stone-200 pt-6">
                         <p className="text-sm text-stone-500">Notes</p>
 
                         <p className="mt-1 text-stone-800">
-                            {reservation.notes}
+                            {reservation.special_request}
                         </p>
                     </div>
                 )}

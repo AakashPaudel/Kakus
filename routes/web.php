@@ -1,19 +1,19 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminOrderController;
+use App\Http\Controllers\Admin\AdminReservationController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\ContactController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\ReservationController;
+use App\Http\Controllers\RestaurantTableController;
+use App\Models\Category;
+use App\Models\MenuItem;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
-use App\Http\Controllers\RestaurantTableController;
-use App\Http\Controllers\ReservationController;
-use App\Models\MenuItem;
-use App\Http\Controllers\ContactController;
-use App\Http\Controllers\Admin\AdminOrderController;
-use App\Http\Controllers\Admin\AdminReservationController;
-use App\Http\Controllers\DashboardController;
-use App\Models\Category;
-use App\Http\Controllers\HomeController;
 
 Route::get('/', HomeController::class)->name('home');
 
@@ -44,11 +44,9 @@ Route::get('/', HomeController::class)->name('home');
 //     ]);
 // })->name('home');
 
-
 Route::get('/contact', function () {
     return Inertia::render('Contact');
 })->name('contact');
-
 
 Route::post('/contact', [ContactController::class, 'store'])
     ->name('contact.store');
@@ -65,7 +63,6 @@ Route::get('/about', function () {
     ]);
 })->name('about');
 
-
 Route::get('/menu', function () {
     $categories = Category::query()
         ->where('is_active', true)
@@ -73,10 +70,9 @@ Route::get('/menu', function () {
         ->get(['id', 'name', 'slug']);
 
     $items = MenuItem::query()
-    ->with(['category', 'images']) // Added 'images' relationship
-    ->where('is_available', true)
-    ->get();
-
+        ->with(['category', 'images']) // Added 'images' relationship
+        ->where('is_available', true)
+        ->get();
 
     return Inertia::render('menu/Menu', [
         'categories' => $categories,
@@ -106,10 +102,9 @@ Route::middleware(['auth', 'verified', 'role:staff'])
     ->get('/staff/dashboard', [DashboardController::class, 'staff'])
     ->name('staff.dashboard');
 
-Route::middleware(['auth', 'verified', 'role:admin'])
+Route::middleware(['auth', 'verified', 'role:admin,staff'])
     ->get('/admin/dashboard', [DashboardController::class, 'admin'])
     ->name('admin.dashboard');
-
 
 // cart routes
 Route::middleware('auth')->group(function () {
@@ -150,7 +145,7 @@ Route::middleware('auth')->group(function () {
 });
 
 // for admin and staff to view all orders and reservations, and update their status
-Route::middleware(['auth', 'verified', 'role:admin'])
+Route::middleware(['auth', 'verified', 'role:admin,staff'])
     ->prefix('admin')
     ->name('admin.')
     ->group(function () {
@@ -158,17 +153,13 @@ Route::middleware(['auth', 'verified', 'role:admin'])
         Route::get('/orders', [AdminOrderController::class, 'index'])
             ->name('orders.index');
 
-
-
         Route::get('/reservations', [AdminReservationController::class, 'index'])
             ->name('reservations.index');
     });
 
-
-//Reservation routes
+// Reservation routes
 
 Route::middleware('auth')->group(function () {
-
 
     Route::get(
         '/reservations/create',
@@ -206,16 +197,14 @@ Route::middleware('auth')->group(function () {
     )->name('reservations.cancel');
 });
 
+Route::middleware(['auth', 'verified', 'role:admin,staff'])->group(function () {
+    Route::patch(
+        '/admin/reservations/{reservation}/status',
+        [ReservationController::class, 'updateStatus']
+    )->name('admin.reservations.update-status');
+});
 
-
-
-
-Route::patch(
-    '/admin/reservations/{reservation}/status',
-    [ReservationController::class, 'updateStatus']
-)->name('admin.reservations.update-status');
-
-Route::middleware(['auth', 'verified'])->group(function () {
+Route::middleware(['auth', 'verified', 'role:admin,staff'])->group(function () {
     Route::resource(
         'admin/tables',
         RestaurantTableController::class
@@ -236,4 +225,4 @@ Route::middleware(['auth', 'verified'])->group(function () {
     )->name('admin.tables.update-status');
 });
 
-require __DIR__ . '/settings.php';
+require __DIR__.'/settings.php';

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Inventory;
+use App\Models\MenuItem;
 use App\Models\Order;
 use App\Models\Reservation;
 use App\Models\User;
@@ -24,6 +25,12 @@ class DashboardController extends Controller
             'pendingOrders' => Order::where('status', 'pending')->count(),
             'totalReservations' => Reservation::count(),
             'totalCustomers' => User::where('role', 'customer')->count(),
+            'totalMenuItems' => MenuItem::count(),
+            'lowStockItems' => Inventory::whereColumn(
+                'quantity',
+                '<=',
+                'reorder_level'
+            )->count(),
         ];
 
         $recentOrders = Order::with('user')
@@ -154,8 +161,7 @@ class DashboardController extends Controller
             ->orderBy('reservation_date')
             ->orderBy('start_time')
             ->first();
-        
-            
+
         return Inertia::render('customer/CustomerDashboard', [
             'stats' => $stats,
             'recentOrders' => $recentOrders,

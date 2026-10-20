@@ -2,9 +2,9 @@
 
 namespace App\Policies;
 
-use App\Enums\ReservationStatus;
 use App\Models\Reservation;
 use App\Models\User;
+use App\ReservationStatus;
 
 class ReservationPolicy
 {
@@ -16,7 +16,7 @@ class ReservationPolicy
         return in_array($user->role, [
             'admin',
             'staff',
-           ]);
+        ]);
     }
 
     /**
@@ -52,6 +52,13 @@ class ReservationPolicy
      */
     public function cancel(User $user, Reservation $reservation): bool
     {
+        if (in_array($reservation->status, [
+            ReservationStatus::Cancelled,
+            ReservationStatus::Completed,
+        ], true)) {
+            return false;
+        }
+
         return $user->role === 'admin'
             || $user->role === 'staff'
             || $reservation->user_id === $user->id;

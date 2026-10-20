@@ -5,14 +5,13 @@ import {
     UtensilsCrossed,
     ShoppingBag,
     CalendarDays,
-    Package,
 } from 'lucide-react';
 
 const actions = [
     {
         title: 'Manage Menu',
         description: 'Add or update menu items.',
-        href: '/admin/menu',
+        href: '/menu',
         icon: UtensilsCrossed,
         iconStyle:
             'bg-orange-50 text-orange-600 group-hover:bg-orange-600 group-hover:text-white dark:bg-orange-500/10 dark:text-orange-400 dark:group-hover:bg-orange-500 dark:group-hover:text-white',
@@ -28,18 +27,10 @@ const actions = [
     {
         title: 'Reservations',
         description: 'Review restaurant bookings.',
-        href: '/reservations',
+        href: '/admin/reservations',
         icon: CalendarDays,
         iconStyle:
             'bg-purple-50 text-purple-600 group-hover:bg-purple-600 group-hover:text-white dark:bg-purple-500/10 dark:text-purple-400 dark:group-hover:bg-purple-500 dark:group-hover:text-white',
-    },
-    {
-        title: 'Inventory',
-        description: 'Check stock and reorder levels.',
-        href: '/admin/inventory',
-        icon: Package,
-        iconStyle:
-            'bg-emerald-50 text-emerald-600 group-hover:bg-emerald-600 group-hover:text-white dark:bg-emerald-500/10 dark:text-emerald-400 dark:group-hover:bg-emerald-500 dark:group-hover:text-white',
     },
 ];
 

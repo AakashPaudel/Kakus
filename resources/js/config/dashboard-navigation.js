@@ -2,26 +2,22 @@
 export const dashboardNavigation = {
     admin: [
         { title: 'Overview', href: '/dashboard' },
-        { title: 'Menu Management', href: '/admin/menu' },
+        { title: 'Menu', href: '/menu' },
         { title: 'Orders', href: '/admin/orders' },
         { title: 'Reservations', href: '/admin/reservations' },
-        { title: 'Inventory', href: '/admin/inventory' },
-        { title: 'Customers', href: '/admin/customers' },
-        { title: 'Reports', href: '/admin/reports' },
         { title: 'Settings', href: '/settings/profile' },
     ],
 
     staff: [
         { title: 'Overview', href: '/dashboard' },
-        { title: 'Orders', href: '/staff/orders' },
-        { title: 'Reservations', href: '/staff/reservations' },
-        { title: 'Inventory', href: '/staff/inventory' },
+        { title: 'Orders', href: '/admin/orders' },
+        { title: 'Reservations', href: '/admin/reservations' },
     ],
 
     customer: [
         { title: 'Overview', href: '/dashboard' },
-        { title: 'My Orders', href: '/my-orders' },
-        { title: 'My Reservations', href: '/my-reservations' },
+        { title: 'My Orders', href: '/orders' },
+        { title: 'My Reservations', href: '/reservations/customer' },
         { title: 'My Profile', href: '/settings/profile' },
     ],
 };

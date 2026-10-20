@@ -38,7 +38,7 @@ export default function LowStockItems({ items = [] }) {
                 </div>
 
                 <Link
-                    href="/admin/inventory"
+                    href="/admin/dashboard"
                     className="inline-flex shrink-0 items-center gap-1.5 text-sm font-semibold text-orange-600 transition-colors hover:text-orange-700 dark:text-orange-400 dark:hover:text-orange-300"
                 >
                     <span className="hidden sm:inline">View inventory</span>
@@ -105,7 +105,7 @@ export default function LowStockItems({ items = [] }) {
                         </p>
 
                         <Link
-                            href="/admin/inventory"
+                            href="/admin/dashboard"
                             className="mt-4 inline-flex items-center gap-2 rounded-xl border border-stone-200 px-4 py-2.5 text-sm font-semibold text-stone-700 transition-colors hover:border-orange-200 hover:bg-orange-50 hover:text-orange-700 dark:border-stone-700 dark:text-stone-300 dark:hover:border-orange-500/30 dark:hover:bg-orange-500/10 dark:hover:text-orange-400"
                         >
                             Check inventory
@@ -123,7 +123,7 @@ export default function LowStockItems({ items = [] }) {
                     </p>
 
                     <Link
-                        href="/admin/inventory"
+                        href="/admin/dashboard"
                         className="inline-flex items-center gap-1 text-xs font-semibold text-orange-600 hover:text-orange-700 dark:text-orange-400 dark:hover:text-orange-300"
                     >
                         Manage stock

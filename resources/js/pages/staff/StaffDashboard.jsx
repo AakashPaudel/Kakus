@@ -36,12 +36,12 @@ const quickActions = [
     {
         title: 'Manage Orders',
         description: 'View and process customer orders',
-        href: '/staff/orders',
+        href: '/admin/orders',
     },
     {
         title: 'Manage Reservations',
         description: 'Review customer reservations',
-        href: '/staff/reservations',
+        href: '/admin/reservations',
     },
 ];
 
