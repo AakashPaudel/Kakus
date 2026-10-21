@@ -30,6 +30,8 @@ void createInertiaApp({
             case name === 'About':
             case name === 'Contact':
             case name === 'customer/reservations/Index':
+            case name === 'customer/reservations/Show':
+            case name === 'customer/reservations/Edit':
         
         
                 // case name === 'cart/MenuItem':

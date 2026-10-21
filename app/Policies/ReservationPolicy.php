@@ -42,6 +42,13 @@ class ReservationPolicy
      */
     public function update(User $user, Reservation $reservation): bool
     {
+        if (in_array($reservation->status, [
+            ReservationStatus::Cancelled,
+            ReservationStatus::Completed,
+        ], true)) {
+            return false;
+        }
+
         return $user->role === 'admin'
             || $user->role === 'staff'
             || $reservation->user_id === $user->id;

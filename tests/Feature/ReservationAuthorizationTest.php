@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\Models\Reservation;
+use App\Models\RestaurantTable;
 use App\Models\User;
 use App\ReservationStatus;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -90,6 +91,82 @@ class ReservationAuthorizationTest extends TestCase
         );
 
         $response->assertSuccessful();
+    }
+
+    public function test_customer_can_edit_their_pending_reservation(): void
+    {
+        $customer = User::factory()->create(['role' => 'customer']);
+        $table = RestaurantTable::factory()->create(['capacity' => 6]);
+        $reservation = Reservation::factory()->create([
+            'user_id' => $customer->id,
+            'restaurant_table_id' => $table->id,
+            'guest_count' => 2,
+        ]);
+
+        $date = now()->addDays(3)->toDateString();
+
+        $response = $this->actingAs($customer)->put(
+            route('reservations.update', $reservation),
+            [
+                'restaurant_table_id' => $table->id,
+                'reservation_date' => $date,
+                'start_time' => '18:00',
+                'end_time' => '20:00',
+                'guest_count' => 4,
+                'special_request' => 'Window seat, please.',
+            ]
+        );
+
+        $response
+            ->assertRedirect(route('customer.reservations.index'))
+            ->assertSessionHas('success', 'Reservation updated successfully.');
+
+        $reservation->refresh();
+
+        $this->assertSame($date, $reservation->reservation_date->toDateString());
+        $this->assertSame('18:00', $reservation->start_time->format('H:i'));
+        $this->assertSame(4, $reservation->guest_count);
+        $this->assertSame('Window seat, please.', $reservation->special_request);
+    }
+
+    public function test_customer_cannot_edit_another_customers_reservation(): void
+    {
+        $customer = User::factory()->create(['role' => 'customer']);
+        $reservation = Reservation::factory()->create();
+
+        $response = $this->actingAs($customer)->put(
+            route('reservations.update', $reservation),
+            [
+                'restaurant_table_id' => $reservation->restaurant_table_id,
+                'reservation_date' => now()->addDays(3)->toDateString(),
+                'start_time' => '18:00',
+                'end_time' => '20:00',
+                'guest_count' => 2,
+            ]
+        );
+
+        $response->assertForbidden();
+    }
+
+    public function test_completed_reservation_cannot_be_edited(): void
+    {
+        $customer = User::factory()->create(['role' => 'customer']);
+        $reservation = Reservation::factory()
+            ->completed()
+            ->create(['user_id' => $customer->id]);
+
+        $response = $this->actingAs($customer)->put(
+            route('reservations.update', $reservation),
+            [
+                'restaurant_table_id' => $reservation->restaurant_table_id,
+                'reservation_date' => now()->addDays(3)->toDateString(),
+                'start_time' => '18:00',
+                'end_time' => '20:00',
+                'guest_count' => 2,
+            ]
+        );
+
+        $response->assertForbidden();
     }
 
     public function test_customer_cannot_view_all_reservations(): void

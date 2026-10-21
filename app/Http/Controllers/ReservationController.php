@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Exceptions\ReservationConflictException;
 use App\Http\Requests\StoreReservationRequest;
+use App\Http\Requests\UpdateReservationRequest;
 use App\Models\Reservation;
 use App\Models\RestaurantTable;
 use App\ReservationStatus;
@@ -65,9 +66,8 @@ class ReservationController extends Controller
         ]);
     }
 
-    public function show(
-        Reservation $reservation
-    ): Response {
+    public function show(Request $request, Reservation $reservation): Response
+    {
         Gate::authorize('view', $reservation);
 
         // eager load the related user and restaurant table to avoid N+1 queries
@@ -76,12 +76,60 @@ class ReservationController extends Controller
             'restaurantTable',
         ]);
 
-        return Inertia::render(
-            'admin/reservations/show',
-            [
-                'reservation' => $reservation,
-            ]
-        );
+        $page = in_array($request->user()->role, ['admin', 'staff'], true)
+            ? 'admin/reservations/show'
+            : 'customer/reservations/Show';
+
+        return Inertia::render($page, ['reservation' => $reservation]);
+    }
+
+    public function edit(Reservation $reservation): Response
+    {
+        Gate::authorize('update', $reservation);
+
+        $availableTables = RestaurantTable::query()
+            ->where(function ($query) use ($reservation): void {
+                $query
+                    ->where('status', 'available')
+                    ->orWhereKey($reservation->restaurant_table_id);
+            })
+            ->orderBy('table_number')
+            ->get();
+
+        $reservation->load('restaurantTable');
+
+        return Inertia::render('customer/reservations/Edit', [
+            'reservation' => $reservation,
+            'availableTables' => $availableTables,
+        ]);
+    }
+
+    public function update(
+        UpdateReservationRequest $request,
+        Reservation $reservation
+    ): RedirectResponse {
+        if (in_array($reservation->status, [
+            ReservationStatus::Cancelled,
+            ReservationStatus::Completed,
+        ], true)) {
+            return back()->withErrors([
+                'reservation' => 'This reservation can no longer be edited.',
+            ]);
+        }
+
+        try {
+            $this->reservationService->updateReservation(
+                $reservation,
+                $request->validated()
+            );
+        } catch (ReservationConflictException|RuntimeException $exception) {
+            return back()->withErrors([
+                'reservation' => $exception->getMessage(),
+            ]);
+        }
+
+        return to_route('customer.reservations.index')
+            ->with('success', 'Reservation updated successfully.');
     }
 
     public function cancel(

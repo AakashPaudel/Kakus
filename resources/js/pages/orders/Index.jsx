@@ -1,67 +1,100 @@
-export default function Index({ orders }) {
+import { Head, Link } from '@inertiajs/react';
+import orders from '@/routes/orders';
+
+export default function Index({ orders = [] }) {
     return (
-        <div className="min-h-screen py-12">
-            <div className="mx-auto max-w-7xl space-y-8 px-4 sm:px-6 lg:px-8">
-                <div>
-                    <h1 className="text-3xl font-bold text-stone-900">
-                        My Orders
-                    </h1>
+        <>
+            <Head title="My Orders" />
 
-                    <p className="mt-2 text-stone-600 dark:text-stone-400">
-                        View your previous restaurant orders.
-                    </p>
-                </div>
+            <div className="bg-amber-50 px-4 py-12 sm:px-6 lg:px-8">
+                <div className="mx-auto max-w-7xl space-y-8">
+                    <header className="flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
+                        <div>
+                            <p className="text-sm font-semibold uppercase tracking-widest text-amber-700">
+                                Your orders
+                            </p>
+                            <h1 className="mt-2 text-4xl font-bold tracking-tight text-stone-900">
+                                My Orders
+                            </h1>
+                            <p className="mt-2 max-w-2xl text-stone-600">
+                                Review your order history and open any order
+                                for its full details.
+                            </p>
+                        </div>
 
-                {orders.length === 0 ? (
-                    <div className="rounded-2xl bg-white p-8 text-center shadow-sm ring-1 ring-stone-200 dark:bg-stone-900 dark:ring-stone-800">
-                        <p className="text-stone-600 dark:text-stone-400">
-                            You haven't placed any orders yet.
-                        </p>
-                    </div>
-                ) : (
-                    <div className="space-y-6">
-                        {orders.map((order) => (
-                            <div
-                                key={order.id}
-                                className="rounded-2xl bg-white p-6 shadow-sm ring-1 ring-stone-200"
-                            >
-                                <div className="flex items-center justify-between gap-4">
-                                    <div>
-                                        <h2 className="text-xl font-semibold text-stone-900 ">
-                                            Order #{order.id}
-                                        </h2>
+                        <Link
+                            href="/menu"
+                            className="w-fit rounded-lg bg-amber-500 px-5 py-3 text-sm font-semibold text-white transition hover:bg-amber-600"
+                        >
+                            Browse menu
+                        </Link>
+                    </header>
 
-                                        <p className="mt-1 text-sm capitalize text-stone-500">
-                                            {order.status}
+                    {orders.length === 0 ? (
+                        <EmptyState
+                            title="No orders yet"
+                            description="Your completed orders will appear here after you place an order."
+                            href="/menu"
+                            label="Explore the menu"
+                        />
+                    ) : (
+                        <div className="grid gap-6 lg:grid-cols-2">
+                            {orders.map((order) => (
+                                <article
+                                    key={order.id}
+                                    className="rounded-3xl bg-white p-6 shadow-sm ring-1 ring-stone-200"
+                                >
+                                    <div className="flex items-start justify-between gap-4">
+                                        <div>
+                                            <p className="text-sm font-semibold uppercase tracking-wider text-stone-500">
+                                                Order #{order.id}
+                                            </p>
+                                            <h2 className="mt-2 text-xl font-bold capitalize text-stone-900">
+                                                {order.status}
+                                            </h2>
+                                        </div>
+                                        <p className="text-lg font-bold text-stone-900">
+                                            Rs. {Number(order.total).toLocaleString()}
                                         </p>
                                     </div>
 
-                                    <p className="font-semibold text-stone-900 dark:text-stone-900">
-                                        Rs. {Number(order.total).toLocaleString()}
-                                    </p>
-                                </div>
+                                    <div className="mt-5 space-y-3 border-t border-stone-200 pt-4">
+                                        {order.order_items?.slice(0, 3).map((item) => (
+                                            <div key={item.id} className="flex justify-between gap-4 text-sm">
+                                                <span className="text-stone-700">
+                                                    {item.name} × {item.quantity}
+                                                </span>
+                                                <span className="font-medium text-stone-900">
+                                                    Rs. {Number(item.subtotal).toLocaleString()}
+                                                </span>
+                                            </div>
+                                        ))}
+                                    </div>
 
-                                <div className="mt-5 space-y-3 border-t border-stone-200 pt-4 dark:border-stone-800">
-                                    {order.order_items?.map((item) => (
-                                        <div
-                                            key={item.id}
-                                            className="flex justify-between gap-4 text-sm"
-                                        >
-                                            <span className="text-stone-700 dark:text-stone-800">
-                                                {item.name} × {item.quantity}
-                                            </span>
-
-                                            <span className="shrink-0 font-medium text-stone-900 dark:text-stone-900">
-                                                Rs. {Number(item.subtotal).toLocaleString()}
-                                            </span>
-                                        </div>
-                                    ))}
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-                )}
+                                    <Link
+                                        href={orders.show.url(order)}
+                                        className="mt-6 block rounded-lg border border-stone-300 px-4 py-3 text-center text-sm font-semibold text-stone-700 transition hover:bg-stone-50"
+                                    >
+                                        View order details
+                                    </Link>
+                                </article>
+                            ))}
+                        </div>
+                    )}
+                </div>
             </div>
+        </>
+    );
+}
+
+function EmptyState({ title, description, href, label }) {
+    return (
+        <div className="rounded-3xl bg-white px-6 py-16 text-center shadow-sm ring-1 ring-stone-200">
+            <h2 className="text-2xl font-bold text-stone-900">{title}</h2>
+            <p className="mx-auto mt-3 max-w-md text-stone-600">{description}</p>
+            <Link href={href} className="mt-6 inline-block rounded-lg bg-amber-500 px-6 py-3 font-semibold text-white hover:bg-amber-600">
+                {label}
+            </Link>
         </div>
     );
 }

@@ -2,14 +2,14 @@
 
 namespace App\Services;
 
-use App\ReservationStatus;
 use App\Exceptions\ReservationConflictException;
 use App\Models\Reservation;
 use App\Models\RestaurantTable;
 use App\Models\User;
+use App\Notifications\ReservationStatusNotification;
+use App\ReservationStatus;
 use Illuminate\Support\Facades\DB;
 use RuntimeException;
-use App\Notifications\ReservationStatusNotification;
 
 class ReservationService
 {
@@ -92,7 +92,7 @@ class ReservationService
         ReservationStatus $newStatus
     ): Reservation {
         return DB::transaction(function () use (
-            $user,
+
             $reservation,
             $newStatus
         ) {
@@ -133,8 +133,6 @@ class ReservationService
                 'status' => $newStatus,
             ]);
 
-        
-
             $reservation->user->notify(
                 new ReservationStatusNotification(
                     $reservation->fresh()
@@ -142,6 +140,68 @@ class ReservationService
             );
 
             return $reservation->fresh();
+        });
+    }
+
+    public function updateReservation(
+        Reservation $reservation,
+        array $data
+    ): Reservation {
+        return DB::transaction(function () use ($reservation, $data): Reservation {
+            $reservation = Reservation::query()
+                ->whereKey($reservation->id)
+                ->lockForUpdate()
+                ->firstOrFail();
+
+            $table = RestaurantTable::query()
+                ->whereKey($data['restaurant_table_id'])
+                ->lockForUpdate()
+                ->firstOrFail();
+
+            if ($table->status->value === 'inactive') {
+                throw new RuntimeException(
+                    'This restaurant table is currently inactive.'
+                );
+            }
+
+            if ($data['guest_count'] > $table->capacity) {
+                throw new RuntimeException(
+                    "This table can accommodate a maximum of {$table->capacity} guests."
+                );
+            }
+
+            $hasConflict = Reservation::query()
+                ->where('restaurant_table_id', $table->id)
+                ->where('reservation_date', $data['reservation_date'])
+                ->whereIn('status', [
+                    ReservationStatus::Pending->value,
+                    ReservationStatus::Confirmed->value,
+                ])
+                ->where(
+                    $reservation->getKeyName(),
+                    '<>',
+                    $reservation->getKey()
+                )
+                ->where('start_time', '<', $data['end_time'])
+                ->where('end_time', '>', $data['start_time'])
+                ->exists();
+
+            if ($hasConflict) {
+                throw new ReservationConflictException(
+                    'This table is already reserved during the selected time.'
+                );
+            }
+
+            $reservation->update([
+                'restaurant_table_id' => $table->id,
+                'reservation_date' => $data['reservation_date'],
+                'start_time' => $data['start_time'],
+                'end_time' => $data['end_time'],
+                'guest_count' => $data['guest_count'],
+                'special_request' => $data['special_request'] ?? null,
+            ]);
+
+            return $reservation->fresh(['restaurantTable']);
         });
     }
 }

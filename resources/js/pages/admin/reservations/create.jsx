@@ -1,6 +1,7 @@
 
 import { Link, useForm } from '@inertiajs/react';
 import AdminPageLayout from '@/components/admin/AdminPageLayout';
+import customerReservations from '@/routes/customer/reservations';
 
 export default function Create({ availableTables }) {
     const { data, setData, post, processing, errors } = useForm({
@@ -23,7 +24,7 @@ export default function Create({ availableTables }) {
             <div className="mx-auto max-w-2xl space-y-6">
             <div>
                 <Link
-                    href="/reservations"
+                    href={customerReservations.index.url()}
                     className="text-sm font-medium text-amber-600 hover:text-amber-700"
                 >
                     ← Back to reservations
@@ -228,7 +229,7 @@ export default function Create({ availableTables }) {
                 {/* Actions */}
                 <div className="flex justify-end gap-3">
                     <Link
-                        href="/reservations"
+                        href={customerReservations.index.url()}
                         className="rounded-lg border border-stone-300 px-5 py-3 font-medium text-stone-700 hover:bg-stone-50"
                     >
                         Cancel

@@ -20,8 +20,6 @@ use Inertia\Inertia;
 
 Route::get('/', HomeController::class)->name('home');
 
-
-
 Route::get('/contact', function () {
     return Inertia::render('Contact');
 })->name('contact');
@@ -147,7 +145,7 @@ Route::middleware('auth')->group(function () {
     Route::get(
         '/reservations/customer',
         [ReservationController::class, 'indexCustomer']
-    )->name('reservations.index.customer');
+    )->name('customer.reservations.index');
 
     Route::post(
         '/reservations',
@@ -163,6 +161,16 @@ Route::middleware('auth')->group(function () {
         '/reservations/{reservation}',
         [ReservationController::class, 'show']
     )->name('reservations.show');
+
+    Route::get(
+        '/reservations/{reservation}/edit',
+        [ReservationController::class, 'edit']
+    )->name('reservations.edit');
+
+    Route::put(
+        '/reservations/{reservation}',
+        [ReservationController::class, 'update']
+    )->name('reservations.update');
 
     // Route::get(
     //     '/admin/reservations',
