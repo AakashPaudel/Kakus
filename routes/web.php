@@ -20,32 +20,7 @@ use Inertia\Inertia;
 
 Route::get('/', HomeController::class)->name('home');
 
-// Route::get('/', function () {
 
-//     // $todaysSpecials = MenuItem::query()
-//     //     ->where('is_available', true)->with('images')
-//     //     // ->where('is_featured', true)
-//     //     ->get();
-//     $galleryItems = MenuItem::query()
-//         ->where('is_available', true)
-//         ->with('images')
-//         ->latest()
-//         ->take(6)
-//         ->get();
-
-//     $categories = Category::query()
-//         ->where('is_active', true)
-//         ->orderBy('name')
-//         ->get(['id', 'name', 'slug']);
-
-//     // dd($todaysSpecials->toArray());
-
-//     return Inertia::render('Home', [
-//         'todaysSpecials' => $todaysSpecials,
-//         'galleryItems' => $galleryItems,
-//         'categories' => $categories,
-//     ]);
-// })->name('home');
 
 Route::get('/contact', function () {
     return Inertia::render('Contact');

@@ -4,6 +4,7 @@ import { useState } from 'react';
 import menu from '@/routes/admin/menu';
 import categories from '@/routes/admin/categories';
 import inventory from '@/routes/admin/inventory';
+import AdminPageLayout from '@/components/admin/AdminPageLayout';
 
 function CategoryForm({ category, onCancel }) {
     const form = useForm({
@@ -173,7 +174,8 @@ export default function Index({ categories = [], items = [] }) {
     const [editingCategory, setEditingCategory] = useState(null);
 
     return (
-        <div className="space-y-6">
+        <AdminPageLayout>
+            <div className="space-y-6">
             {/* Page heading */}
             <section className="rounded-xl border border-stone-200 bg-white p-5 shadow-sm sm:p-6 dark:border-stone-700 dark:bg-stone-900">
                 <div className="flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
@@ -408,6 +410,7 @@ export default function Index({ categories = [], items = [] }) {
                     </div>
                 </section>
             </div>
-        </div>
+            </div>
+        </AdminPageLayout>
     );
 }

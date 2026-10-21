@@ -1,6 +1,7 @@
 
 import { Head } from '@inertiajs/react';
 import OrderStatusSelect from '@/components/restaurant/OrderStatus';
+import AdminPageLayout from '@/components/admin/AdminPageLayout';
 
 export default function Index({ orders }) {
     const orderList = orders?.data ?? [];
@@ -51,25 +52,27 @@ export default function Index({ orders }) {
         <>
             <Head title="Orders" />
 
-            <div className="min-w-0 space-y-6 p-4 sm:p-6 lg:p-8">
+            <AdminPageLayout>
+                <div className="min-w-0 space-y-6">
                 {/* Page heading */}
-                <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+                <section className="rounded-xl border border-stone-200 bg-white p-5 shadow-sm sm:p-6 dark:border-stone-700 dark:bg-stone-900">
+                    <div className="flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
                     <div>
-                        <p className="text-sm font-semibold uppercase tracking-widest text-amber-700 dark:text-amber-400">
+                        <p className="text-xs font-bold uppercase tracking-widest text-amber-700 dark:text-amber-400">
                             Administration
                         </p>
 
-                        <h1 className="mt-1 text-2xl font-bold tracking-tight text-stone-950 dark:text-stone-50 sm:text-3xl">
+                        <h1 className="mt-2 text-2xl font-bold tracking-tight text-stone-900 sm:text-3xl dark:text-stone-50">
                             Orders
                         </h1>
 
-                        <p className="mt-2 text-sm leading-6 text-stone-600 dark:text-stone-400">
+                        <p className="mt-2 max-w-xl text-sm leading-6 text-stone-600 dark:text-stone-300">
                             Review customer orders and manage their
                             preparation status.
                         </p>
                     </div>
 
-                    <div className="inline-flex w-fit items-center gap-2 rounded-xl border border-stone-200 bg-white px-4 py-3 shadow-sm dark:border-stone-700 dark:bg-stone-900">
+                    <div className="inline-flex w-fit items-center gap-2 rounded-lg border border-stone-200 bg-stone-50 px-4 py-3 dark:border-stone-700 dark:bg-stone-950">
                         <span className="text-sm text-stone-600 dark:text-stone-400">
                             Total orders
                         </span>
@@ -79,6 +82,7 @@ export default function Index({ orders }) {
                         </span>
                     </div>
                 </div>
+                </section>
 
                 {/* Orders table */}
                 <section className="overflow-hidden rounded-2xl border border-stone-200 bg-white shadow-sm dark:border-stone-700 dark:bg-stone-900">
@@ -254,7 +258,8 @@ export default function Index({ orders }) {
                             </div>
                         )}
                 </section>
-            </div>
+                </div>
+            </AdminPageLayout>
         </>
     );
 }

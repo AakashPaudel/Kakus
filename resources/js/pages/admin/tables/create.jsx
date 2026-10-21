@@ -1,4 +1,5 @@
 import { Link, useForm } from '@inertiajs/react';
+import AdminPageLayout from '@/components/admin/AdminPageLayout';
 
 export default function Create() {
     const { data, setData, post, processing, errors } = useForm({
@@ -14,7 +15,8 @@ export default function Create() {
     }
 
     return (
-        <div className="mx-auto max-w-2xl space-y-6">
+        <AdminPageLayout>
+            <div className="mx-auto max-w-2xl space-y-6">
             <div>
                 <Link
                     href="/tables"
@@ -127,6 +129,7 @@ export default function Create() {
                     </button>
                 </div>
             </form>
-        </div>
+            </div>
+        </AdminPageLayout>
     );
 }

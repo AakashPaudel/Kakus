@@ -1,6 +1,7 @@
 
 import { Link } from '@inertiajs/react';
 import ReservationStatusSelect from '@/components/restaurant/ReservationStatus';
+import AdminPageLayout from '@/components/admin/AdminPageLayout';
 
 export default function Index({ reservations }) {
     const reservationList = Array.isArray(reservations)
@@ -55,25 +56,27 @@ export default function Index({ reservations }) {
     };
 
     return (
-        <div className="min-w-0 space-y-6 p-4 sm:p-6 lg:p-8">
+        <AdminPageLayout>
+            <div className="min-w-0 space-y-6">
             {/* Page heading */}
-            <header className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+            <section className="rounded-xl border border-stone-200 bg-white p-5 shadow-sm sm:p-6 dark:border-stone-700 dark:bg-stone-900">
+                <header className="flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
                 <div>
-                    <p className="text-sm font-semibold uppercase tracking-widest text-amber-700 dark:text-amber-400">
+                    <p className="text-xs font-bold uppercase tracking-widest text-amber-700 dark:text-amber-400">
                         Administration
                     </p>
 
-                    <h1 className="mt-1 text-2xl font-bold tracking-tight text-stone-950 dark:text-stone-50 sm:text-3xl">
+                    <h1 className="mt-2 text-2xl font-bold tracking-tight text-stone-900 sm:text-3xl dark:text-stone-50">
                         Reservations
                     </h1>
 
-                    <p className="mt-2 max-w-2xl text-sm leading-6 text-stone-600 dark:text-stone-400">
+                    <p className="mt-2 max-w-xl text-sm leading-6 text-stone-600 dark:text-stone-300">
                         Review table bookings and manage reservation
                         statuses from one place.
                     </p>
                 </div>
 
-                <div className="flex w-fit items-center gap-3 rounded-xl border border-stone-200 bg-white px-4 py-3 shadow-sm dark:border-stone-700 dark:bg-stone-900">
+                <div className="flex w-fit items-center gap-3 rounded-lg border border-stone-200 bg-stone-50 px-4 py-3 dark:border-stone-700 dark:bg-stone-950">
                     <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-amber-100 text-amber-800 dark:bg-amber-400/10 dark:text-amber-300">
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -107,7 +110,8 @@ export default function Index({ reservations }) {
                         </p>
                     </div>
                 </div>
-            </header>
+                </header>
+            </section>
 
             {/* Reservations table */}
             <section className="overflow-hidden rounded-2xl border border-stone-200 bg-white shadow-sm dark:border-stone-700 dark:bg-stone-900">
@@ -279,6 +283,7 @@ export default function Index({ reservations }) {
                         </div>
                     )}
             </section>
-        </div>
+            </div>
+        </AdminPageLayout>
     );
 }

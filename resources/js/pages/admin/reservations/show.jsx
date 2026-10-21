@@ -1,5 +1,6 @@
 
 import { Head, Link } from '@inertiajs/react';
+import AdminPageLayout from '@/components/admin/AdminPageLayout';
 
 export default function Show({ reservation }) {
     const formatDate = (date) => {
@@ -89,7 +90,8 @@ export default function Show({ reservation }) {
         <>
             <Head title={`Reservation #${reservation.id}`} />
 
-            <div className="mx-auto min-w-0 max-w-5xl space-y-6 p-4 sm:p-6 lg:p-8">
+            <AdminPageLayout>
+                <div className="mx-auto min-w-0 max-w-5xl space-y-6">
                 {/* Breadcrumb */}
                 <Link
                     href="/admin/reservations"
@@ -221,7 +223,8 @@ export default function Show({ reservation }) {
                         </div>
                     </div>
                 </section>
-            </div>
+                </div>
+            </AdminPageLayout>
         </>
     );
 }

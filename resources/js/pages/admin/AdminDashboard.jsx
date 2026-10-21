@@ -5,6 +5,7 @@ import RecentReservations from '@/components/dashboard/RecentReservations';
 import LowStockItems from '@/components/dashboard/LowStockItems';
 import SalesSummary from '@/components/dashboard/SalesSummary';
 import QuickActions from '@/components/dashboard/QuickActions';
+import AdminPageLayout from '@/components/admin/AdminPageLayout';
 
 export default function Dashboard({
     stats = {},
@@ -15,8 +16,7 @@ export default function Dashboard({
 }) {
 
     return (
-        <div className="min-h-screen bg-stone-50 text-stone-900 dark:bg-stone-950 dark:text-stone-100">
-            <div className="mx-auto flex w-full max-w-7xl flex-col gap-6 p-4 sm:p-6 lg:gap-8 lg:p-8">
+        <AdminPageLayout>
 
                 {/* Page heading */}
                 <section className="rounded-2xl border border-stone-200 bg-white p-5 shadow-sm sm:p-7 dark:border-stone-800 dark:bg-stone-900">
@@ -131,7 +131,6 @@ export default function Dashboard({
                     </div>
                 </section>
 
-            </div>
-        </div>
+        </AdminPageLayout>
     );
 }

@@ -1,8 +1,10 @@
 import { Link } from '@inertiajs/react';
+import AdminPageLayout from '@/components/admin/AdminPageLayout';
 
 export default function Index({ tables = [] }) {
     return (
-        <div className="space-y-8">
+        <AdminPageLayout>
+            <div className="space-y-8">
             <div className="flex items-center justify-between">
                 <div>
                     <h1 className="text-3xl font-bold text-stone-900">
@@ -87,6 +89,7 @@ export default function Index({ tables = [] }) {
                     </table>
                 </div>
             </div>
-        </div>
+            </div>
+        </AdminPageLayout>
     );
 }
