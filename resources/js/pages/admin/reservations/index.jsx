@@ -1,127 +1,253 @@
+
 import { Link } from '@inertiajs/react';
 import ReservationStatusSelect from '@/components/restaurant/ReservationStatus';
 
 export default function Index({ reservations }) {
+    const reservationList = Array.isArray(reservations)
+        ? reservations
+        : reservations?.data ?? [];
+
+    const totalReservations =
+        reservations?.total ?? reservationList.length;
+
+    const formatDate = (date) => {
+        if (!date) return '—';
+
+        // Avoid UTC shifting when the database returns YYYY-MM-DD.
+        const dateString = String(date);
+        const localDate = /^\d{4}-\d{2}-\d{2}$/.test(dateString)
+            ? new Date(`${dateString}T00:00:00`)
+            : new Date(dateString);
+
+        if (Number.isNaN(localDate.getTime())) return dateString;
+
+        return localDate.toLocaleDateString('en-NP', {
+            year: 'numeric',
+            month: 'short',
+            day: 'numeric',
+        });
+    };
+
+    const formatStatus = (status) => {
+        if (!status) return 'Unknown';
+
+        return status
+            .replaceAll('_', ' ')
+            .replace(/\b\w/g, (char) => char.toUpperCase());
+    };
+
+    const getStatusStyle = (status) => {
+        const styles = {
+            pending:
+                'bg-amber-100 text-amber-800 ring-amber-600/20 dark:bg-amber-400/10 dark:text-amber-300 dark:ring-amber-400/20',
+            confirmed:
+                'bg-emerald-100 text-emerald-800 ring-emerald-600/20 dark:bg-emerald-400/10 dark:text-emerald-300 dark:ring-emerald-400/20',
+            cancelled:
+                'bg-red-100 text-red-800 ring-red-600/20 dark:bg-red-400/10 dark:text-red-300 dark:ring-red-400/20',
+            completed:
+                'bg-stone-200 text-stone-700 ring-stone-500/20 dark:bg-stone-700/60 dark:text-stone-300 dark:ring-stone-400/20',
+        };
+
+        return (
+            styles[status?.toLowerCase()] ??
+            'bg-blue-100 text-blue-800 ring-blue-600/20 dark:bg-blue-400/10 dark:text-blue-300 dark:ring-blue-400/20'
+        );
+    };
+
     return (
-        <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
-            {/* Header */}
-            <div className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+        <div className="min-w-0 space-y-6 p-4 sm:p-6 lg:p-8">
+            {/* Page heading */}
+            <header className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
                 <div>
-                    <h1 className="text-3xl font-bold tracking-tight text-stone-900">
-                        My Reservations
+                    <p className="text-sm font-semibold uppercase tracking-widest text-amber-700 dark:text-amber-400">
+                        Administration
+                    </p>
+
+                    <h1 className="mt-1 text-2xl font-bold tracking-tight text-stone-950 dark:text-stone-50 sm:text-3xl">
+                        Reservations
                     </h1>
 
-
-                    <p className="mt-2 text-sm text-stone-600">
-                        View and manage your restaurant reservations.
+                    <p className="mt-2 max-w-2xl text-sm leading-6 text-stone-600 dark:text-stone-400">
+                        Review table bookings and manage reservation
+                        statuses from one place.
                     </p>
                 </div>
 
-                <Link
-                    href="/reservations/create"
-                    className="inline-flex items-center justify-center rounded-lg bg-amber-600 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-amber-700"
-                >
-                    + Make Reservation
-                </Link>
-            </div>
+                <div className="flex w-fit items-center gap-3 rounded-xl border border-stone-200 bg-white px-4 py-3 shadow-sm dark:border-stone-700 dark:bg-stone-900">
+                    <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-amber-100 text-amber-800 dark:bg-amber-400/10 dark:text-amber-300">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="1.7"
+                            className="h-5 w-5"
+                            aria-hidden="true"
+                        >
+                            <rect
+                                x="3.75"
+                                y="5.5"
+                                width="16.5"
+                                height="15"
+                                rx="2"
+                            />
+                            <path
+                                strokeLinecap="round"
+                                d="M8 3.75v3.5M16 3.75v3.5M3.75 10h16.5"
+                            />
+                        </svg>
+                    </div>
 
-            {/* Reservations Table */}
-            {reservations.length === 0 ? (
-                <div className="rounded-2xl border border-dashed border-stone-300 bg-white p-12 text-center">
-                    <h2 className="text-lg font-semibold text-stone-800">
-                        No reservations yet
+                    <div>
+                        <p className="text-xs font-medium text-stone-500 dark:text-stone-400">
+                            Total reservations
+                        </p>
+                        <p className="text-xl font-bold tabular-nums text-stone-950 dark:text-stone-50">
+                            {totalReservations}
+                        </p>
+                    </div>
+                </div>
+            </header>
+
+            {/* Reservations table */}
+            <section className="overflow-hidden rounded-2xl border border-stone-200 bg-white shadow-sm dark:border-stone-700 dark:bg-stone-900">
+                <div className="border-b border-stone-200 px-5 py-4 dark:border-stone-700 sm:px-6">
+                    <h2 className="text-base font-semibold text-stone-900 dark:text-stone-100">
+                        All reservations
                     </h2>
 
-                    <p className="mt-2 text-sm text-stone-500">
-                        You don't have any reservations at the moment.
+                    <p className="mt-1 text-sm text-stone-500 dark:text-stone-400">
+                        Booking details, current status, and available actions.
                     </p>
-
-                    <Link
-                        href="/reservations/create"
-                        className="mt-5 inline-block text-sm font-semibold text-amber-600 hover:text-amber-700"
-                    >
-                        Reserve a table →
-                    </Link>
                 </div>
-            ) : (
-                <div className="overflow-hidden rounded-2xl border border-stone-200 bg-white shadow-sm">
+
+                {reservationList.length === 0 ? (
+                    <div className="flex flex-col items-center px-6 py-16 text-center">
+                        <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-stone-100 text-stone-500 dark:bg-stone-800 dark:text-stone-400">
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                strokeWidth="1.5"
+                                className="h-7 w-7"
+                                aria-hidden="true"
+                            >
+                                <rect
+                                    x="3.75"
+                                    y="5.5"
+                                    width="16.5"
+                                    height="15"
+                                    rx="2"
+                                />
+                                <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    d="M8 3.75v3.5M16 3.75v3.5M3.75 10h16.5m-11 4h7m-7 3h4"
+                                />
+                            </svg>
+                        </div>
+
+                        <h3 className="mt-4 text-base font-semibold text-stone-900 dark:text-stone-100">
+                            No reservations yet
+                        </h3>
+
+                        <p className="mt-2 max-w-sm text-sm leading-6 text-stone-500 dark:text-stone-400">
+                            Reservations will appear here when customers
+                            book a table.
+                        </p>
+                    </div>
+                ) : (
                     <div className="overflow-x-auto">
-                        <table className="w-full min-w-[850px] divide-y divide-stone-200 text-left">
-                            <thead className="bg-stone-50">
+                        <table className="w-full min-w-[900px] border-collapse text-left">
+                            <thead className="bg-stone-50 dark:bg-stone-800/70">
                                 <tr>
-                                    <th className="px-6 py-4 text-xs font-semibold uppercase tracking-wider text-stone-500">
+                                    <th
+                                        scope="col"
+                                        className="whitespace-nowrap px-5 py-4 text-xs font-semibold uppercase tracking-wider text-stone-600 dark:text-stone-300 sm:px-6"
+                                    >
                                         Reservation
                                     </th>
 
-                                    <th className="px-6 py-4 text-xs font-semibold uppercase tracking-wider text-stone-500">
-                                        Date
+                                    <th
+                                        scope="col"
+                                        className="whitespace-nowrap px-5 py-4 text-xs font-semibold uppercase tracking-wider text-stone-600 dark:text-stone-300 sm:px-6"
+                                    >
+                                        Reservation date
                                     </th>
 
-                                    <th className="px-6 py-4 text-xs font-semibold uppercase tracking-wider text-stone-500">
+                                    <th
+                                        scope="col"
+                                        className="px-5 py-4 text-xs font-semibold uppercase tracking-wider text-stone-600 dark:text-stone-300 sm:px-6"
+                                    >
                                         Status
                                     </th>
 
-                                    <th className="px-6 py-4 text-xs font-semibold uppercase tracking-wider text-stone-500">
-                                        Update Status
+                                    <th
+                                        scope="col"
+                                        className="whitespace-nowrap px-5 py-4 text-xs font-semibold uppercase tracking-wider text-stone-600 dark:text-stone-300 sm:px-6"
+                                    >
+                                        Update status
                                     </th>
 
-                                    <th className="px-6 py-4 text-right text-xs font-semibold uppercase tracking-wider text-stone-500">
+                                    <th
+                                        scope="col"
+                                        className="px-5 py-4 text-right text-xs font-semibold uppercase tracking-wider text-stone-600 dark:text-stone-300 sm:px-6"
+                                    >
                                         Action
                                     </th>
                                 </tr>
                             </thead>
 
-                            <tbody className="divide-y divide-stone-100">
-                                {reservations.data.map((reservation) => (
+                            <tbody className="divide-y divide-stone-100 dark:divide-stone-800">
+                                {reservationList.map((reservation) => (
                                     <tr
                                         key={reservation.id}
-                                        className="transition hover:bg-amber-50/40"
+                                        className="transition-colors hover:bg-stone-50/80 dark:hover:bg-stone-800/40"
                                     >
-                                        {/* Reservation ID */}
-                                        <td className="whitespace-nowrap px-6 py-5">
-                                            <span className="font-semibold text-stone-900">
+                                        <td className="whitespace-nowrap px-5 py-4 sm:px-6">
+                                            <p className="font-semibold text-stone-900 dark:text-stone-100">
                                                 #{reservation.id}
-                                            </span>
-                                            <p className="mt-1 text-xs text-stone-500">
+                                            </p>
+
+                                            <p className="mt-1 text-xs text-stone-500 dark:text-stone-400">
                                                 Kaku's Restaurant
                                             </p>
                                         </td>
 
-                                        {/* Date */}
-                                        <td className="whitespace-nowrap px-6 py-5 text-sm text-stone-600">
-                                            {reservation.reservation_date}
+                                        <td className="whitespace-nowrap px-5 py-4 text-sm text-stone-700 dark:text-stone-300 sm:px-6">
+                                            {formatDate(
+                                                reservation.reservation_date,
+                                            )}
                                         </td>
 
-                                        {/* Current Status */}
-                                        <td className="whitespace-nowrap px-6 py-5">
+                                        <td className="px-5 py-4 sm:px-6">
                                             <span
-                                                className={`inline-flex rounded-full px-3 py-1 text-xs font-semibold capitalize ${reservation.status === 'confirmed'
-                                                    ? 'bg-green-100 text-green-700'
-                                                    : reservation.status === 'cancelled'
-                                                        ? 'bg-red-100 text-red-700'
-                                                        : reservation.status === 'completed'
-                                                            ? 'bg-stone-200 text-stone-700'
-                                                            : 'bg-amber-100 text-amber-700'
-                                                    }`}
+                                                className={`inline-flex items-center whitespace-nowrap rounded-full px-3 py-1.5 text-xs font-semibold ring-1 ring-inset ${getStatusStyle(reservation.status)}`}
                                             >
-                                                {reservation.status}
+                                                {formatStatus(
+                                                    reservation.status,
+                                                )}
                                             </span>
                                         </td>
 
-                                        {/* Update Status */}
-                                        <td className="whitespace-nowrap px-6 py-5">
-                                            <ReservationStatusSelect
-                                                reservation={reservation}
-                                            />
+                                        <td className="px-5 py-4 sm:px-6">
+                                            <div className="w-44">
+                                                <ReservationStatusSelect
+                                                    reservation={reservation}
+                                                />
+                                            </div>
                                         </td>
 
-                                        {/* View Action */}
-                                        <td className="whitespace-nowrap px-6 py-5 text-right">
+                                        <td className="whitespace-nowrap px-5 py-4 text-right sm:px-6">
                                             <Link
                                                 href={`/reservations/${reservation.id}`}
-                                                className="text-sm font-semibold text-amber-700 transition hover:text-amber-800"
+                                                className="inline-flex items-center gap-1 rounded-md text-sm font-semibold text-amber-800 transition hover:text-amber-950 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-600 focus-visible:ring-offset-2 dark:text-amber-400 dark:hover:text-amber-300 dark:focus-visible:ring-offset-stone-900"
                                             >
-                                                View Details →
+                                                View details
+                                                <span aria-hidden="true">
+                                                    →
+                                                </span>
                                             </Link>
                                         </td>
                                     </tr>
@@ -129,10 +255,30 @@ export default function Index({ reservations }) {
                             </tbody>
                         </table>
                     </div>
-                </div>
-            )}
+                )}
+
+                {/* Pagination summary for Laravel paginated results */}
+                {reservationList.length > 0 &&
+                    reservations?.total != null && (
+                        <div className="border-t border-stone-200 bg-stone-50/70 px-5 py-4 dark:border-stone-700 dark:bg-stone-800/40 sm:px-6">
+                            <p className="text-sm text-stone-600 dark:text-stone-400">
+                                Showing{' '}
+                                <span className="font-semibold text-stone-900 dark:text-stone-100">
+                                    {reservations.from ?? 1}
+                                </span>{' '}
+                                to{' '}
+                                <span className="font-semibold text-stone-900 dark:text-stone-100">
+                                    {reservations.to ?? reservationList.length}
+                                </span>{' '}
+                                of{' '}
+                                <span className="font-semibold text-stone-900 dark:text-stone-100">
+                                    {reservations.total}
+                                </span>{' '}
+                                reservations
+                            </p>
+                        </div>
+                    )}
+            </section>
         </div>
     );
-
-
 }

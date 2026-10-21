@@ -28,7 +28,7 @@ export default function OrderStatusSelect({ order }) {
                     { preserveScroll: true },
                 );
             }}
-            className="rounded-lg border border-stone-300 bg-white px-3 py-2 text-sm"
+            className="rounded-lg border border-stone-300  px-3 py-2 text-sm"
         >
             {statuses.map((status) => (
                 <option key={status} value={status}>

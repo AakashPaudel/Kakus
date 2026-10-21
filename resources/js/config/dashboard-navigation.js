@@ -2,7 +2,7 @@
 export const dashboardNavigation = {
     admin: [
         { title: 'Overview', href: '/dashboard' },
-        { title: 'Menu', href: '/menu' },
+        { title: 'Menu Management', href: '/admin/menu' },
         { title: 'Orders', href: '/admin/orders' },
         { title: 'Reservations', href: '/admin/reservations' },
         { title: 'Settings', href: '/settings/profile' },

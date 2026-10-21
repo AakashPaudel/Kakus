@@ -2,16 +2,24 @@
 
 namespace Tests\Feature;
 
-use App\ReservationStatus;
 use App\Models\Reservation;
 use App\Models\RestaurantTable;
 use App\Models\User;
+use App\ReservationStatus;
+use App\Services\ReservationService;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class ReservationCreationTest extends TestCase
 {
     use RefreshDatabase;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->travelTo('2026-09-30 12:00:00');
+    }
 
     public function test_authenticated_user_can_create_reservation(): void
     {
@@ -217,7 +225,6 @@ class ReservationCreationTest extends TestCase
     //         'end_time' => '20:00:00',
     //         'status' => ReservationStatus::Confirmed,
     //     ]);
-
 
     //     $response = $this->actingAs($user)->post(
     //         route('reservations.store'),
@@ -480,7 +487,7 @@ class ReservationCreationTest extends TestCase
             'capacity' => 4,
         ]);
 
-        $reservation = app(\App\Services\ReservationService::class)
+        $reservation = app(ReservationService::class)
             ->createReservation($user, [
                 'restaurant_table_id' => $table->id,
                 'reservation_date' => '2026-10-05',

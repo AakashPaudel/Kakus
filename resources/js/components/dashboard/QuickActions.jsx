@@ -11,7 +11,7 @@ const actions = [
     {
         title: 'Manage Menu',
         description: 'Add or update menu items.',
-        href: '/menu',
+        href: '/admin/menu',
         icon: UtensilsCrossed,
         iconStyle:
             'bg-orange-50 text-orange-600 group-hover:bg-orange-600 group-hover:text-white dark:bg-orange-500/10 dark:text-orange-400 dark:group-hover:bg-orange-500 dark:group-hover:text-white',

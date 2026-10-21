@@ -2,6 +2,9 @@
 
 use App\Http\Controllers\Admin\AdminOrderController;
 use App\Http\Controllers\Admin\AdminReservationController;
+use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\InventoryController;
+use App\Http\Controllers\Admin\MenuItemController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\DashboardController;
@@ -223,6 +226,26 @@ Route::middleware(['auth', 'verified', 'role:admin,staff'])->group(function () {
         'admin/tables/{restaurantTable}/status',
         [RestaurantTableController::class, 'updateStatus']
     )->name('admin.tables.update-status');
+});
+
+Route::middleware(['auth', 'verified', 'role:admin'])->prefix('admin')->name('admin.')->group(function () {
+    Route::resource('menu', MenuItemController::class)
+        ->parameters(['menu' => 'menuItem'])
+        ->except(['show']);
+
+    Route::post('categories', [CategoryController::class, 'store'])
+        ->name('categories.store');
+    Route::put('categories/{category}', [CategoryController::class, 'update'])
+        ->name('categories.update');
+    Route::delete('categories/{category}', [CategoryController::class, 'destroy'])
+        ->name('categories.destroy');
+});
+
+Route::middleware(['auth', 'verified', 'role:admin,staff'])->prefix('admin')->name('admin.')->group(function () {
+    Route::get('inventory', [InventoryController::class, 'index'])
+        ->name('inventory.index');
+    Route::patch('inventory/{inventory}', [InventoryController::class, 'update'])
+        ->name('inventory.update');
 });
 
 require __DIR__.'/settings.php';
