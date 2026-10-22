@@ -19,8 +19,8 @@ export default function CategoryFilter({
                     onClick={() => onCategoryChange(null)}
                     className={`rounded-full px-5 py-2.5 text-sm font-medium transition-colors ${
                         selectedCategory === null
-                            ? 'bg-orange-600 text-white shadow-sm'
-                            : 'bg-white text-stone-700 hover:bg-orange-100 '
+                            ? 'restaurant-accent-button shadow-sm'
+                            : 'restaurant-secondary-button'
                     }`}
                 >
                     All Items
@@ -37,8 +37,8 @@ export default function CategoryFilter({
                             onClick={() => onCategoryChange(category.id)}
                             className={`rounded-full px-5 py-2.5 text-sm font-medium transition-colors ${
                                 isSelected
-                                    ? 'bg-orange-600 text-white shadow-sm'
-                                    : 'bg-white text-stone-700 hover:bg-orange-100 '
+                                    ? 'restaurant-accent-button shadow-sm'
+                                    : 'restaurant-secondary-button'
                             }`}
                         >
                             {category.name}

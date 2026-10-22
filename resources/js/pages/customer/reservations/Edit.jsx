@@ -20,7 +20,7 @@ export default function Edit({ reservation, availableTables = [] }) {
         <>
             <Head title={`Edit reservation #${reservation.id}`} />
 
-            <div className="bg-amber-50 px-4 py-12 sm:px-6 lg:px-8">
+            <div className="restaurant-shell px-4 py-12 sm:px-6 lg:px-8">
                 <div className="mx-auto max-w-2xl space-y-8">
                     <div>
                         <Link
@@ -49,7 +49,7 @@ export default function Edit({ reservation, availableTables = [] }) {
 
                     <form
                         onSubmit={submit}
-                        className="space-y-6 rounded-3xl bg-white p-6 shadow-sm ring-1 ring-stone-200 sm:p-8"
+                        className="restaurant-surface space-y-6 rounded-3xl p-6 shadow-sm sm:p-8"
                     >
                         <div className="grid gap-5 sm:grid-cols-2">
                             <Field form={form} name="reservation_date" label="Date" type="date" />
@@ -94,10 +94,10 @@ export default function Edit({ reservation, availableTables = [] }) {
                         </div>
 
                         <div className="flex flex-col-reverse gap-3 border-t border-stone-200 pt-6 sm:flex-row sm:justify-end">
-                            <Link href={reservations.show.url(reservation)} className="rounded-lg border border-stone-300 px-5 py-3 text-center text-sm font-semibold text-stone-700 hover:bg-stone-50">
+                            <Link href={reservations.show.url(reservation)} className="restaurant-secondary-button rounded-lg px-5 py-3 text-center text-sm font-semibold">
                                 Cancel
                             </Link>
-                            <button type="submit" disabled={form.processing} className="rounded-lg bg-amber-500 px-5 py-3 text-sm font-semibold text-white hover:bg-amber-600 disabled:opacity-50">
+                            <button type="submit" disabled={form.processing} className="restaurant-accent-button rounded-lg px-5 py-3 text-sm font-semibold disabled:opacity-50">
                                 {form.processing ? 'Saving...' : 'Save changes'}
                             </button>
                         </div>

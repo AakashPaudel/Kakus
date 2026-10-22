@@ -11,7 +11,7 @@ export default function Index({ reservations = [] }) {
         <>
             <Head title="My Reservations" />
 
-            <div className="bg-amber-50 px-4 py-12 sm:px-6 lg:px-8">
+            <div className="restaurant-shell px-4 py-12 sm:px-6 lg:px-8">
                 <div className="mx-auto max-w-7xl space-y-8">
                     <header className="flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
                         <div>
@@ -29,19 +29,19 @@ export default function Index({ reservations = [] }) {
 
                         <Link
                             href={reservationsRoutes.create.url()}
-                            className="w-fit rounded-lg bg-amber-500 px-5 py-3 text-sm font-semibold text-white transition hover:bg-amber-600"
+                            className="restaurant-accent-button w-fit rounded-lg px-5 py-3 text-sm font-semibold"
                         >
                             Reserve a table
                         </Link>
                     </header>
 
                     {reservations.length === 0 ? (
-                        <div className="rounded-3xl bg-white px-6 py-16 text-center shadow-sm ring-1 ring-stone-200">
+                        <div className="restaurant-surface rounded-3xl px-6 py-16 text-center shadow-sm">
                             <h2 className="text-2xl font-bold text-stone-900">No reservations yet</h2>
                             <p className="mx-auto mt-3 max-w-md text-stone-600">
                                 Find a table that is perfect for your next visit.
                             </p>
-                            <Link href={reservationsRoutes.create.url()} className="mt-6 inline-block rounded-lg bg-amber-500 px-6 py-3 font-semibold text-white hover:bg-amber-600">
+                            <Link href={reservationsRoutes.create.url()} className="restaurant-accent-button mt-6 inline-block rounded-lg px-6 py-3 font-semibold">
                                 Reserve a table
                             </Link>
                         </div>
@@ -63,7 +63,7 @@ function ReservationCard({ reservation }) {
     const canEdit = !['cancelled', 'completed'].includes(status);
 
     return (
-        <article className="flex flex-col rounded-3xl bg-white p-6 shadow-sm ring-1 ring-stone-200">
+        <article className="restaurant-surface flex flex-col rounded-3xl p-6 shadow-sm">
             <div className="flex items-center justify-between gap-3">
                 <p className="text-sm font-semibold uppercase tracking-wider text-stone-500">
                     Reservation #{reservation.id}
@@ -88,11 +88,11 @@ function ReservationCard({ reservation }) {
             )}
 
             <div className="mt-6 flex gap-3 border-t border-stone-100 pt-5">
-                <Link href={reservationsRoutes.show.url(reservation)} className="flex-1 rounded-lg border border-stone-300 px-4 py-2 text-center text-sm font-semibold text-stone-700 hover:bg-stone-50">
+                <Link href={reservationsRoutes.show.url(reservation)} className="restaurant-secondary-button flex-1 rounded-lg px-4 py-2 text-center text-sm font-semibold">
                     View details
                 </Link>
                 {canEdit && (
-                    <Link href={reservationsRoutes.edit.url(reservation)} className="flex-1 rounded-lg bg-amber-500 px-4 py-2 text-center text-sm font-semibold text-white hover:bg-amber-600">
+                    <Link href={reservationsRoutes.edit.url(reservation)} className="restaurant-accent-button flex-1 rounded-lg px-4 py-2 text-center text-sm font-semibold">
                         Edit
                     </Link>
                 )}

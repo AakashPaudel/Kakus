@@ -3,7 +3,7 @@ import { Link } from '@inertiajs/react';
 
 export default function ContactCTA() {
     return (
-        <section className="bg-amber-50 py-20 sm:py-24">
+        <section className="restaurant-shell py-20 sm:py-24">
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                 <div className="relative overflow-hidden rounded-full bg-stone-900 px-6 py-16 text-center shadow-xl sm:px-12 sm:py-20 lg:px-20">
                     {/* Decorative shapes */}
@@ -30,14 +30,14 @@ export default function ContactCTA() {
                         <div className="mt-9 flex flex-col items-center justify-center gap-4 sm:flex-row">
                             <Link
                                 href="/contact"
-                                className="inline-flex w-full items-center justify-center rounded-full bg-amber-600 px-7 py-3.5 text-sm font-semibold text-stone-950 transition duration-300 hover:bg-amber-700 sm:w-auto"
+                                className="restaurant-accent-button inline-flex w-full items-center justify-center rounded-full px-7 py-3.5 text-sm font-semibold sm:w-auto"
                             >
                                 Get in Touch
                             </Link>
 
                             <Link
                                 href="/reservations/create"
-                                className="inline-flex w-full items-center justify-center rounded-full border border-stone-600 px-7 py-3.5 text-sm font-semibold text-white transition duration-300 hover:border-amber-500 hover:text-amber-600 sm:w-auto"
+                                className="restaurant-secondary-button inline-flex w-full items-center justify-center rounded-full border-stone-600 bg-transparent px-7 py-3.5 text-sm font-semibold text-white hover:bg-stone-800 hover:text-amber-300 sm:w-auto"
                             >
                                 Make a Reservation
                             </Link>
@@ -48,4 +48,3 @@ export default function ContactCTA() {
         </section>
     );
 }
-

@@ -30,16 +30,16 @@ export default function WhyChooseUs() {
             <div className="mx-auto max-w-3xl px-4">
 
                 <div className="mb-10 text-center">
-                    <p className="text-sm font-semibold uppercase tracking-widest text-gray-500">
+                    <p className="text-sm font-semibold uppercase tracking-widest text-stone-500">
                         Why Kaku's
                     </p>
 
-                    <h2 className="mt-2 text-3xl font-bold text-gray-900">
+                    <h2 className="mt-2 text-3xl font-bold text-stone-900">
                         Why Choose Us?
                     </h2>
                 </div>
 
-                <div className="divide-y divide-gray-200 border-y border-gray-200">
+                <div className="divide-y divide-stone-200 border-y border-stone-200">
                     {reasons.map((reason, index) => {
                         const isOpen = openIndex === index;
 
@@ -50,7 +50,7 @@ export default function WhyChooseUs() {
                                     onClick={() => toggle(index)}
                                     className="flex w-full items-center justify-between py-5 text-left"
                                 >
-                                    <span className="font-semibold text-gray-900">
+                                    <span className="font-semibold text-stone-900">
                                         {reason.question}
                                     </span>
 
@@ -64,7 +64,7 @@ export default function WhyChooseUs() {
                                 </button>
 
                                 {isOpen && (
-                                    <div className="pb-5 pr-8 text-gray-600">
+                                    <div className="pb-5 pr-8 text-stone-600">
                                         {reason.answer}
                                     </div>
                                 )}

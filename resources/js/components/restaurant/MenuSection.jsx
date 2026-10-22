@@ -40,20 +40,20 @@ export default function Menu({ items = [], categories = [] }) {
 
     return (
 
-        <main className="min-h-screen">
+        <main className="restaurant-shell min-h-screen">
             <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 sm:py-14 lg:px-8 lg:py-16">
 
 
                 {/* Page heading */}
                 <header className="mb-8 text-center sm:mb-10">
-                    <span className="mb-3 inline-flex items-center gap-2 rounded-full bg-orange-100 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.18em] text-orange-700">
+                    <span className="mb-3 inline-flex items-center gap-2 rounded-full bg-[var(--restaurant-accent-soft)] px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.18em] text-amber-800">
                         <UtensilsCrossed size={14} />
                         Freshly prepared
                     </span>
 
                     <h1 className="text-3xl font-bold text-stone-800 tracking-tight sm:text-4xl lg:text-5xl">
                         Explore Our{' '}
-                        <span className="text-orange-600 dark:text-orange-400">
+                        <span className="text-amber-700">
                             Menu
                         </span>
                     </h1>
@@ -67,7 +67,7 @@ export default function Menu({ items = [], categories = [] }) {
                 {/* Search and filters */}
                 <section
                     aria-label="Search and filter menu"
-                    className="mb-10 rounded-2xl border border-stone-200  p-4 shadow-sm sm:p-6"
+                    className="restaurant-surface mb-10 rounded-2xl p-4 shadow-sm sm:p-6"
                 >
                     <div className="mb-6">
                         <label
@@ -92,7 +92,7 @@ export default function Menu({ items = [], categories = [] }) {
                                     setSearchTerm(event.target.value)
                                 }
                                 placeholder="Search food or category..."
-                                className="w-full rounded-xl border border-stone-300 bg-stone-50 py-3.5 pl-12 pr-12 text-sm text-stone-900 outline-none transition placeholder:text-stone-400 focus:border-orange-500 focus:ring-4 focus:ring-orange-500/10 "
+                                className="w-full rounded-xl border border-stone-300 bg-[var(--restaurant-accent-soft)] py-3.5 pl-12 pr-12 text-sm text-stone-900 outline-none transition placeholder:text-stone-400 focus:border-amber-500 focus:ring-4 focus:ring-amber-500/10 "
                             />
 
                             {searchTerm && (
@@ -123,7 +123,7 @@ export default function Menu({ items = [], categories = [] }) {
                                 <button
                                     type="button"
                                     onClick={clearFilters}
-                                    className="inline-flex items-center gap-1.5 rounded-lg px-3 py-2 text-sm font-medium text-orange-700 transition hover:bg-orange-50 dark:text-orange-400 dark:hover:bg-orange-950/40"
+                                    className="restaurant-link inline-flex items-center gap-1.5 rounded-lg px-3 py-2 text-sm font-medium"
                                 >
                                     <X size={15} />
                                     Clear filters
@@ -173,7 +173,7 @@ export default function Menu({ items = [], categories = [] }) {
                             
                     ) : (
                         <div className="rounded-2xl border border-dashed border-stone-300 bg-white px-5 py-14 text-center dark:border-stone-700 dark:bg-stone-900">
-                            <div className="mx-auto flex size-14 items-center justify-center rounded-full bg-orange-100 text-orange-600 dark:bg-orange-950/60 dark:text-orange-400">
+                            <div className="mx-auto flex size-14 items-center justify-center rounded-full bg-[var(--restaurant-accent-soft)] text-amber-600">
                                 <Search size={25} />
                             </div>
 
@@ -191,7 +191,7 @@ export default function Menu({ items = [], categories = [] }) {
                                 <button
                                     type="button"
                                     onClick={clearFilters}
-                                    className="mt-6 rounded-xl bg-orange-600 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-orange-700 focus:outline-none focus:ring-4 focus:ring-orange-500/30"
+                                    className="restaurant-accent-button mt-6 rounded-xl px-5 py-2.5 text-sm font-semibold"
                                 >
                                     Show all dishes
                                 </button>

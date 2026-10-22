@@ -1,14 +1,14 @@
 export default function Show({ order }) {
     return (
         <>
-            <div className="space-y-8">
+            <div className="restaurant-shell min-h-screen space-y-8 px-4 py-12 sm:px-6 lg:px-8">
                 <div className="flex items-center justify-between">
                     <div>
-                        <h1 className="text-3xl font-bold">
+                        <h1 className="text-3xl font-bold text-stone-900">
                             Order #{order.id}
                         </h1>
 
-                        <p className="mt-2 text-gray-600">
+                        <p className="mt-2 text-stone-600">
                             Status: {order.status}
                         </p>
                     </div>
@@ -18,7 +18,7 @@ export default function Show({ order }) {
                     </div>
                 </div>
 
-                <div className="rounded-lg bg-white p-6 shadow">
+                <div className="restaurant-surface rounded-2xl p-6 shadow-sm">
                     <h2 className="text-xl font-semibold">Items</h2>
 
                     <div className="mt-4 space-y-4">
@@ -30,7 +30,7 @@ export default function Show({ order }) {
                                 <div>
                                     <p className="font-medium">{item.name}</p>
 
-                                    <p className="text-sm text-gray-500">
+                                    <p className="text-sm text-stone-500">
                                         {item.quantity} × Rs. {item.unit_price}
                                     </p>
                                 </div>
@@ -43,7 +43,7 @@ export default function Show({ order }) {
                     </div>
                 </div>
 
-                <div className="rounded-lg bg-white p-6 shadow">
+                <div className="restaurant-surface rounded-2xl p-6 shadow-sm">
                     <div className="flex justify-between">
                         <span>Subtotal</span>
                         <span>Rs. {order.subtotal}</span>

@@ -37,7 +37,7 @@ export default function FAQSection() {
     };
 
     return (
-        <section className="bg-white py-20">
+        <section className="restaurant-shell py-20">
             <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
                 {/* Heading */}
                 <div className="mb-12 text-center">
@@ -56,7 +56,7 @@ export default function FAQSection() {
                 </div>
 
                 {/* FAQ List */}
-                <div className="divide-y divide-stone-200 rounded-2xl border border-stone-200 bg-stone-50">
+                <div className="restaurant-surface divide-y divide-stone-200 rounded-2xl">
                     {faqs.map((faq, index) => {
                         const isOpen = openIndex === index;
 
@@ -65,7 +65,7 @@ export default function FAQSection() {
                                 <button
                                     type="button"
                                     onClick={() => toggleFAQ(index)}
-                                    className="flex w-full items-center justify-between gap-6 px-6 py-5 text-left transition hover:bg-amber-50 sm:px-8"
+                                    className="flex w-full items-center justify-between gap-6 px-6 py-5 text-left transition hover:bg-[var(--restaurant-accent-soft)] sm:px-8"
                                 >
                                     <span className="font-semibold text-stone-900">
                                         {faq.question}
@@ -101,4 +101,3 @@ export default function FAQSection() {
         </section>
     );
 }
-

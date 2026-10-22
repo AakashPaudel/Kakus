@@ -5,11 +5,11 @@ export default function TodaysSpecialSection({ special = [] }) {
     if (!special || special.length === 0) {
         return (
             <section
-                className="bg-amber-50 py-16 sm:py-20"
+                className="restaurant-shell py-16 sm:py-20"
                 aria-labelledby="todays-special-heading"
             >
                 <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-                    <div className="rounded-3xl border border-amber-100 bg-white px-6 py-14 text-center">
+                    <div className="restaurant-surface rounded-3xl px-6 py-14 text-center">
                         <p className="text-sm font-bold uppercase tracking-[0.2em] text-amber-800">
                             Today's Special
                         </p>
@@ -28,7 +28,7 @@ export default function TodaysSpecialSection({ special = [] }) {
 
                         <Link
                             href="/menu"
-                            className="mt-6 inline-flex min-h-11 items-center justify-center rounded-xl bg-amber-800 px-6 py-3 text-sm font-semibold text-white transition hover:bg-amber-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-700 focus-visible:ring-offset-2"
+                            className="restaurant-accent-button mt-6 inline-flex min-h-11 items-center justify-center rounded-xl px-6 py-3 text-sm font-semibold"
                         >
                             Explore Our Menu
                         </Link>
@@ -46,7 +46,7 @@ export default function TodaysSpecialSection({ special = [] }) {
 
     return (
         <section
-            className="overflow-hidden bg-amber-50 py-16 sm:py-20 lg:py-24"
+            className="restaurant-shell overflow-hidden py-16 sm:py-20 lg:py-24"
             aria-labelledby="todays-special-heading"
         >
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -71,7 +71,7 @@ export default function TodaysSpecialSection({ special = [] }) {
                 </div>
 
                 {/* Featured Dish */}
-                <div className="grid overflow-hidden rounded-3xl border border-amber-100 bg-white shadow-sm lg:grid-cols-2 lg:shadow-lg">
+                <div className="restaurant-surface grid overflow-hidden rounded-3xl shadow-sm lg:grid-cols-2 lg:shadow-lg">
                     {/* Dish Image */}
                     <div className="relative min-h-64 overflow-hidden bg-stone-200 sm:min-h-80 lg:min-h-[480px]">
                         {imageUrl ? (
@@ -128,7 +128,7 @@ export default function TodaysSpecialSection({ special = [] }) {
                             {item.id && (
                                 <Link
                                     href={`/menu/${item.id}`}
-                                    className="inline-flex min-h-12 items-center justify-center gap-2 rounded-xl bg-amber-800 px-5 py-3 text-sm font-semibold text-white shadow-sm transition hover:-translate-y-0.5 hover:bg-amber-900 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-700 focus-visible:ring-offset-2"
+                                    className="restaurant-accent-button inline-flex min-h-12 items-center justify-center gap-2 rounded-xl px-5 py-3 text-sm font-semibold shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
                                 >
                                     Discover This Dish
                                     <span aria-hidden="true">→</span>

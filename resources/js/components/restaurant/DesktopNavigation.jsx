@@ -29,14 +29,14 @@ export default function DesktopNavigation() {
                         className={`relative py-2 text-sm font-semibold
                             transition-colors duration-200
                             ${isActive(item.href)
-                                ? 'text-stone-100'
-                                : 'text-stone-700 hover:text-stone-800'
+                                ? 'text-amber-300'
+                                : 'text-stone-300 hover:text-white'
                             }`}
                     >
                         {item.name}
 
                         {isActive(item.href) && (
-                            <span className="absolute inset-x-0 -bottom-1 h-0.5 rounded-full bg-stone-100" />
+                            <span className="absolute inset-x-0 -bottom-1 h-0.5 rounded-full bg-amber-400" />
                         )}
                     </Link>
                 ))}
@@ -50,8 +50,8 @@ export default function DesktopNavigation() {
                 aria-expanded={isOpen}
                 aria-controls="mobile-navigation"
                 className="inline-flex size-11 items-center justify-center
-                    rounded-xl border border-stone-200 bg-white text-stone-800
-                    transition hover:bg-amber-50 hover:text-amber-700
+                    rounded-xl border border-stone-700 bg-stone-800 text-stone-100
+                    transition hover:border-amber-500 hover:bg-stone-700 hover:text-amber-300
                     focus-visible:outline-none focus-visible:ring-2
                     focus-visible:ring-amber-500 lg:hidden"
             >
@@ -67,7 +67,7 @@ export default function DesktopNavigation() {
                 id="mobile-navigation"
                 className={`absolute right-0 top-full z-50 mt-3 w-72
                     max-w-[calc(100vw-2rem)] origin-top-right rounded-2xl
-                    border border-stone-200 bg-white p-3 shadow-xl
+                    border border-stone-700 bg-stone-900 p-3 shadow-xl
                     transition duration-200 lg:hidden
                     ${isOpen
                         ? 'visible translate-y-0 scale-100 opacity-100'
@@ -84,8 +84,8 @@ export default function DesktopNavigation() {
                             className={`rounded-xl px-4 py-3 text-sm font-medium
                                 transition-colors duration-200
                                 ${isActive(item.href)
-                                    ? 'bg-amber-50 text-amber-700'
-                                    : 'text-stone-700 hover:bg-stone-50 hover:text-amber-700'
+                                    ? 'bg-amber-500/15 text-amber-300'
+                                    : 'text-stone-300 hover:bg-stone-800 hover:text-amber-300'
                                 }`}
                         >
                             {item.name}

@@ -31,7 +31,7 @@ export default function ThisWeekSpecialsSection({
 
     return (
         <section
-            className="bg-white py-16 sm:py-20 lg:py-24"
+            className="restaurant-shell py-16 sm:py-20 lg:py-24"
             aria-labelledby="weekly-specials-heading"
         >
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -72,7 +72,7 @@ export default function ThisWeekSpecialsSection({
                         rounded-xl border p-5 transition-colors
                         sm:w-72
                         ${isToday
-                                            ? 'border-amber-400 bg-amber-50'
+                                            ? 'border-amber-400 bg-[var(--restaurant-accent-soft)]'
                                             : 'border-stone-200 bg-white hover:border-amber-300'
                                         }
                     `}

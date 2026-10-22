@@ -44,7 +44,7 @@ export default function HeroSection() {
     return (
         <>
             {/* Hero Section */}
-            <section className="overflow-hidden bg-amber-600">
+            <section className="overflow-hidden bg-stone-900">
                 <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8 lg:py-24">
                     <div className="grid min-h-[500px] items-center gap-12 lg:grid-cols-2 lg:gap-16">
                         {/* Left Side — Hero Content */}
@@ -97,14 +97,14 @@ export default function HeroSection() {
                                 className="
                                     max-w-3xl text-5xl font-extrabold
                                     leading-[1.02] tracking-[-0.045em]
-                                    text-stone-950
+                                    text-white
                                     sm:text-6xl lg:text-6xl xl:text-7xl
                                     motion-safe:animate-[heroReveal_0.8s_ease-out_0.12s_both]
                                 "
                             >
                                 Good food.
 
-                                <span className="mt-2 block text-amber-950">
+                                <span className="mt-2 block text-amber-300">
                                     Great moments.
                                 </span>
                             </h1>
@@ -113,7 +113,7 @@ export default function HeroSection() {
                             <p
                                 className="
                                     mt-7 max-w-xl text-base leading-8
-                                    text-stone-800 sm:text-lg
+                                    text-stone-300 sm:text-lg
                                     motion-safe:animate-[heroReveal_0.8s_ease-out_0.24s_both]
                                 "
                             >
@@ -132,20 +132,7 @@ export default function HeroSection() {
                             >
                                 <Link
                                     href="/menu"
-                                    className="
-                                        inline-flex min-h-12 items-center justify-center
-                                        gap-2 rounded-xl bg-stone-950 px-7 py-3.5
-                                        text-sm font-semibold text-white
-                                        shadow-md shadow-stone-950/10
-                                        transition-all duration-300
-                                        hover:-translate-y-0.5 hover:bg-stone-800
-                                        hover:shadow-lg
-                                        focus-visible:outline-none
-                                        focus-visible:ring-2
-                                        focus-visible:ring-stone-950
-                                        focus-visible:ring-offset-2
-                                        sm:text-base
-                                    "
+                                    className="restaurant-accent-button inline-flex min-h-12 items-center justify-center gap-2 rounded-xl px-7 py-3.5 text-sm font-semibold sm:text-base"
                                 >
                                     Explore Our Menu
                                     <span aria-hidden="true">→</span>
@@ -153,20 +140,7 @@ export default function HeroSection() {
 
                                 <Link
                                     href="/reservations/create"
-                                    className="
-                                        inline-flex min-h-12 items-center justify-center
-                                        rounded-xl border border-stone-300
-                                        bg-white px-7 py-3.5
-                                        text-sm font-semibold text-stone-800
-                                        transition-all duration-300
-                                        hover:-translate-y-0.5
-                                        hover:border-amber-300 hover:bg-amber-50
-                                        focus-visible:outline-none
-                                        focus-visible:ring-2
-                                        focus-visible:ring-stone-950
-                                        focus-visible:ring-offset-2
-                                        sm:text-base
-                                    "
+                                    className="restaurant-secondary-button inline-flex min-h-12 items-center justify-center rounded-xl border-stone-600 bg-transparent px-7 py-3.5 text-sm font-semibold text-white hover:bg-stone-800 hover:text-amber-300 sm:text-base"
                                 >
                                     Reserve a Table
                                 </Link>
@@ -211,7 +185,7 @@ export default function HeroSection() {
                                     absolute left-1/2 top-1/2
                                     h-72 w-72 -translate-x-1/2
                                     -translate-y-1/2 rounded-full
-                                    bg-orange-300/40 blur-3xl
+                                    bg-amber-300/40 blur-3xl
                                     motion-safe:animate-[ambientGlow_6s_ease-in-out_infinite]
                                 "
                             />
@@ -336,7 +310,7 @@ export default function HeroSection() {
             </section>
 
             {/* Statistics Section */}
-            <section className="border-t border-amber-600 bg-amber-600 py-12 sm:py-14">
+            <section className="border-t border-stone-800 bg-stone-950 py-12 sm:py-14">
                 <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                     <div className="grid grid-cols-2 gap-y-10 md:grid-cols-4 md:divide-x md:divide-amber-500/40">
                         {stats.map((stat, index) => (
@@ -348,11 +322,11 @@ export default function HeroSection() {
                                     hover:-translate-y-1
                                 "
                             >
-                                <p className="text-3xl font-extrabold tracking-tight text-stone-950 sm:text-4xl">
+                                <p className="text-3xl font-extrabold tracking-tight text-amber-300 sm:text-4xl">
                                     {stat.value}
                                 </p>
 
-                                <p className="mt-2 text-xs font-bold uppercase tracking-[0.16em] text-stone-800 sm:text-sm">
+                                <p className="mt-2 text-xs font-bold uppercase tracking-[0.16em] text-stone-300 sm:text-sm">
                                     {stat.label}
                                 </p>
                             </div>

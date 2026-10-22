@@ -137,6 +137,79 @@
         @apply border-border;
     }
 
+    @layer components {
+        .restaurant-shell {
+            background: var(--restaurant-dominant);
+            color: var(--restaurant-secondary);
+        }
+
+        .restaurant-surface {
+            background: var(--restaurant-surface);
+            border: 1px solid var(--restaurant-border);
+            color: var(--restaurant-secondary);
+        }
+
+        .restaurant-accent-button {
+            background: var(--restaurant-accent);
+            color: #fffaf0;
+            transition:
+                background-color 180ms ease,
+                box-shadow 180ms ease,
+                transform 180ms ease;
+        }
+
+        .restaurant-accent-button:hover {
+            background: var(--restaurant-accent-hover);
+            box-shadow: 0 10px 24px rgb(180 83 9 / 18%);
+            transform: translateY(-1px);
+        }
+
+        .restaurant-accent-button:focus-visible,
+        .restaurant-link:focus-visible,
+        .restaurant-secondary-button:focus-visible {
+            outline: 2px solid var(--restaurant-accent);
+            outline-offset: 3px;
+        }
+
+        .restaurant-secondary-button {
+            border: 1px solid var(--restaurant-border-strong);
+            background: var(--restaurant-surface);
+            color: var(--restaurant-secondary);
+            transition:
+                background-color 180ms ease,
+                border-color 180ms ease,
+                color 180ms ease;
+        }
+
+        .restaurant-secondary-button:hover {
+            border-color: var(--restaurant-accent);
+            background: var(--restaurant-accent-soft);
+            color: var(--restaurant-accent-dark);
+        }
+
+        .restaurant-link {
+            color: var(--restaurant-accent-dark);
+            transition: color 180ms ease;
+        }
+
+        .restaurant-link:hover {
+            color: var(--restaurant-accent-hover);
+        }
+    }
+
+    :root {
+        --restaurant-dominant: #fffaf0;
+        --restaurant-surface: #ffffff;
+        --restaurant-secondary: #292524;
+        --restaurant-muted: #57534e;
+        --restaurant-border: #e7e5e4;
+        --restaurant-border-strong: #d6d3d1;
+        --restaurant-accent: #d97706;
+        --restaurant-accent-hover: #b45309;
+        --restaurant-accent-dark: #92400e;
+        --restaurant-accent-soft: #fff7ed;
+    }
+
     body {
         @apply bg-background text-foreground;
     }
@@ -196,4 +269,3 @@
         scale: 1.15;
     }
 }
-

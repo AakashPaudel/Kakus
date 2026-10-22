@@ -17,11 +17,11 @@ export default function DishGallery({ items }) {
                         From Our Kitchen
                     </p>
 
-                    <h2 className="mt-2 text-3xl font-bold text-gray-900 sm:text-4xl">
+                    <h2 className="mt-2 text-3xl font-bold text-stone-900 sm:text-4xl">
                         A Taste of Kaku's
                     </h2>
 
-                    <p className="mx-auto mt-4 max-w-2xl text-gray-600">
+                    <p className="mx-auto mt-4 max-w-2xl text-stone-600">
                         Take a look at some of the dishes our kitchen prepares
                         with care and passion.
                     </p>
@@ -61,7 +61,7 @@ export default function DishGallery({ items }) {
                 <div className="mt-10 text-center">
                     <Link
                         href="/menu"
-                        className="inline-flex rounded-lg bg-gray-900 px-6 py-3 text-sm font-semibold text-white hover:bg-gray-700"
+                        className="restaurant-accent-button inline-flex rounded-lg px-6 py-3 text-sm font-semibold"
                     >
                         Explore Our Menu
                     </Link>

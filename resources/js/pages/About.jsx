@@ -20,24 +20,24 @@ export default function About({ featuredItem }) {
     ];
     return (
         <>
-            <section className="py-20">
+            <section className="restaurant-shell py-20">
                 <div className="mx-auto max-w-4xl px-4 text-center">
-                    <p className="text-sm font-semibold uppercase tracking-widest text-gray-500">
+                    <p className="text-sm font-semibold uppercase tracking-widest text-amber-700">
                         About Kaku's
                     </p>
 
-                    <h1 className="mt-3 text-4xl font-bold text-gray-900 sm:text-5xl">
+                    <h1 className="mt-3 text-4xl font-bold text-stone-900 sm:text-5xl">
                         Good food, good people, good moments.
                     </h1>
 
-                    <p className="mx-auto mt-6 max-w-2xl text-lg leading-8 text-gray-600">
+                    <p className="mx-auto mt-6 max-w-2xl text-lg leading-8 text-stone-600">
                         Kaku's is built around the simple idea that great food should
                         bring people together. From carefully prepared dishes to a
                         welcoming dining experience, every detail matters.
                     </p>
                 </div>
             </section>
-            <section className="py-16">
+            <section className="restaurant-shell py-16">
                 <div className="mx-auto grid max-w-7xl gap-10 px-4 md:grid-cols-2">
 
                     <div className="overflow-hidden rounded-2xl">
@@ -53,34 +53,34 @@ export default function About({ featuredItem }) {
                     </div>
 
                     <div className="flex flex-col justify-center">
-                        <p className="text-sm font-semibold uppercase tracking-widest text-gray-500">
+                        <p className="text-sm font-semibold uppercase tracking-widest text-amber-700">
                             From Our Kitchen
                         </p>
 
-                        <h2 className="mt-3 text-3xl font-bold text-gray-900">
+                        <h2 className="mt-3 text-3xl font-bold text-stone-900">
                             {featuredItem?.name}
                         </h2>
 
-                        <p className="mt-4 leading-7 text-gray-600">
+                        <p className="mt-4 leading-7 text-stone-600">
                             {featuredItem?.description}
                         </p>
 
-                        <p className="mt-6 text-xl font-bold text-gray-900">
+                        <p className="mt-6 text-xl font-bold text-amber-700">
                             Rs. {featuredItem?.price}
                         </p>
                     </div>
 
                 </div>
             </section>
-            <section className="py-16">
+            <section className="restaurant-shell py-16">
                 <div className="mx-auto max-w-7xl px-4">
                     <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
                         {stats.map((stat, index) => (
                             <div key={index} className="text-center">
-                                <p className="text-3xl font-bold text-gray-900">
+                                <p className="text-3xl font-bold text-stone-900">
                                     {stat.value}
                                 </p>
-                                <p className="mt-2 text-sm font-semibold uppercase tracking-widest text-gray-500">
+                                <p className="mt-2 text-sm font-semibold uppercase tracking-widest text-amber-700">
                                     {stat.label}
                                 </p>
                             </div>

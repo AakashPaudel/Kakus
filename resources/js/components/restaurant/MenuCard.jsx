@@ -20,7 +20,7 @@ export default function MenuCard({ item }) {
     return (
 
 
-        <div className="group overflow-hidden rounded-2xl bg-white shadow-sm ring-1 ring-stone-200 transition duration-300 hover:-translate-y-1 hover:shadow-lg">
+        <div className="restaurant-surface group overflow-hidden rounded-2xl shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-lg">
             {/* Image */}
             <div className="relative overflow-hidden">
                 {item.images?.[0]?.image_path ? (
@@ -70,7 +70,7 @@ export default function MenuCard({ item }) {
                         type="button"
                         onClick={addToCart}
                         disabled={!item.is_available}
-                        className="rounded-lg bg-amber-500 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-amber-600 disabled:cursor-not-allowed disabled:bg-stone-300"
+                        className="restaurant-accent-button rounded-lg px-4 py-2.5 text-sm font-semibold disabled:cursor-not-allowed disabled:bg-stone-300"
                     >
                         {item.is_available ? 'Add to Cart' : 'Unavailable'}
                     </button>
