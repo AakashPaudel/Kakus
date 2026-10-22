@@ -54,7 +54,8 @@ export default function UserMenu() {
     // Guest navigation
     if (!user) {
         return (
-            <div className="flex shrink-0 items-center gap-2 sm:gap-3">
+            <div ref={menuRef} className="relative shrink-0">
+                <div className="hidden items-center gap-3 lg:flex">
                 <Link
                     href="/login"
                     className="
@@ -110,6 +111,49 @@ export default function UserMenu() {
                         />
                     </svg>
                 </Link>
+                </div>
+
+                <button
+                    ref={buttonRef}
+                    type="button"
+                    onClick={() => setOpen((previous) => !previous)}
+                    aria-expanded={open}
+                    aria-haspopup="true"
+                    aria-controls="guest-navigation"
+                    aria-label={open ? 'Close account menu' : 'Open account menu'}
+                    className="inline-flex size-10 items-center justify-center rounded-full border border-amber-800/20 bg-white text-stone-800 shadow-sm transition-all duration-200 hover:border-amber-700 hover:bg-amber-50 hover:text-amber-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-600 focus-visible:ring-offset-2 lg:hidden"
+                >
+                    <span aria-hidden="true" className="text-base">👤</span>
+                </button>
+
+                {open && (
+                    <div
+                        id="guest-navigation"
+                        className="fixed inset-x-3 top-24 z-[100] max-h-[calc(100dvh-7rem)] overflow-y-auto rounded-2xl border border-stone-200 bg-white p-3 shadow-xl shadow-stone-900/10 animate-in fade-in slide-in-from-top-2 duration-200 sm:absolute sm:inset-x-auto sm:right-0 sm:top-full sm:mt-3 sm:w-72"
+                    >
+                        <p className="px-3 py-2 text-xs font-semibold uppercase tracking-[0.16em] text-stone-500">
+                            Account
+                        </p>
+
+                        <div className="mt-1 grid gap-1">
+                            <Link
+                                href="/login"
+                                onClick={closeMenu}
+                                className="rounded-xl px-3 py-3 text-sm font-semibold text-stone-700 transition-colors hover:bg-amber-50 hover:text-amber-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-600"
+                            >
+                                Login
+                            </Link>
+
+                            <Link
+                                href="/register"
+                                onClick={closeMenu}
+                                className="rounded-xl bg-amber-800 px-3 py-3 text-sm font-semibold text-white transition-colors hover:bg-amber-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-600"
+                            >
+                                Create Account
+                            </Link>
+                        </div>
+                    </div>
+                )}
             </div>
         );
     }
@@ -146,12 +190,15 @@ export default function UserMenu() {
             {open && (
                 <div
                     className="
-                        absolute right-0 top-full z-[100]
-                        mt-3 w-[min(18rem,calc(100vw-2rem))]
-                        overflow-hidden rounded-2xl
+                        fixed inset-x-3 top-24 z-[100]
+                        max-h-[calc(100dvh-7rem)] overflow-y-auto
+                        rounded-2xl
                         border border-stone-200 bg-white
                         shadow-xl shadow-stone-900/10
                         animate-in fade-in slide-in-from-top-2 duration-200
+                        sm:absolute sm:inset-x-auto sm:right-0 sm:top-full
+                        sm:mt-3 sm:max-h-[calc(100vh-6rem)]
+                        sm:w-[min(18rem,calc(100vw-2rem))]
                     "
                 >
                     {/* User Information */}

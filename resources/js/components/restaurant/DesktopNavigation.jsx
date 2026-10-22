@@ -18,7 +18,7 @@ export default function DesktopNavigation() {
     const isActive = (href) =>
         url === href || (href !== '/' && url.startsWith(`${href}/`));
     return (
-        <nav className="relative">
+        <nav className="relative lg:static">
             {/* Desktop Navigation */}
             <div className="hidden items-center gap-7 lg:flex">
                 {navigation.map((item) => (
@@ -65,10 +65,11 @@ export default function DesktopNavigation() {
             {/* Mobile Navigation Menu */}
             <div
                 id="mobile-navigation"
-                className={`absolute right-0 top-full z-50 mt-3 w-72
-                    max-w-[calc(100vw-2rem)] origin-top-right rounded-2xl
-                    border border-stone-700 bg-stone-900 p-3 shadow-xl
-                    transition duration-200 lg:hidden
+                className={`fixed inset-x-3 top-24 z-50 max-h-[calc(100dvh-7rem)]
+                    overflow-y-auto rounded-2xl border border-stone-700
+                    bg-stone-900 p-3 shadow-xl origin-top
+                    transition duration-200 sm:inset-x-auto sm:right-4
+                    sm:top-24 sm:w-80 sm:origin-top-right lg:hidden
                     ${isOpen
                         ? 'visible translate-y-0 scale-100 opacity-100'
                         : 'invisible -translate-y-2 scale-95 opacity-0'

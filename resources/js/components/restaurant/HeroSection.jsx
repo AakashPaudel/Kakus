@@ -165,11 +165,11 @@ export default function HeroSection() {
                                 </span>
 
                                 <div>
-                                    <p className="text-sm font-semibold text-stone-900">
+                                    <p className="text-sm font-semibold text-stone-600">
                                         Made with care, served with love
                                     </p>
 
-                                    <p className="mt-1 text-xs text-stone-700 sm:text-sm">
+                                    <p className="mt-1 text-xs text-stone-600 sm:text-sm">
                                         Fresh ingredients. Memorable meals.
                                     </p>
                                 </div>
@@ -300,7 +300,7 @@ export default function HeroSection() {
                                     A Taste Worth Sharing
                                 </p>
 
-                                <p className="mt-2 text-sm text-stone-800">
+                                <p className="mt-2 text-sm text-stone-600">
                                     Fresh ingredients. Unforgettable flavors.
                                 </p>
                             </div>
