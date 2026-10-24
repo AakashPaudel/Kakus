@@ -154,15 +154,7 @@ export default function HeroSection() {
                                     motion-safe:animate-[heroReveal_0.8s_ease-out_0.48s_both]
                                 "
                             >
-                                <span
-                                    className="
-                                        flex size-10 shrink-0 items-center
-                                        justify-center rounded-full
-                                        bg-amber-100 text-lg text-black
-                                    "
-                                >
-                                    ✦
-                                </span>
+                                
 
                                 <div>
                                     <p className="text-sm font-semibold text-stone-600">

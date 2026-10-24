@@ -1,5 +1,5 @@
 import { useForm } from '@inertiajs/react';
-import ContactCTA from '@/Components/restaurant/CTA';
+import ContactCTA from '@/components/restaurant/CTA';
 
 export default function ContactSection() {
     const { data, setData, post, processing, errors, reset } = useForm({

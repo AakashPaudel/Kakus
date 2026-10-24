@@ -53,7 +53,7 @@ export default function TodaysSpecialSection({ special = [] }) {
                 {/* Section Heading */}
                 <div className="mb-10 max-w-2xl sm:mb-12">
                     <span className="inline-flex items-center gap-2 rounded-full border border-amber-200 bg-white px-4 py-2 text-xs font-bold uppercase tracking-[0.18em] text-amber-900 sm:text-sm">
-                        <span aria-hidden="true">✦</span>
+                        {/* <span aria-hidden="true">✦</span> */}
                         Today's Special
                     </span>
 

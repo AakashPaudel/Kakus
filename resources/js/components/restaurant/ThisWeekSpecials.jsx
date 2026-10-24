@@ -38,7 +38,7 @@ export default function ThisWeekSpecialsSection({
                 {/* Heading */}
                 <div className="mb-10 max-w-2xl sm:mb-12">
                     <span className="inline-flex items-center gap-2 rounded-full bg-stone-100 px-4 py-2 text-xs font-bold uppercase tracking-[0.18em] text-stone-700 sm:text-sm">
-                        <span aria-hidden="true">✦</span>
+                        {/* <span aria-hidden="true">✦</span> */}
                         A New Flavor Every Day
                     </span>
 
