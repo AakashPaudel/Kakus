@@ -2,7 +2,6 @@ import { Head, Link } from '@inertiajs/react';
 import {
     ArrowRight,
     CalendarDays,
-    CheckCircle2,
     Clock,
     Package,
     ShoppingBag,

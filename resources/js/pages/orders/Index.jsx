@@ -1,5 +1,5 @@
 import { Head, Link } from '@inertiajs/react';
-import orders from '@/routes/orders';
+import ordersRoute from '@/routes/orders';
 
 export default function Index({ orders = [] }) {
     return (
@@ -84,7 +84,7 @@ export default function Index({ orders = [] }) {
                                     </div>
 
                                     <Link
-                                        href={orders.show.url(order)}
+                                        href={ordersRoute.show.url(order)}
                                         className="restaurant-secondary-button mt-6 block rounded-lg px-4 py-3 text-center text-sm font-semibold"
                                     >
                                         View order details
