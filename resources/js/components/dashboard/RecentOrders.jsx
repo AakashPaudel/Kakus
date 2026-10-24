@@ -1,4 +1,3 @@
-
 import { Link } from '@inertiajs/react';
 import { ArrowRight, ShoppingBag } from 'lucide-react';
 
@@ -100,7 +99,7 @@ export default function RecentOrders({ orders = [] }) {
                                         key={order.id}
                                         className="transition-colors hover:bg-stone-50/80 dark:hover:bg-stone-800/40"
                                     >
-                                        <td className="whitespace-nowrap px-5 py-4 font-semibold text-stone-900 sm:px-6 dark:text-stone-100">
+                                        <td className="px-5 py-4 font-semibold whitespace-nowrap text-stone-900 sm:px-6 dark:text-stone-100">
                                             #{order.id}
                                         </td>
 
@@ -108,14 +107,14 @@ export default function RecentOrders({ orders = [] }) {
                                             {order.user?.name ?? 'Unknown'}
                                         </td>
 
-                                        <td className="whitespace-nowrap px-5 py-4 font-semibold text-stone-900 sm:px-6 dark:text-stone-100">
+                                        <td className="px-5 py-4 font-semibold whitespace-nowrap text-stone-900 sm:px-6 dark:text-stone-100">
                                             Rs.{' '}
                                             {Number(
                                                 order.total ?? 0,
                                             ).toLocaleString('en-IN')}
                                         </td>
 
-                                        <td className="whitespace-nowrap px-5 py-4 sm:px-6">
+                                        <td className="px-5 py-4 whitespace-nowrap sm:px-6">
                                             <span
                                                 className={`inline-flex items-center rounded-full px-2.5 py-1 text-xs font-semibold capitalize ring-1 ring-inset ${badgeStyle}`}
                                             >
@@ -142,7 +141,8 @@ export default function RecentOrders({ orders = [] }) {
                                         </p>
 
                                         <p className="mt-1 text-sm text-stone-500 dark:text-stone-400">
-                                            New customer orders will appear here.
+                                            New customer orders will appear
+                                            here.
                                         </p>
                                     </div>
                                 </td>

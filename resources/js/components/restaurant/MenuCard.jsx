@@ -1,25 +1,23 @@
-
 import { router } from '@inertiajs/react';
 
 export default function MenuCard({ item }) {
     function addToCart() {
-        router.post('/cart/items', 
+        router.post(
+            '/cart/items',
             {
-            menu_item_id: item.id,
-            quantity: 1,
-        },
-        {
-            // preserveState: true,
+                menu_item_id: item.id,
+                quantity: 1,
+            },
+            {
+                // preserveState: true,
 
-
-            // to prevent the page from scrolling to the top after adding an item to the cart, we can use preserveScroll: true
-            preserveScroll: true,
-        });
+                // to prevent the page from scrolling to the top after adding an item to the cart, we can use preserveScroll: true
+                preserveScroll: true,
+            },
+        );
     }
 
     return (
-
-
         <div className="restaurant-surface group overflow-hidden rounded-2xl shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-lg">
             {/* Image */}
             <div className="relative overflow-hidden">
@@ -46,7 +44,7 @@ export default function MenuCard({ item }) {
             </div>
 
             {/* Content */}
-            
+
             <div className="flex min-h-[190px] flex-col p-5">
                 <h2 className="text-xl font-bold text-stone-900 transition group-hover:text-amber-700">
                     {item.name}
@@ -76,10 +74,6 @@ export default function MenuCard({ item }) {
                     </button>
                 </div>
             </div>
-            
-
         </div>
-
-
     );
 }

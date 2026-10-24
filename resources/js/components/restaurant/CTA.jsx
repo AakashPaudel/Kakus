@@ -1,4 +1,3 @@
-
 import { Link } from '@inertiajs/react';
 
 export default function ContactCTA() {
@@ -7,11 +6,11 @@ export default function ContactCTA() {
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                 <div className="relative overflow-hidden rounded-full bg-stone-900 px-6 py-16 text-center shadow-xl sm:px-12 sm:py-20 lg:px-20">
                     {/* Decorative shapes */}
-                    <div className="absolute -left-20 -top-20 h-48 w-48 rounded-full bg-amber-500/10 blur-2xl" />
-                    <div className="absolute -bottom-24 -right-16 h-64 w-64 rounded-full bg-amber-400/10 blur-3xl" />
+                    <div className="absolute -top-20 -left-20 h-48 w-48 rounded-full bg-amber-500/10 blur-2xl" />
+                    <div className="absolute -right-16 -bottom-24 h-64 w-64 rounded-full bg-amber-400/10 blur-3xl" />
 
                     <div className="relative mx-auto max-w-3xl">
-                        <p className="text-sm font-semibold uppercase tracking-[0.2em] text-amber-500">
+                        <p className="text-sm font-semibold tracking-[0.2em] text-amber-500 uppercase">
                             Come Dine With Us
                         </p>
 
@@ -21,9 +20,9 @@ export default function ContactCTA() {
 
                         <p className="mx-auto mt-6 max-w-2xl text-base leading-8 text-stone-300 sm:text-lg">
                             Whether you're craving a quick bite, a delicious
-                            family meal, or something special, Kaku's is here
-                            to make every visit memorable. Come enjoy great
-                            food, warm hospitality, and moments worth sharing.
+                            family meal, or something special, Kaku's is here to
+                            make every visit memorable. Come enjoy great food,
+                            warm hospitality, and moments worth sharing.
                         </p>
 
                         {/* Actions */}

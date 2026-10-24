@@ -11,9 +11,6 @@ import {
 
 import StatCard from '@/components/dashboard/StatCard';
 
-
-
-
 const statusStyles = {
     Preparing: 'bg-blue-100 text-blue-700',
     Pending: 'bg-amber-100 text-amber-700',
@@ -44,11 +41,11 @@ const shortcuts = [
 export default function CustomerDashboard({
     stats: dashboardStats = {},
     recentOrders = [],
-    upcomingReservation = [], }) {
-
+    upcomingReservation = [],
+}) {
     const statCards = [
         {
-            title: "Total Orders",
+            title: 'Total Orders',
             value: dashboardStats.totalOrders ?? 0,
             description: 'Orders received',
             icon: 'shopping-bag',
@@ -60,7 +57,7 @@ export default function CustomerDashboard({
             icon: 'clock',
         },
         {
-            title: "Upcoming Reservations",
+            title: 'Upcoming Reservations',
             value: dashboardStats.upcomingReservations ?? 0,
             description: 'Reservations scheduled for the future',
             icon: 'calendar-days',
@@ -79,7 +76,6 @@ export default function CustomerDashboard({
 
             <div className="min-h-screen bg-stone-50 text-stone-900 dark:bg-stone-950 dark:text-stone-100">
                 <div className="mx-auto flex w-full max-w-7xl flex-col gap-6 p-4 sm:p-6 lg:gap-8 lg:p-8">
-
                     {/* Welcome Header */}
                     <section className="rounded-2xl border border-stone-200 bg-white p-5 shadow-sm sm:p-7 dark:border-stone-800 dark:bg-stone-900">
                         <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
@@ -93,14 +89,15 @@ export default function CustomerDashboard({
                                 </h1>
 
                                 <p className="mt-2 max-w-xl text-sm leading-6 text-stone-600 sm:text-base dark:text-stone-400">
-                                    Keep track of your orders, manage your reservations,
-                                    and plan your next delicious visit.
+                                    Keep track of your orders, manage your
+                                    reservations, and plan your next delicious
+                                    visit.
                                 </p>
                             </div>
 
                             <Link
                                 href="/menu"
-                                className="inline-flex w-fit items-center justify-center gap-2 rounded-xl bg-orange-600 px-5 py-3 text-sm font-semibold text-white transition hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 dark:focus:ring-offset-stone-900"
+                                className="inline-flex w-fit items-center justify-center gap-2 rounded-xl bg-orange-600 px-5 py-3 text-sm font-semibold text-white transition hover:bg-orange-700 focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 focus:outline-none dark:focus:ring-offset-stone-900"
                             >
                                 Explore Menu
                                 <ArrowRight size={17} />
@@ -119,7 +116,6 @@ export default function CustomerDashboard({
 
                     {/* Main Dashboard Content */}
                     <div className="grid grid-cols-1 items-start gap-6 xl:grid-cols-3">
-
                         {/* Recent Orders */}
                         <section className="min-w-0 overflow-hidden rounded-2xl border border-stone-200 bg-white shadow-sm xl:col-span-2 dark:border-stone-800 dark:bg-stone-900">
                             <div className="flex flex-col gap-3 border-b border-stone-200 p-5 sm:flex-row sm:items-center sm:justify-between sm:p-6 dark:border-stone-800">
@@ -129,7 +125,8 @@ export default function CustomerDashboard({
                                     </h2>
 
                                     <p className="mt-1 text-sm text-stone-500 dark:text-stone-400">
-                                        Keep track of your latest restaurant orders.
+                                        Keep track of your latest restaurant
+                                        orders.
                                     </p>
                                 </div>
 
@@ -163,7 +160,7 @@ export default function CustomerDashboard({
                                                         {order.date}
                                                     </p>
 
-                                                    <p className="mt-2 break-words text-sm leading-5 text-stone-600 dark:text-stone-300">
+                                                    <p className="mt-2 text-sm leading-5 break-words text-stone-600 dark:text-stone-300">
                                                         {order.items}
                                                     </p>
                                                 </div>
@@ -171,13 +168,19 @@ export default function CustomerDashboard({
 
                                             <div className="flex flex-wrap items-center justify-between gap-3 sm:flex-col sm:items-end sm:justify-center">
                                                 <p className="text-base font-bold text-stone-900 dark:text-stone-100">
-                                                    Rs. {Number(order.total).toLocaleString('en-IN')}
+                                                    Rs.{' '}
+                                                    {Number(
+                                                        order.total,
+                                                    ).toLocaleString('en-IN')}
                                                 </p>
 
                                                 <span
-                                                    className={`inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold ${statusStyles[order.status] ??
+                                                    className={`inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold ${
+                                                        statusStyles[
+                                                            order.status
+                                                        ] ??
                                                         'bg-stone-100 text-stone-700 dark:bg-stone-800 dark:text-stone-300'
-                                                        }`}
+                                                    }`}
                                                 >
                                                     {order.status}
                                                 </span>
@@ -199,8 +202,8 @@ export default function CustomerDashboard({
                                     </h3>
 
                                     <p className="mt-2 max-w-sm text-sm leading-6 text-stone-500 dark:text-stone-400">
-                                        Your recent orders will appear here when you
-                                        order something delicious.
+                                        Your recent orders will appear here when
+                                        you order something delicious.
                                     </p>
 
                                     <Link
@@ -216,7 +219,6 @@ export default function CustomerDashboard({
 
                         {/* Right Sidebar */}
                         <div className="flex min-w-0 flex-col gap-6">
-
                             {/* Next Reservation */}
                             <section className="rounded-2xl border border-stone-200 bg-white p-5 shadow-sm sm:p-6 dark:border-stone-800 dark:bg-stone-900">
                                 <div className="flex items-center gap-3">
@@ -238,13 +240,13 @@ export default function CustomerDashboard({
                                 {upcomingReservation ? (
                                     <div className="mt-5">
                                         <div className="rounded-xl border border-orange-100 bg-orange-50/70 p-4 dark:border-orange-900/50 dark:bg-orange-950/30">
-                                            <p className="text-xs font-semibold uppercase tracking-wider text-orange-700 dark:text-orange-400">
+                                            <p className="text-xs font-semibold tracking-wider text-orange-700 uppercase dark:text-orange-400">
                                                 Reservation Date
                                             </p>
 
-                                            <p className="mt-2 text-lg font-bold leading-7 text-stone-900 dark:text-stone-100">
+                                            <p className="mt-2 text-lg leading-7 font-bold text-stone-900 dark:text-stone-100">
                                                 {new Date(
-                                                    `${upcomingReservation.reservation_date}T00:00:00`
+                                                    `${upcomingReservation.reservation_date}T00:00:00`,
                                                 ).toLocaleDateString('en-US', {
                                                     weekday: 'long',
                                                     month: 'long',
@@ -262,12 +264,15 @@ export default function CustomerDashboard({
                                                     <span>
                                                         {upcomingReservation.start_time
                                                             ? new Date(
-                                                                `2000-01-01T${upcomingReservation.start_time}`
-                                                            ).toLocaleTimeString('en-US', {
-                                                                hour: 'numeric',
-                                                                minute: '2-digit',
-                                                                hour12: true,
-                                                            })
+                                                                  `2000-01-01T${upcomingReservation.start_time}`,
+                                                              ).toLocaleTimeString(
+                                                                  'en-US',
+                                                                  {
+                                                                      hour: 'numeric',
+                                                                      minute: '2-digit',
+                                                                      hour12: true,
+                                                                  },
+                                                              )
                                                             : 'Time not specified'}
                                                     </span>
                                                 </div>
@@ -279,8 +284,12 @@ export default function CustomerDashboard({
                                                     />
 
                                                     <span>
-                                                        {upcomingReservation.guest_count}{' '}
-                                                        {Number(upcomingReservation.guest_count) === 1
+                                                        {
+                                                            upcomingReservation.guest_count
+                                                        }{' '}
+                                                        {Number(
+                                                            upcomingReservation.guest_count,
+                                                        ) === 1
                                                             ? 'guest'
                                                             : 'guests'}
                                                     </span>
@@ -289,20 +298,25 @@ export default function CustomerDashboard({
 
                                             <div className="mt-4 border-t border-orange-200/70 pt-4 dark:border-orange-900/60">
                                                 <span
-                                                    className={`inline-flex items-center gap-2 rounded-full px-3 py-1.5 text-xs font-semibold ${upcomingReservation.status === 'confirmed'
+                                                    className={`inline-flex items-center gap-2 rounded-full px-3 py-1.5 text-xs font-semibold ${
+                                                        upcomingReservation.status ===
+                                                        'confirmed'
                                                             ? 'bg-green-100 text-green-800 dark:bg-green-950 dark:text-green-300'
-                                                            : upcomingReservation.status === 'pending'
-                                                                ? 'bg-amber-100 text-amber-800 dark:bg-amber-950 dark:text-amber-300'
-                                                                : 'bg-stone-200 text-stone-700 dark:bg-stone-800 dark:text-stone-300'
-                                                        }`}
+                                                            : upcomingReservation.status ===
+                                                                'pending'
+                                                              ? 'bg-amber-100 text-amber-800 dark:bg-amber-950 dark:text-amber-300'
+                                                              : 'bg-stone-200 text-stone-700 dark:bg-stone-800 dark:text-stone-300'
+                                                    }`}
                                                 >
                                                     <span className="h-1.5 w-1.5 rounded-full bg-current" />
 
-                                                    {upcomingReservation.status === 'pending'
+                                                    {upcomingReservation.status ===
+                                                    'pending'
                                                         ? 'Pending confirmation'
-                                                        : upcomingReservation.status === 'confirmed'
-                                                            ? 'Confirmed'
-                                                            : upcomingReservation.status}
+                                                        : upcomingReservation.status ===
+                                                            'confirmed'
+                                                          ? 'Confirmed'
+                                                          : upcomingReservation.status}
                                                 </span>
                                             </div>
                                         </div>
@@ -319,7 +333,8 @@ export default function CustomerDashboard({
                                         </p>
 
                                         <p className="mt-1 text-sm leading-5 text-stone-500 dark:text-stone-400">
-                                            Reserve your table for your next visit.
+                                            Reserve your table for your next
+                                            visit.
                                         </p>
                                     </div>
                                 )}

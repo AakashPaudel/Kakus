@@ -1,4 +1,3 @@
-
 export default function SalesSummary({ sales }) {
     const metrics = [
         {
@@ -17,7 +16,6 @@ export default function SalesSummary({ sales }) {
 
     return (
         <section className="overflow-hidden rounded-2xl border border-stone-200 bg-white shadow-sm dark:border-stone-800 dark:bg-stone-900">
-
             {/* Section heading */}
             <div className="border-b border-stone-100 p-5 sm:p-6 dark:border-stone-800">
                 <h2 className="text-lg font-bold text-stone-900 dark:text-stone-100">
@@ -46,13 +44,13 @@ export default function SalesSummary({ sales }) {
                                     index === 0
                                         ? 'bg-orange-500'
                                         : index === 1
-                                            ? 'bg-emerald-500'
-                                            : 'bg-amber-500'
+                                          ? 'bg-emerald-500'
+                                          : 'bg-amber-500'
                                 }`}
                             />
                         </div>
 
-                        <p className="mt-3 break-words text-2xl font-bold tracking-tight text-stone-900 sm:text-3xl dark:text-stone-100">
+                        <p className="mt-3 text-2xl font-bold tracking-tight break-words text-stone-900 sm:text-3xl dark:text-stone-100">
                             Rs. {Number(metric.value).toLocaleString('en-IN')}
                         </p>
 
@@ -60,8 +58,8 @@ export default function SalesSummary({ sales }) {
                             {index === 0
                                 ? 'Overall recorded sales'
                                 : index === 1
-                                    ? "Today's recorded sales"
-                                    : 'Recorded sales this month'}
+                                  ? "Today's recorded sales"
+                                  : 'Recorded sales this month'}
                         </p>
                     </div>
                 ))}

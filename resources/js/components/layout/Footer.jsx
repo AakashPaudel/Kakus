@@ -1,4 +1,3 @@
-
 import { Link } from '@inertiajs/react';
 
 export default function Footer() {
@@ -15,8 +14,8 @@ export default function Footer() {
 
                         <p className="mt-4 max-w-sm text-sm leading-7 text-stone-400">
                             A place where great food, warm hospitality, and
-                            memorable moments come together. We look forward
-                            to welcoming you.
+                            memorable moments come together. We look forward to
+                            welcoming you.
                         </p>
                     </div>
 
@@ -59,9 +58,7 @@ export default function Footer() {
 
                     {/* Contact Information */}
                     <div>
-                        <h3 className="font-semibold text-white">
-                            Contact Us
-                        </h3>
+                        <h3 className="font-semibold text-white">Contact Us</h3>
 
                         <div className="mt-4 space-y-3 text-sm">
                             <p>

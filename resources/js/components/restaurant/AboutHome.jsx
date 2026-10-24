@@ -1,4 +1,3 @@
-
 import { Link } from '@inertiajs/react';
 
 export default function AboutSection() {
@@ -6,7 +5,6 @@ export default function AboutSection() {
         <section className="restaurant-shell py-20 lg:py-28">
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                 <div className="grid items-center gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:gap-20">
-                    
                     {/* Images */}
                     <div className="relative mx-auto w-full max-w-md">
                         {/* Top Image */}
@@ -19,7 +17,7 @@ export default function AboutSection() {
                         </div>
 
                         {/* Bottom Image */}
-                        <div className="ml-auto mt-[-70px] w-[78%] overflow-hidden rounded-3xl border-8 border-[#fffaf0] shadow-xl">
+                        <div className="mt-[-70px] ml-auto w-[78%] overflow-hidden rounded-3xl border-8 border-[#fffaf0] shadow-xl">
                             <img
                                 src="/storage/menu-items/chicken-momo.jpg"
                                 alt="Delicious food served at Kaku's"
@@ -30,11 +28,11 @@ export default function AboutSection() {
 
                     {/* Content */}
                     <div className="max-w-2xl">
-                        <p className="text-sm font-semibold uppercase tracking-[0.2em] text-amber-700">
+                        <p className="text-sm font-semibold tracking-[0.2em] text-amber-700 uppercase">
                             About Kaku's
                         </p>
 
-                        <h2 className="mt-4 text-3xl font-bold leading-tight tracking-tight text-stone-900 sm:text-4xl lg:text-5xl">
+                        <h2 className="mt-4 text-3xl leading-tight font-bold tracking-tight text-stone-900 sm:text-4xl lg:text-5xl">
                             Good Food,
                             <span className="block text-amber-700">
                                 Great Moments.
@@ -50,9 +48,9 @@ export default function AboutSection() {
 
                         <p className="mt-4 text-base leading-8 text-stone-600">
                             From carefully selected ingredients to dishes
-                            prepared with passion, every plate we serve
-                            reflects our commitment to quality, flavor, and
-                            genuine hospitality.
+                            prepared with passion, every plate we serve reflects
+                            our commitment to quality, flavor, and genuine
+                            hospitality.
                         </p>
 
                         {/* Link */}

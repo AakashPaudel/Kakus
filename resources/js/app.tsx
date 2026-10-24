@@ -11,11 +11,8 @@ import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
 const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
 
 void createInertiaApp({
-    
-
     title: (title) => (title ? `${title} - ${appName}` : appName),
-    
-    
+
     layout: (name) => {
         switch (true) {
             case name === 'welcome':
@@ -32,8 +29,6 @@ void createInertiaApp({
             case name === 'customer/reservations/Index':
             case name === 'customer/reservations/Show':
             case name === 'customer/reservations/Edit':
-        
-        
                 // case name === 'cart/MenuItem':
                 return RestaurantLayout;
 

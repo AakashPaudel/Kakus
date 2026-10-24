@@ -1,4 +1,3 @@
-
 import { Link } from '@inertiajs/react';
 import { useEffect, useState } from 'react';
 
@@ -39,8 +38,6 @@ export default function HeroSection() {
         return () => clearInterval(interval);
     }, []);
 
-
-
     return (
         <>
             {/* Hero Section */}
@@ -50,39 +47,26 @@ export default function HeroSection() {
                         {/* Left Side — Hero Content */}
                         <div className="flex flex-col items-start">
                             {/* Eyebrow */}
-                            <div
-                                className="
-        mb-6 inline-flex max-w-full items-center gap-3
-        animate-[heroReveal_0.7s_ease-out_both]
-    "
-                            >
+                            <div className="mb-6 inline-flex max-w-full animate-[heroReveal_0.7s_ease-out_both] items-center gap-3">
                                 {/* Opening status indicator */}
                                 <span className="relative flex h-2.5 w-2.5 shrink-0">
                                     <span
-                                        className={`
-                absolute inline-flex h-full w-full rounded-full opacity-75
-                ${isOpen ? 'animate-ping bg-green-400' : ''}
-            `}
+                                        className={`absolute inline-flex h-full w-full rounded-full opacity-75 ${isOpen ? 'animate-ping bg-green-400' : ''} `}
                                     />
 
                                     <span
-                                        className={`
-                relative inline-flex h-2.5 w-2.5 rounded-full
-                ${isOpen ? 'bg-green-400' : 'bg-amber-400'}
-            `}
+                                        className={`relative inline-flex h-2.5 w-2.5 rounded-full ${isOpen ? 'bg-green-400' : 'bg-amber-400'} `}
                                     />
                                 </span>
 
                                 {/* Status label */}
                                 <p
-                                    className="
-            min-w-0 text-xs font-bold uppercase
-            tracking-[0.16em] text-amber-300
-            sm:text-sm sm:tracking-[0.2em]
-        "
+                                    className="min-w-0 text-xs font-bold tracking-[0.16em] text-amber-300 uppercase sm:text-sm sm:tracking-[0.2em]"
                                     aria-live="polite"
                                 >
-                                    {isOpen ? "Open Now, kitchen closes at 10 PM" : "Currently Closed — See You Soon"}
+                                    {isOpen
+                                        ? 'Open Now, kitchen closes at 10 PM'
+                                        : 'Currently Closed — See You Soon'}
                                 </p>
 
                                 {/* Decorative divider */}
@@ -93,43 +77,22 @@ export default function HeroSection() {
                             </div>
 
                             {/* Main Heading */}
-                            <h1
-                                className="
-                                    max-w-3xl text-5xl font-extrabold
-                                    leading-[1.02] tracking-[-0.045em]
-                                    text-white
-                                    sm:text-6xl lg:text-6xl xl:text-7xl
-                                    motion-safe:animate-[heroReveal_0.8s_ease-out_0.12s_both]
-                                "
-                            >
+                            <h1 className="max-w-3xl text-5xl leading-[1.02] font-extrabold tracking-[-0.045em] text-white motion-safe:animate-[heroReveal_0.8s_ease-out_0.12s_both] sm:text-6xl lg:text-6xl xl:text-7xl">
                                 Good food.
-
                                 <span className="mt-2 block text-amber-300">
                                     Great moments.
                                 </span>
                             </h1>
 
                             {/* Description */}
-                            <p
-                                className="
-                                    mt-7 max-w-xl text-base leading-8
-                                    text-stone-300 sm:text-lg
-                                    motion-safe:animate-[heroReveal_0.8s_ease-out_0.24s_both]
-                                "
-                            >
-                                From fresh ingredients to unforgettable
-                                flavors, discover dishes made with care and
-                                served to bring people together.
+                            <p className="mt-7 max-w-xl text-base leading-8 text-stone-300 motion-safe:animate-[heroReveal_0.8s_ease-out_0.24s_both] sm:text-lg">
+                                From fresh ingredients to unforgettable flavors,
+                                discover dishes made with care and served to
+                                bring people together.
                             </p>
 
                             {/* Call to Actions */}
-                            <div
-                                className="
-                                    mt-9 flex w-full flex-col gap-3
-                                    sm:w-auto sm:flex-row sm:items-center
-                                    motion-safe:animate-[heroReveal_0.8s_ease-out_0.36s_both]
-                                "
-                            >
+                            <div className="mt-9 flex w-full flex-col gap-3 motion-safe:animate-[heroReveal_0.8s_ease-out_0.36s_both] sm:w-auto sm:flex-row sm:items-center">
                                 <Link
                                     href="/menu"
                                     className="restaurant-accent-button inline-flex min-h-12 items-center justify-center gap-2 rounded-xl px-7 py-3.5 text-sm font-semibold sm:text-base"
@@ -147,15 +110,7 @@ export default function HeroSection() {
                             </div>
 
                             {/* Small Trust Indicator */}
-                            <div
-                                className="
-                                    mt-9 flex items-center gap-3
-                                    border-t border-amber-700/30 pt-5
-                                    motion-safe:animate-[heroReveal_0.8s_ease-out_0.48s_both]
-                                "
-                            >
-                                
-
+                            <div className="mt-9 flex items-center gap-3 border-t border-amber-700/30 pt-5 motion-safe:animate-[heroReveal_0.8s_ease-out_0.48s_both]">
                                 <div>
                                     <p className="text-sm font-semibold text-stone-600">
                                         Made with care, served with love
@@ -173,80 +128,32 @@ export default function HeroSection() {
                             {/* Ambient Glow */}
                             <div
                                 aria-hidden="true"
-                                className="
-                                    absolute left-1/2 top-1/2
-                                    h-72 w-72 -translate-x-1/2
-                                    -translate-y-1/2 rounded-full
-                                    bg-amber-300/40 blur-3xl
-                                    motion-safe:animate-[ambientGlow_6s_ease-in-out_infinite]
-                                "
+                                className="absolute top-1/2 left-1/2 h-72 w-72 -translate-x-1/2 -translate-y-1/2 rounded-full bg-amber-300/40 blur-3xl motion-safe:animate-[ambientGlow_6s_ease-in-out_infinite]"
                             />
 
                             {/* Floating Food Gallery */}
                             <div className="relative flex items-center justify-center gap-3 sm:gap-5">
                                 {/* Left Image */}
-                                <div
-                                    className="
-                                        w-[27%] shrink-0
-                                        motion-safe:animate-[foodReveal_1s_ease-out_both]
-                                    "
-                                >
-                                    <div
-                                        className="
-                                            overflow-hidden rounded-2xl
-                                            rotate-[-7deg]
-                                            shadow-xl shadow-amber-900/10
-                                            transition-all duration-500
-                                            hover:scale-110 hover:rotate-0
-                                            hover:shadow-2xl
-                                            motion-safe:animate-[foodLeft_5s_ease-in-out_infinite]
-                                        "
-                                    >
+                                <div className="w-[27%] shrink-0 motion-safe:animate-[foodReveal_1s_ease-out_both]">
+                                    <div className="rotate-[-7deg] overflow-hidden rounded-2xl shadow-xl shadow-amber-900/10 transition-all duration-500 hover:scale-110 hover:rotate-0 hover:shadow-2xl motion-safe:animate-[foodLeft_5s_ease-in-out_infinite]">
                                         <img
                                             src="/storage/menu-items/chicken-burger.jpg"
                                             alt="Freshly prepared chicken burger"
-                                            className="
-                                                aspect-[3/4] w-full object-cover
-                                                transition-transform duration-700
-                                                hover:scale-110
-                                            "
+                                            className="aspect-[3/4] w-full object-cover transition-transform duration-700 hover:scale-110"
                                         />
                                     </div>
                                 </div>
 
                                 {/* Center Image */}
-                                <div
-                                    className="
-                                        relative z-[1] w-[42%] shrink-0
-                                        overflow-hidden rounded-3xl
-                                        border-4 border-white bg-amber-100
-                                        shadow-2xl shadow-amber-900/20
-                                        transition-all duration-500
-                                        hover:z-10 hover:scale-105
-                                        hover:shadow-amber-900/30
-                                        motion-safe:animate-[foodCenter_5s_ease-in-out_infinite]
-                                    "
-                                >
+                                <div className="relative z-[1] w-[42%] shrink-0 overflow-hidden rounded-3xl border-4 border-white bg-amber-100 shadow-2xl shadow-amber-900/20 transition-all duration-500 hover:z-10 hover:scale-105 hover:shadow-amber-900/30 motion-safe:animate-[foodCenter_5s_ease-in-out_infinite]">
                                     <img
                                         src="/storage/menu-items/four-cheese-pizza.jpg"
                                         alt="Kaku's signature four-cheese pizza"
-                                        className="
-                                            aspect-[3/4] w-full object-cover
-                                            transition-transform duration-700
-                                            hover:scale-110
-                                        "
+                                        className="aspect-[3/4] w-full object-cover transition-transform duration-700 hover:scale-110"
                                     />
 
                                     {/* Image Caption */}
-                                    <div
-                                        className="
-                                            absolute inset-x-0 bottom-0
-                                            bg-gradient-to-t
-                                            from-stone-950/80 to-transparent
-                                            px-2 pb-3 pt-10 text-center
-                                            sm:px-4 sm:pb-5
-                                        "
-                                    >
+                                    <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-stone-950/80 to-transparent px-2 pt-10 pb-3 text-center sm:px-4 sm:pb-5">
                                         <p className="text-xs font-bold text-white sm:text-base">
                                             Chef's Special
                                         </p>
@@ -258,36 +165,17 @@ export default function HeroSection() {
                                 </div>
 
                                 {/* Right Image */}
-                                <div
-                                    className="
-                                        w-[27%] shrink-0 rotate-[7deg]
-                                        overflow-hidden rounded-2xl
-                                        shadow-xl shadow-amber-900/10
-                                        transition-all duration-500
-                                        hover:z-10 hover:scale-110
-                                        hover:rotate-0 hover:shadow-2xl
-                                        motion-safe:animate-[foodRight_5s_ease-in-out_infinite]
-                                    "
-                                >
+                                <div className="w-[27%] shrink-0 rotate-[7deg] overflow-hidden rounded-2xl shadow-xl shadow-amber-900/10 transition-all duration-500 hover:z-10 hover:scale-110 hover:rotate-0 hover:shadow-2xl motion-safe:animate-[foodRight_5s_ease-in-out_infinite]">
                                     <img
                                         src="/storage/menu-items/chicken-momo.jpg"
                                         alt="Delicious chicken momo"
-                                        className="
-                                            aspect-[3/4] w-full object-cover
-                                            transition-transform duration-700
-                                            hover:scale-110
-                                        "
+                                        className="aspect-[3/4] w-full object-cover transition-transform duration-700 hover:scale-110"
                                     />
                                 </div>
                             </div>
 
                             {/* Bottom Label */}
-                            <div
-                                className="
-                                    relative mt-8 text-center
-                                    motion-safe:animate-[foodReveal_1s_ease-out_0.6s_both]
-                                "
-                            >
+                            <div className="relative mt-8 text-center motion-safe:animate-[foodReveal_1s_ease-out_0.6s_both]">
                                 <p className="text-lg font-bold tracking-tight text-stone-900 sm:text-xl">
                                     A Taste Worth Sharing
                                 </p>
@@ -308,17 +196,13 @@ export default function HeroSection() {
                         {stats.map((stat, index) => (
                             <div
                                 key={index}
-                                className="
-                                    text-center
-                                    transition-transform duration-300
-                                    hover:-translate-y-1
-                                "
+                                className="text-center transition-transform duration-300 hover:-translate-y-1"
                             >
                                 <p className="text-3xl font-extrabold tracking-tight text-amber-300 sm:text-4xl">
                                     {stat.value}
                                 </p>
 
-                                <p className="mt-2 text-xs font-bold uppercase tracking-[0.16em] text-stone-300 sm:text-sm">
+                                <p className="mt-2 text-xs font-bold tracking-[0.16em] text-stone-300 uppercase sm:text-sm">
                                     {stat.label}
                                 </p>
                             </div>

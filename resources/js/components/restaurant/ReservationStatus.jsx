@@ -1,17 +1,11 @@
 import { router } from '@inertiajs/react';
 
-const statuses = [
-    'pending',
-    'confirmed',
-    'completed',
-    'cancelled',
-];
+const statuses = ['pending', 'confirmed', 'completed', 'cancelled'];
 
 export default function ReservationStatusSelect({ reservation }) {
     // console.log('Order:', reservation);
     // console.log('Order ID:', reservation.id);
     return (
-
         <select
             value={reservation.status}
             onChange={(event) => {
@@ -25,7 +19,7 @@ export default function ReservationStatusSelect({ reservation }) {
                     },
                 );
             }}
-            className="rounded-lg border border-stone-300  px-3 py-2 text-sm"
+            className="rounded-lg border border-stone-300 px-3 py-2 text-sm"
         >
             {statuses.map((status) => (
                 <option key={status} value={status}>
@@ -34,5 +28,4 @@ export default function ReservationStatusSelect({ reservation }) {
             ))}
         </select>
     );
-
 }

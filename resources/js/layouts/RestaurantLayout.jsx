@@ -6,9 +6,7 @@ export default function RestaurantLayout({ children }) {
         <div className="restaurant-shell flex min-h-screen flex-col">
             <Navbar />
 
-            <main className="flex-1">
-                {children}
-            </main>
+            <main className="flex-1">{children}</main>
 
             <Footer />
         </div>

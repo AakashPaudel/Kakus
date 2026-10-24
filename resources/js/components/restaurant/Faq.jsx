@@ -1,31 +1,25 @@
-
 import { useState } from 'react';
 
 const faqs = [
     {
         question: 'Can I make a reservation online?',
-        answer:
-            "Yes. You can easily reserve a table through our website by choosing your preferred date, time, number of guests, and available table.",
+        answer: 'Yes. You can easily reserve a table through our website by choosing your preferred date, time, number of guests, and available table.',
     },
     {
         question: 'Can I order food online?',
-        answer:
-            "Absolutely. Browse our menu, add your favorite dishes to the cart, and proceed to checkout to place your order.",
+        answer: 'Absolutely. Browse our menu, add your favorite dishes to the cart, and proceed to checkout to place your order.',
     },
     {
         question: 'Do you offer delivery?',
-        answer:
-            "Yes, we offer food delivery to selected areas. Delivery availability and charges may depend on your location.",
+        answer: 'Yes, we offer food delivery to selected areas. Delivery availability and charges may depend on your location.',
     },
     {
         question: 'Can I customize my order?',
-        answer:
-            "For selected dishes, you can include special requests or notes when placing your order. Our team will do their best to accommodate your preferences.",
+        answer: 'For selected dishes, you can include special requests or notes when placing your order. Our team will do their best to accommodate your preferences.',
     },
     {
         question: 'How can I contact Kaku’s Restaurant?',
-        answer:
-            "You can reach us through our contact page, where you can send us a message or find our restaurant contact information and location.",
+        answer: 'You can reach us through our contact page, where you can send us a message or find our restaurant contact information and location.',
     },
 ];
 
@@ -41,7 +35,7 @@ export default function FAQSection() {
             <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
                 {/* Heading */}
                 <div className="mb-12 text-center">
-                    <p className="text-sm font-semibold uppercase tracking-[0.2em] text-amber-600">
+                    <p className="text-sm font-semibold tracking-[0.2em] text-amber-600 uppercase">
                         Frequently Asked Questions
                     </p>
 

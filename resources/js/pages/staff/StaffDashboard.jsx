@@ -1,6 +1,6 @@
 import { Head } from '@inertiajs/react';
 
-import StatCard  from '@/components/dashboard/StatCard';
+import StatCard from '@/components/dashboard/StatCard';
 import RecentOrders from '@/components/dashboard/RecentOrders';
 import RecentReservations from '@/components/dashboard/RecentReservations';
 import QuickActions from '@/components/dashboard/QuickActions';
@@ -104,10 +104,7 @@ export default function StaffDashboard({
                 <div className="grid gap-6 xl:grid-cols-2">
                     <RecentOrders orders={recentOrders} />
 
-
-                    <RecentReservations
-                        reservations={recentReservations}
-                    />
+                    <RecentReservations reservations={recentReservations} />
                 </div>
 
                 {/* Quick Actions */}

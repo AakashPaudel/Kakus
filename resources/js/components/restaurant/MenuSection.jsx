@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { Search, X, UtensilsCrossed } from 'lucide-react';
 
@@ -16,17 +15,14 @@ export default function Menu({ items = [], categories = [] }) {
             selectedCategory === null ||
             String(item.category_id) === String(selectedCategory);
 
-        const matchesName = item.name
-            ?.toLowerCase()
-            .includes(query);
+        const matchesName = item.name?.toLowerCase().includes(query);
 
         const matchesCategoryName = item.category?.name
             ?.toLowerCase()
             .includes(query);
 
         return (
-            matchesCategory &&
-            (!query || matchesName || matchesCategoryName)
+            matchesCategory && (!query || matchesName || matchesCategoryName)
         );
     });
 
@@ -39,28 +35,22 @@ export default function Menu({ items = [], categories = [] }) {
         searchTerm.trim() !== '' || selectedCategory !== null;
 
     return (
-
         <main className="restaurant-shell min-h-screen">
             <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 sm:py-14 lg:px-8 lg:py-16">
-
-
                 {/* Page heading */}
                 <header className="mb-8 text-center sm:mb-10">
-                    <span className="mb-3 inline-flex items-center gap-2 rounded-full bg-[var(--restaurant-accent-soft)] px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.18em] text-amber-800">
+                    <span className="mb-3 inline-flex items-center gap-2 rounded-full bg-[var(--restaurant-accent-soft)] px-4 py-1.5 text-xs font-semibold tracking-[0.18em] text-amber-800 uppercase">
                         <UtensilsCrossed size={14} />
                         Freshly prepared
                     </span>
 
-                    <h1 className="text-3xl font-bold text-stone-800 tracking-tight sm:text-4xl lg:text-5xl">
-                        Explore Our{' '}
-                        <span className="text-amber-700">
-                            Menu
-                        </span>
+                    <h1 className="text-3xl font-bold tracking-tight text-stone-800 sm:text-4xl lg:text-5xl">
+                        Explore Our <span className="text-amber-700">Menu</span>
                     </h1>
 
-                    <p className="mx-auto mt-4 max-w-2xl text-sm leading-6 text-stone-600 dark:text-stone-400 sm:text-base">
-                        Discover your next favourite dish. Search by food
-                        name or category to find exactly what you are craving.
+                    <p className="mx-auto mt-4 max-w-2xl text-sm leading-6 text-stone-600 sm:text-base dark:text-stone-400">
+                        Discover your next favourite dish. Search by food name
+                        or category to find exactly what you are craving.
                     </p>
                 </header>
 
@@ -81,7 +71,7 @@ export default function Menu({ items = [], categories = [] }) {
                             <Search
                                 size={20}
                                 aria-hidden="true"
-                                className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-stone-400"
+                                className="pointer-events-none absolute top-1/2 left-4 -translate-y-1/2 text-stone-400"
                             />
 
                             <input
@@ -92,7 +82,7 @@ export default function Menu({ items = [], categories = [] }) {
                                     setSearchTerm(event.target.value)
                                 }
                                 placeholder="Search food or category..."
-                                className="w-full rounded-xl border border-stone-300 bg-[var(--restaurant-accent-soft)] py-3.5 pl-12 pr-12 text-sm text-stone-900 outline-none transition placeholder:text-stone-400 focus:border-amber-500 focus:ring-4 focus:ring-amber-500/10 "
+                                className="w-full rounded-xl border border-stone-300 bg-[var(--restaurant-accent-soft)] py-3.5 pr-12 pl-12 text-sm text-stone-900 transition outline-none placeholder:text-stone-400 focus:border-amber-500 focus:ring-4 focus:ring-amber-500/10"
                             />
 
                             {searchTerm && (
@@ -100,7 +90,7 @@ export default function Menu({ items = [], categories = [] }) {
                                     type="button"
                                     onClick={() => setSearchTerm('')}
                                     aria-label="Clear search"
-                                    className="absolute right-3 top-1/2 flex size-8 -translate-y-1/2 items-center justify-center rounded-lg text-stone-500 transition hover:bg-stone-200 hover:text-stone-900 dark:hover:bg-stone-800 dark:hover:text-stone-100"
+                                    className="absolute top-1/2 right-3 flex size-8 -translate-y-1/2 items-center justify-center rounded-lg text-stone-500 transition hover:bg-stone-200 hover:text-stone-900 dark:hover:bg-stone-800 dark:hover:text-stone-100"
                                 >
                                     <X size={17} />
                                 </button>
@@ -151,9 +141,7 @@ export default function Menu({ items = [], categories = [] }) {
 
                             <p className="mt-1 text-sm text-stone-500 dark:text-stone-400">
                                 {filteredItems.length}{' '}
-                                {filteredItems.length === 1
-                                    ? 'dish'
-                                    : 'dishes'}{' '}
+                                {filteredItems.length === 1 ? 'dish' : 'dishes'}{' '}
                                 found
                             </p>
                         </div>
@@ -162,15 +150,9 @@ export default function Menu({ items = [], categories = [] }) {
                     {filteredItems.length > 0 ? (
                         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
                             {filteredItems.map((item) => (
-                                <MenuCard
-                                    key={item.id}
-                                    item={item}
-                                />
-                            ))
-                        }
-
+                                <MenuCard key={item.id} item={item} />
+                            ))}
                         </div>
-                            
                     ) : (
                         <div className="rounded-2xl border border-dashed border-stone-300 bg-white px-5 py-14 text-center dark:border-stone-700 dark:bg-stone-900">
                             <div className="mx-auto flex size-14 items-center justify-center rounded-full bg-[var(--restaurant-accent-soft)] text-amber-600">
@@ -183,8 +165,8 @@ export default function Menu({ items = [], categories = [] }) {
 
                             <p className="mx-auto mt-2 max-w-md text-sm leading-6 text-stone-500 dark:text-stone-400">
                                 We couldn't find any dishes matching your
-                                current search and category. Try another
-                                keyword or clear your filters.
+                                current search and category. Try another keyword
+                                or clear your filters.
                             </p>
 
                             {hasActiveFilters && (
@@ -201,6 +183,5 @@ export default function Menu({ items = [], categories = [] }) {
                 </section>
             </div>
         </main>
-
     );
 }

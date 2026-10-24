@@ -1,18 +1,17 @@
 import { router } from '@inertiajs/react';
 
 const statuses = [
-        'pending',
-        'confirmed',
-        'preparing',
-        'ready',
-        'completed',
-        'cancelled',
-    ];
+    'pending',
+    'confirmed',
+    'preparing',
+    'ready',
+    'completed',
+    'cancelled',
+];
 
 export default function OrderStatusSelect({ order }) {
     // console.log('Order:', order);
     // console.log('Order ID:', order.id);
-    
 
     return (
         <select
@@ -28,7 +27,7 @@ export default function OrderStatusSelect({ order }) {
                     { preserveScroll: true },
                 );
             }}
-            className="rounded-lg border border-stone-300  px-3 py-2 text-sm"
+            className="rounded-lg border border-stone-300 px-3 py-2 text-sm"
         >
             {statuses.map((status) => (
                 <option key={status} value={status}>

@@ -1,4 +1,3 @@
-
 import { Link } from '@inertiajs/react';
 import {
     ArrowUpRight,
@@ -36,7 +35,7 @@ const actions = [
 
 export default function QuickActions() {
     return (
-        <section className="overflow-hidden rounded-2xl border border-stone-200 bg-white p-5 shadow-sm transition-shadow duration-300 hover:shadow-md dark:border-stone-800 dark:bg-stone-900 sm:p-6">
+        <section className="overflow-hidden rounded-2xl border border-stone-200 bg-white p-5 shadow-sm transition-shadow duration-300 hover:shadow-md sm:p-6 dark:border-stone-800 dark:bg-stone-900">
             {/* Section Header */}
             <div className="mb-6">
                 <h2 className="text-lg font-semibold tracking-tight text-stone-900 dark:text-stone-100">
@@ -57,7 +56,7 @@ export default function QuickActions() {
                         <Link
                             key={action.title}
                             href={action.href}
-                            className="group relative flex min-h-32 flex-col justify-between overflow-hidden rounded-xl border border-stone-200 bg-white p-4 transition-all duration-300 hover:-translate-y-0.5 hover:border-orange-300 hover:bg-orange-50/40 hover:shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-500 focus-visible:ring-offset-2 dark:border-stone-700 dark:bg-stone-900 dark:hover:border-orange-500/50 dark:hover:bg-stone-800 dark:focus-visible:ring-offset-stone-900 sm:p-5"
+                            className="group relative flex min-h-32 flex-col justify-between overflow-hidden rounded-xl border border-stone-200 bg-white p-4 transition-all duration-300 hover:-translate-y-0.5 hover:border-orange-300 hover:bg-orange-50/40 hover:shadow-sm focus-visible:ring-2 focus-visible:ring-orange-500 focus-visible:ring-offset-2 focus-visible:outline-none sm:p-5 dark:border-stone-700 dark:bg-stone-900 dark:hover:border-orange-500/50 dark:hover:bg-stone-800 dark:focus-visible:ring-offset-stone-900"
                         >
                             {/* Icon and Arrow */}
                             <div className="mb-5 flex items-start justify-between gap-3">

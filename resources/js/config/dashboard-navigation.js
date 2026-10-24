@@ -1,4 +1,3 @@
-
 export const dashboardNavigation = {
     admin: [
         { title: 'Overview', href: '/dashboard' },

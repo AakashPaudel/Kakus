@@ -1,17 +1,11 @@
-
 import { Link } from '@inertiajs/react';
-import {
-    ArrowRight,
-    AlertTriangle,
-    PackageCheck,
-    Package,
-} from 'lucide-react';
+import { ArrowRight, AlertTriangle, PackageCheck, Package } from 'lucide-react';
 
 export default function LowStockItems({ items = [] }) {
     return (
         <section className="overflow-hidden rounded-2xl border border-stone-200 bg-white shadow-sm transition-shadow duration-300 hover:shadow-md dark:border-stone-800 dark:bg-stone-900">
             {/* Header */}
-            <div className="flex items-center justify-between gap-4 border-b border-stone-100 p-5 dark:border-stone-800 sm:p-6">
+            <div className="flex items-center justify-between gap-4 border-b border-stone-100 p-5 sm:p-6 dark:border-stone-800">
                 <div className="flex min-w-0 items-center gap-3">
                     <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-red-50 text-red-600 dark:bg-red-500/10 dark:text-red-400">
                         <AlertTriangle size={21} />
@@ -25,7 +19,7 @@ export default function LowStockItems({ items = [] }) {
 
                             {items.length > 0 && (
                                 <span className="inline-flex items-center rounded-full bg-red-50 px-2.5 py-0.5 text-xs font-semibold text-red-700 dark:bg-red-500/10 dark:text-red-400">
-                                    {items.length}{" "}
+                                    {items.length}{' '}
                                     {items.length === 1 ? 'item' : 'items'}
                                 </span>
                             )}
@@ -53,7 +47,7 @@ export default function LowStockItems({ items = [] }) {
                     items.map((item) => (
                         <div
                             key={item.id}
-                            className="group flex items-center justify-between gap-4 p-5 transition-colors duration-200 hover:bg-stone-50/80 dark:hover:bg-stone-800/50 sm:px-6"
+                            className="group flex items-center justify-between gap-4 p-5 transition-colors duration-200 hover:bg-stone-50/80 sm:px-6 dark:hover:bg-stone-800/50"
                         >
                             {/* Item Details */}
                             <div className="flex min-w-0 items-center gap-3">
@@ -77,7 +71,7 @@ export default function LowStockItems({ items = [] }) {
 
                             {/* Stock Status */}
                             <div className="shrink-0 text-right">
-                                <span className="inline-flex items-center gap-1.5 rounded-lg bg-red-50 px-2.5 py-1.5 text-sm font-bold tabular-nums text-red-700 dark:bg-red-500/10 dark:text-red-400">
+                                <span className="inline-flex items-center gap-1.5 rounded-lg bg-red-50 px-2.5 py-1.5 text-sm font-bold text-red-700 tabular-nums dark:bg-red-500/10 dark:text-red-400">
                                     <AlertTriangle size={14} />
                                     {item.quantity} left
                                 </span>
@@ -100,8 +94,8 @@ export default function LowStockItems({ items = [] }) {
                         </h3>
 
                         <p className="mt-1 max-w-xs text-sm leading-6 text-stone-500 dark:text-stone-400">
-                            No low-stock items to worry about right now.
-                            Your inventory is looking healthy.
+                            No low-stock items to worry about right now. Your
+                            inventory is looking healthy.
                         </p>
 
                         <Link
@@ -117,7 +111,7 @@ export default function LowStockItems({ items = [] }) {
 
             {/* Footer */}
             {items.length > 0 && (
-                <div className="flex items-center justify-between gap-3 border-t border-stone-100 bg-stone-50/70 px-5 py-3.5 dark:border-stone-800 dark:bg-stone-800/30 sm:px-6">
+                <div className="flex items-center justify-between gap-3 border-t border-stone-100 bg-stone-50/70 px-5 py-3.5 sm:px-6 dark:border-stone-800 dark:bg-stone-800/30">
                     <p className="text-xs text-stone-500 dark:text-stone-400">
                         Inventory attention required
                     </p>

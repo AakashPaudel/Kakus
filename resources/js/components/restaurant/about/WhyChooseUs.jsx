@@ -3,18 +3,15 @@ import { useState } from 'react';
 const reasons = [
     {
         question: 'Why are your ingredients special?',
-        answer:
-            'We focus on fresh, carefully selected ingredients so that every dish has the quality and flavor our guests expect.',
+        answer: 'We focus on fresh, carefully selected ingredients so that every dish has the quality and flavor our guests expect.',
     },
     {
         question: 'How do you maintain food quality?',
-        answer:
-            'Our dishes are prepared with attention to consistency, cleanliness, and careful preparation from the kitchen to your table.',
+        answer: 'Our dishes are prepared with attention to consistency, cleanliness, and careful preparation from the kitchen to your table.',
     },
     {
         question: "What makes dining at Kaku's different?",
-        answer:
-            "We combine thoughtfully prepared food with a welcoming atmosphere, making Kaku's a place to enjoy both the meal and the moment.",
+        answer: "We combine thoughtfully prepared food with a welcoming atmosphere, making Kaku's a place to enjoy both the meal and the moment.",
     },
 ];
 
@@ -28,9 +25,8 @@ export default function WhyChooseUs() {
     return (
         <section className="py-20">
             <div className="mx-auto max-w-3xl px-4">
-
                 <div className="mb-10 text-center">
-                    <p className="text-sm font-semibold uppercase tracking-widest text-stone-500">
+                    <p className="text-sm font-semibold tracking-widest text-stone-500 uppercase">
                         Why Kaku's
                     </p>
 
@@ -64,7 +60,7 @@ export default function WhyChooseUs() {
                                 </button>
 
                                 {isOpen && (
-                                    <div className="pb-5 pr-8 text-stone-600">
+                                    <div className="pr-8 pb-5 text-stone-600">
                                         {reason.answer}
                                     </div>
                                 )}
@@ -72,7 +68,6 @@ export default function WhyChooseUs() {
                         );
                     })}
                 </div>
-
             </div>
         </section>
     );

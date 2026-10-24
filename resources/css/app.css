@@ -227,7 +227,8 @@
 }
 
 @keyframes foodLeft {
-    0%, 100% {
+    0%,
+    100% {
         transform: translateY(0) rotate(-7deg);
         opacity: 0.8;
     }
@@ -238,7 +239,8 @@
 }
 
 @keyframes foodCenter {
-    0%, 100% {
+    0%,
+    100% {
         transform: translateY(0) scale(1);
         opacity: 1;
     }
@@ -249,7 +251,8 @@
 }
 
 @keyframes foodRight {
-    0%, 100% {
+    0%,
+    100% {
         transform: translateY(-4px) rotate(7deg);
         opacity: 0.8;
     }
@@ -260,7 +263,8 @@
 }
 
 @keyframes ambientGlow {
-    0%, 100% {
+    0%,
+    100% {
         opacity: 0.45;
         scale: 1;
     }

@@ -7,7 +7,7 @@ export default function StatCard({ title, value, description, icon: Icon }) {
                         {title}
                     </p>
 
-                    <p className="mt-3 break-words text-2xl font-bold tracking-tight text-stone-900 dark:text-stone-100">
+                    <p className="mt-3 text-2xl font-bold tracking-tight break-words text-stone-900 dark:text-stone-100">
                         {value}
                     </p>
 

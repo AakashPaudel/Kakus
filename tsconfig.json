@@ -121,6 +121,10 @@
         "resources/js/pages/cart/Cart.jsx",
         "resources/js/pages/orders/Index.jsx",
         "resources/js/pages/orders/ShowOrder.jsx",
-        "resources/js/layouts/RestaurantLayout.jsx"
-, "resources/js/pages/menu/Menu.jsx", "resources/js/pages/Home.jsx", "resources/js/pages/customer/CustomerDashboard.jsx", "resources/js/pages/staff/StaffDashboard.jsx"    ]
+        "resources/js/layouts/RestaurantLayout.jsx",
+        "resources/js/pages/menu/Menu.jsx",
+        "resources/js/pages/Home.jsx",
+        "resources/js/pages/customer/CustomerDashboard.jsx",
+        "resources/js/pages/staff/StaffDashboard.jsx"
+    ]
 }

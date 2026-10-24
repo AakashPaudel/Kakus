@@ -24,10 +24,10 @@ export default function FlashMessage() {
         return () => clearTimeout(timer);
     }, [flash?.id]);
 
-    if (!message) return null;  
+    if (!message) return null;
 
     return (
-        <div className="fixed right-5 top-5 z-50 rounded-lg bg-green-600 px-4 py-3 text-white shadow-lg">
+        <div className="fixed top-5 right-5 z-50 rounded-lg bg-green-600 px-4 py-3 text-white shadow-lg">
             {message}
         </div>
     );

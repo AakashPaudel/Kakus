@@ -28,12 +28,11 @@ export default function Cart({ cart }) {
 
     return (
         <>
-
             <section className="bg-amber-50 py-12">
                 <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                     {/* Header */}
                     <div className="mb-10">
-                        <p className="text-sm font-semibold uppercase tracking-widest text-amber-700">
+                        <p className="text-sm font-semibold tracking-widest text-amber-700 uppercase">
                             Your order
                         </p>
 
@@ -42,7 +41,8 @@ export default function Cart({ cart }) {
                         </h1>
 
                         <p className="mt-2 text-stone-600">
-                            Review your selected dishes before placing your order.
+                            Review your selected dishes before placing your
+                            order.
                         </p>
                     </div>
 
@@ -54,7 +54,8 @@ export default function Cart({ cart }) {
                                 </h2>
 
                                 <p className="mt-3 text-stone-600">
-                                    Looks like you haven't added any delicious dishes yet.
+                                    Looks like you haven't added any delicious
+                                    dishes yet.
                                 </p>
 
                                 <Link
@@ -82,7 +83,8 @@ export default function Cart({ cart }) {
                                                 </h2>
 
                                                 <p className="mt-1 text-sm text-stone-500">
-                                                    Rs. {cartItem.unit_price} per item
+                                                    Rs. {cartItem.unit_price}{' '}
+                                                    per item
                                                 </p>
                                             </div>
 
@@ -93,10 +95,13 @@ export default function Cart({ cart }) {
                                                     onClick={() =>
                                                         updateQuantity(
                                                             cartItem,
-                                                            cartItem.quantity - 1,
+                                                            cartItem.quantity -
+                                                                1,
                                                         )
                                                     }
-                                                    disabled={cartItem.quantity <= 1}
+                                                    disabled={
+                                                        cartItem.quantity <= 1
+                                                    }
                                                     className="flex h-9 w-9 items-center justify-center rounded-full border border-stone-300 text-lg text-stone-700 transition hover:bg-stone-100 disabled:cursor-not-allowed disabled:opacity-40"
                                                 >
                                                     −
@@ -111,7 +116,8 @@ export default function Cart({ cart }) {
                                                     onClick={() =>
                                                         updateQuantity(
                                                             cartItem,
-                                                            cartItem.quantity + 1,
+                                                            cartItem.quantity +
+                                                                1,
                                                         )
                                                     }
                                                     className="flex h-9 w-9 items-center justify-center rounded-full bg-amber-500 text-lg text-white transition hover:bg-amber-600"
@@ -129,7 +135,9 @@ export default function Cart({ cart }) {
 
                                             <button
                                                 type="button"
-                                                onClick={() => removeItem(cartItem)}
+                                                onClick={() =>
+                                                    removeItem(cartItem)
+                                                }
                                                 className="text-sm font-medium text-red-600 transition hover:text-red-700"
                                             >
                                                 Remove
@@ -191,7 +199,6 @@ export default function Cart({ cart }) {
                     )}
                 </div>
             </section>
-
         </>
     );
 }

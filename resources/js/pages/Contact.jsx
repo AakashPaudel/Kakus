@@ -20,10 +20,9 @@ export default function ContactSection() {
     return (
         <section className="restaurant-shell py-20">
             <div className="mx-auto max-w-7xl py-4 sm:px-6 lg:px-8">
-
                 {/* Heading */}
                 <div className="mx-auto mb-12 max-w-2xl text-center">
-                    <p className="text-sm font-semibold uppercase tracking-[0.2em] text-amber-700">
+                    <p className="text-sm font-semibold tracking-[0.2em] text-amber-700 uppercase">
                         Contact Us
                     </p>
 
@@ -32,27 +31,25 @@ export default function ContactSection() {
                     </h2>
 
                     <p className="mt-4 leading-7 text-stone-600">
-                        Have a question, suggestion, or simply want to say hello?
-                        Send us a message and our team will get back to you.
+                        Have a question, suggestion, or simply want to say
+                        hello? Send us a message and our team will get back to
+                        you.
                     </p>
                 </div>
 
                 {/* Main content */}
                 <div className="restaurant-surface grid overflow-hidden rounded-3xl shadow-sm lg:grid-cols-5">
-
                     {/* Contact information */}
                     <div className="bg-stone-900 p-8 text-white sm:p-10 lg:col-span-2">
-                        <h3 className="text-2xl font-semibold">
-                            Let's talk
-                        </h3>
+                        <h3 className="text-2xl font-semibold">Let's talk</h3>
 
                         <p className="mt-3 leading-7 text-stone-300">
-                            We're here to help with reservations, menu questions,
-                            feedback, or anything else you'd like to ask.
+                            We're here to help with reservations, menu
+                            questions, feedback, or anything else you'd like to
+                            ask.
                         </p>
 
                         <div className="mt-10 space-y-7">
-
                             <div>
                                 <p className="text-sm text-amber-300">
                                     Visit us
@@ -92,18 +89,14 @@ export default function ContactSection() {
                                     10:00 AM – 10:00 PM
                                 </p>
                             </div>
-
                         </div>
                     </div>
 
                     {/* Contact form */}
                     <div className="p-8 sm:p-10 lg:col-span-3">
-
                         <form onSubmit={submit} className="space-y-6">
-
                             {/* Name + Email */}
                             <div className="grid gap-6 sm:grid-cols-2">
-
                                 <div>
                                     <label
                                         htmlFor="name"
@@ -120,7 +113,7 @@ export default function ContactSection() {
                                             setData('name', event.target.value)
                                         }
                                         placeholder="John Doe"
-                                        className="w-full rounded-xl border border-stone-300 bg-white px-4 py-3 text-stone-900 outline-none transition focus:border-amber-500 focus:ring-2 focus:ring-amber-500/20"
+                                        className="w-full rounded-xl border border-stone-300 bg-white px-4 py-3 text-stone-900 transition outline-none focus:border-amber-500 focus:ring-2 focus:ring-amber-500/20"
                                     />
 
                                     {errors.name && (
@@ -146,7 +139,7 @@ export default function ContactSection() {
                                             setData('email', event.target.value)
                                         }
                                         placeholder="john@example.com"
-                                        className="w-full rounded-xl border border-stone-300 bg-white px-4 py-3 text-stone-900 outline-none transition focus:border-amber-500 focus:ring-2 focus:ring-amber-500/20"
+                                        className="w-full rounded-xl border border-stone-300 bg-white px-4 py-3 text-stone-900 transition outline-none focus:border-amber-500 focus:ring-2 focus:ring-amber-500/20"
                                     />
 
                                     {errors.email && (
@@ -155,7 +148,6 @@ export default function ContactSection() {
                                         </p>
                                     )}
                                 </div>
-
                             </div>
 
                             {/* Subject */}
@@ -175,7 +167,7 @@ export default function ContactSection() {
                                         setData('subject', event.target.value)
                                     }
                                     placeholder="How can we help?"
-                                    className="w-full rounded-xl border border-stone-300 bg-white px-4 py-3 text-stone-900 outline-none transition focus:border-amber-500 focus:ring-2 focus:ring-amber-500/20"
+                                    className="w-full rounded-xl border border-stone-300 bg-white px-4 py-3 text-stone-900 transition outline-none focus:border-amber-500 focus:ring-2 focus:ring-amber-500/20"
                                 />
 
                                 {errors.subject && (
@@ -202,7 +194,7 @@ export default function ContactSection() {
                                         setData('message', event.target.value)
                                     }
                                     placeholder="Write your message..."
-                                    className="w-full resize-none rounded-xl border border-stone-300 bg-white px-4 py-3 text-stone-900 outline-none transition focus:border-amber-500 focus:ring-2 focus:ring-amber-500/20"
+                                    className="w-full resize-none rounded-xl border border-stone-300 bg-white px-4 py-3 text-stone-900 transition outline-none focus:border-amber-500 focus:ring-2 focus:ring-amber-500/20"
                                 />
 
                                 {errors.message && (
@@ -218,16 +210,11 @@ export default function ContactSection() {
                                 disabled={processing}
                                 className="restaurant-accent-button w-full rounded-xl px-6 py-3.5 font-semibold disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto"
                             >
-                                {processing
-                                    ? 'Sending...'
-                                    : 'Send Message'}
+                                {processing ? 'Sending...' : 'Send Message'}
                             </button>
-
                         </form>
                     </div>
-
                 </div>
-
             </div>
             <ContactCTA />
         </section>

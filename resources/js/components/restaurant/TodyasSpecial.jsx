@@ -1,4 +1,3 @@
-
 import { Link } from '@inertiajs/react';
 
 export default function TodaysSpecialSection({ special = [] }) {
@@ -10,7 +9,7 @@ export default function TodaysSpecialSection({ special = [] }) {
             >
                 <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                     <div className="restaurant-surface rounded-3xl px-6 py-14 text-center">
-                        <p className="text-sm font-bold uppercase tracking-[0.2em] text-amber-800">
+                        <p className="text-sm font-bold tracking-[0.2em] text-amber-800 uppercase">
                             Today's Special
                         </p>
 
@@ -22,8 +21,8 @@ export default function TodaysSpecialSection({ special = [] }) {
                         </h2>
 
                         <p className="mx-auto mt-3 max-w-lg text-sm leading-7 text-stone-600 sm:text-base">
-                            We're preparing our next special dish.
-                            Please explore our menu while you wait.
+                            We're preparing our next special dish. Please
+                            explore our menu while you wait.
                         </p>
 
                         <Link
@@ -38,9 +37,7 @@ export default function TodaysSpecialSection({ special = [] }) {
         );
     }
 
-    const item = special?.menu_item
-        ?? special?.menuItem
-        ?? special;
+    const item = special?.menu_item ?? special?.menuItem ?? special;
 
     const imageUrl = item?.image_url;
 
@@ -52,7 +49,7 @@ export default function TodaysSpecialSection({ special = [] }) {
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                 {/* Section Heading */}
                 <div className="mb-10 max-w-2xl sm:mb-12">
-                    <span className="inline-flex items-center gap-2 rounded-full border border-amber-200 bg-white px-4 py-2 text-xs font-bold uppercase tracking-[0.18em] text-amber-900 sm:text-sm">
+                    <span className="inline-flex items-center gap-2 rounded-full border border-amber-200 bg-white px-4 py-2 text-xs font-bold tracking-[0.18em] text-amber-900 uppercase sm:text-sm">
                         {/* <span aria-hidden="true">✦</span> */}
                         Today's Special
                     </span>
@@ -65,8 +62,8 @@ export default function TodaysSpecialSection({ special = [] }) {
                     </h2>
 
                     <p className="mt-4 max-w-xl text-sm leading-7 text-stone-600 sm:text-base">
-                        Handpicked for today. Prepared with care.
-                        Made to be remembered.
+                        Handpicked for today. Prepared with care. Made to be
+                        remembered.
                     </p>
                 </div>
 
@@ -88,18 +85,18 @@ export default function TodaysSpecialSection({ special = [] }) {
                             </div>
                         )}
 
-                        <div className="absolute left-4 top-4 rounded-full bg-white/95 px-4 py-2 text-xs font-bold uppercase tracking-wider text-amber-900 shadow-sm sm:left-6 sm:top-6">
+                        <div className="absolute top-4 left-4 rounded-full bg-white/95 px-4 py-2 text-xs font-bold tracking-wider text-amber-900 uppercase shadow-sm sm:top-6 sm:left-6">
                             Chef's Special
                         </div>
                     </div>
 
                     {/* Dish Information */}
                     <div className="flex flex-col justify-center p-6 sm:p-9 lg:p-12">
-                        <p className="text-xs font-bold uppercase tracking-[0.2em] text-amber-800">
+                        <p className="text-xs font-bold tracking-[0.2em] text-amber-800 uppercase">
                             Selected for today
                         </p>
 
-                        <h3 className="mt-4 text-3xl font-extrabold leading-tight tracking-tight text-stone-950 sm:text-4xl">
+                        <h3 className="mt-4 text-3xl leading-tight font-extrabold tracking-tight text-stone-950 sm:text-4xl">
                             {item.name}
                         </h3>
 
@@ -137,8 +134,8 @@ export default function TodaysSpecialSection({ special = [] }) {
                         </div>
 
                         <p className="mt-6 text-xs leading-6 text-stone-500">
-                            Available as part of our scheduled daily
-                            specials, while supplies last.
+                            Available as part of our scheduled daily specials,
+                            while supplies last.
                         </p>
                     </div>
                 </div>

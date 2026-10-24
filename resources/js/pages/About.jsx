@@ -1,4 +1,4 @@
-import WhyChooseUs from "../components/restaurant/about/WhyChooseUs";
+import WhyChooseUs from '../components/restaurant/about/WhyChooseUs';
 export default function About({ featuredItem }) {
     const stats = [
         {
@@ -22,7 +22,7 @@ export default function About({ featuredItem }) {
         <>
             <section className="restaurant-shell py-20">
                 <div className="mx-auto max-w-4xl px-4 text-center">
-                    <p className="text-sm font-semibold uppercase tracking-widest text-amber-700">
+                    <p className="text-sm font-semibold tracking-widest text-amber-700 uppercase">
                         About Kaku's
                     </p>
 
@@ -31,15 +31,15 @@ export default function About({ featuredItem }) {
                     </h1>
 
                     <p className="mx-auto mt-6 max-w-2xl text-lg leading-8 text-stone-600">
-                        Kaku's is built around the simple idea that great food should
-                        bring people together. From carefully prepared dishes to a
-                        welcoming dining experience, every detail matters.
+                        Kaku's is built around the simple idea that great food
+                        should bring people together. From carefully prepared
+                        dishes to a welcoming dining experience, every detail
+                        matters.
                     </p>
                 </div>
             </section>
             <section className="restaurant-shell py-16">
                 <div className="mx-auto grid max-w-7xl gap-10 px-4 md:grid-cols-2">
-
                     <div className="overflow-hidden rounded-2xl">
                         <img
                             src={
@@ -53,7 +53,7 @@ export default function About({ featuredItem }) {
                     </div>
 
                     <div className="flex flex-col justify-center">
-                        <p className="text-sm font-semibold uppercase tracking-widest text-amber-700">
+                        <p className="text-sm font-semibold tracking-widest text-amber-700 uppercase">
                             From Our Kitchen
                         </p>
 
@@ -69,7 +69,6 @@ export default function About({ featuredItem }) {
                             Rs. {featuredItem?.price}
                         </p>
                     </div>
-
                 </div>
             </section>
             <section className="restaurant-shell py-16">
@@ -80,7 +79,7 @@ export default function About({ featuredItem }) {
                                 <p className="text-3xl font-bold text-stone-900">
                                     {stat.value}
                                 </p>
-                                <p className="mt-2 text-sm font-semibold uppercase tracking-widest text-amber-700">
+                                <p className="mt-2 text-sm font-semibold tracking-widest text-amber-700 uppercase">
                                     {stat.label}
                                 </p>
                             </div>
@@ -90,6 +89,5 @@ export default function About({ featuredItem }) {
             </section>
             <WhyChooseUs />
         </>
-
-    )
-}   
+    );
+}

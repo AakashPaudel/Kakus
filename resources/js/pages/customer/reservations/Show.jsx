@@ -1,4 +1,3 @@
-
 import { Head, Link } from '@inertiajs/react';
 import reservations from '@/routes/reservations';
 import customerReservations from '@/routes/customer/reservations';
@@ -51,10 +50,10 @@ function Detail({ label, value, icon }) {
             </div>
 
             <div className="min-w-0 pt-0.5">
-                <p className="text-xs font-medium uppercase tracking-wider text-stone-500 dark:text-stone-400">
+                <p className="text-xs font-medium tracking-wider text-stone-500 uppercase dark:text-stone-400">
                     {label}
                 </p>
-                <p className="mt-1 break-words text-sm font-semibold text-stone-900 sm:text-base dark:text-stone-100">
+                <p className="mt-1 text-sm font-semibold break-words text-stone-900 sm:text-base dark:text-stone-100">
                     {value}
                 </p>
             </div>
@@ -73,10 +72,7 @@ function CalendarIcon() {
             aria-hidden="true"
         >
             <rect x="3.5" y="5" width="17" height="15" rx="2" />
-            <path
-                strokeLinecap="round"
-                d="M7.5 3.5v3M16.5 3.5v3M3.5 9.5h17"
-            />
+            <path strokeLinecap="round" d="M7.5 3.5v3M16.5 3.5v3M3.5 9.5h17" />
         </svg>
     );
 }
@@ -92,7 +88,11 @@ function ClockIcon() {
             aria-hidden="true"
         >
             <circle cx="12" cy="12" r="8.5" />
-            <path strokeLinecap="round" strokeLinejoin="round" d="M12 7v5l3 2" />
+            <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M12 7v5l3 2"
+            />
         </svg>
     );
 }
@@ -178,7 +178,7 @@ export default function Show({ reservation }) {
                     {/* Page heading */}
                     <header className="mt-7 flex flex-col gap-4 border-b border-stone-200 pb-6 sm:flex-row sm:items-center sm:justify-between dark:border-stone-800">
                         <div>
-                            <p className="text-xs font-bold uppercase tracking-[0.18em] text-amber-700 dark:text-amber-400">
+                            <p className="text-xs font-bold tracking-[0.18em] text-amber-700 uppercase dark:text-amber-400">
                                 Reservation details
                             </p>
 
@@ -217,7 +217,9 @@ export default function Show({ reservation }) {
                             <div className="grid gap-x-8 gap-y-7 p-5 sm:grid-cols-2 sm:p-7">
                                 <Detail
                                     label="Reservation date"
-                                    value={formatDate(reservation.reservation_date)}
+                                    value={formatDate(
+                                        reservation.reservation_date,
+                                    )}
                                     icon={<CalendarIcon />}
                                 />
 
@@ -261,7 +263,8 @@ export default function Show({ reservation }) {
                                 </div>
                             ) : (
                                 <p className="mt-4 rounded-xl border border-dashed border-stone-300 px-4 py-5 text-sm text-stone-500 dark:border-stone-700 dark:text-stone-400">
-                                    No special requests were added to this reservation.
+                                    No special requests were added to this
+                                    reservation.
                                 </p>
                             )}
                         </section>
@@ -269,8 +272,8 @@ export default function Show({ reservation }) {
                         {/* Actions */}
                         <div className="flex flex-col-reverse gap-3 border-t border-stone-200 pt-6 sm:flex-row sm:items-center sm:justify-between dark:border-stone-800">
                             <p className="text-xs leading-5 text-stone-500 dark:text-stone-400">
-                                Need to make a change? Review your booking details
-                                before updating your reservation.
+                                Need to make a change? Review your booking
+                                details before updating your reservation.
                             </p>
 
                             {canEdit && (

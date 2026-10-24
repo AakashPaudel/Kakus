@@ -8,24 +8,27 @@ import Menu from '../components/restaurant/MenuSection';
 import FlashMessage from '../components/layout/FlashMessages';
 import ThisWeekSpecialsSection from '../components/restaurant/ThisWeekSpecials';
 
-
-export default function Home({ todaysSpecial, galleryItems, categories, weeklySpecials,todayDate}) {
-
+export default function Home({
+    todaysSpecial,
+    galleryItems,
+    categories,
+    weeklySpecials,
+    todayDate,
+}) {
     return (
         <>
             <HeroSection />
             <TodaysSpecialSection special={todaysSpecial} />
-            <ThisWeekSpecialsSection specials={weeklySpecials} special_date={todayDate} />
+            <ThisWeekSpecialsSection
+                specials={weeklySpecials}
+                special_date={todayDate}
+            />
             <FlashMessage />
             <Menu items={galleryItems} categories={categories} />
             <DishGallery items={galleryItems} />
             <AboutSection />
             <ContactCTA />
             <FAQSection />
-
-
-
         </>
-    )
-
-} 
+    );
+}

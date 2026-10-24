@@ -1,8 +1,8 @@
-
 import { Link } from '@inertiajs/react';
 
 export default function ThisWeekSpecialsSection({
-    specials = [], special_date,
+    specials = [],
+    special_date,
 }) {
     const formatDay = (date) => {
         const [year, month, day] = date.split('-');
@@ -37,7 +37,7 @@ export default function ThisWeekSpecialsSection({
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                 {/* Heading */}
                 <div className="mb-10 max-w-2xl sm:mb-12">
-                    <span className="inline-flex items-center gap-2 rounded-full bg-stone-100 px-4 py-2 text-xs font-bold uppercase tracking-[0.18em] text-stone-700 sm:text-sm">
+                    <span className="inline-flex items-center gap-2 rounded-full bg-stone-100 px-4 py-2 text-xs font-bold tracking-[0.18em] text-stone-700 uppercase sm:text-sm">
                         {/* <span aria-hidden="true">✦</span> */}
                         A New Flavor Every Day
                     </span>
@@ -50,41 +50,41 @@ export default function ThisWeekSpecialsSection({
                     </h2>
 
                     <p className="mt-4 max-w-xl text-sm leading-7 text-stone-600 sm:text-base">
-                        See what's cooking throughout the week.
-                        Today's featured dish is highlighted so
-                        you can find it easily.
+                        See what's cooking throughout the week. Today's featured
+                        dish is highlighted so you can find it easily.
                     </p>
                 </div>
 
                 {/* Weekly Schedule */}
-            
+
                 {specials.length > 0 ? (
-                    <div className="flex gap-4 overflow-x-auto pb-4 snap-x snap-mandatory">
+                    <div className="flex snap-x snap-mandatory gap-4 overflow-x-auto pb-4">
                         {specials.map((special) => {
-                            const isToday = special.special_date === special_date;
+                            const isToday =
+                                special.special_date === special_date;
                             const item = special.menu_item;
 
                             return (
                                 <article
                                     key={special.id}
-                                    className={`
-                        flex w-64 shrink-0 snap-start flex-col
-                        rounded-xl border p-5 transition-colors
-                        sm:w-72
-                        ${isToday
+                                    className={`flex w-64 shrink-0 snap-start flex-col rounded-xl border p-5 transition-colors sm:w-72 ${
+                                        isToday
                                             ? 'border-amber-400 bg-[var(--restaurant-accent-soft)]'
                                             : 'border-stone-200 bg-white hover:border-amber-300'
-                                        }
-                    `}
+                                    } `}
                                 >
                                     <div className="flex items-start justify-between gap-3">
                                         <div>
                                             <p className="text-sm font-semibold text-stone-500">
-                                                {formatDay(special.special_date)}
+                                                {formatDay(
+                                                    special.special_date,
+                                                )}
                                             </p>
 
                                             <p className="mt-1 text-xs text-stone-400">
-                                                {formatDate(special.special_date)}
+                                                {formatDate(
+                                                    special.special_date,
+                                                )}
                                             </p>
                                         </div>
 
@@ -97,7 +97,7 @@ export default function ThisWeekSpecialsSection({
 
                                     <div className="my-4 border-t border-stone-200" />
 
-                                    <h3 className="text-base font-bold leading-snug text-stone-900">
+                                    <h3 className="text-base leading-snug font-bold text-stone-900">
                                         {item?.name ?? 'Special dish'}
                                     </h3>
 
@@ -115,7 +115,6 @@ export default function ThisWeekSpecialsSection({
                         No upcoming specials available.
                     </p>
                 )}
-                
             </div>
         </section>
     );

@@ -1,4 +1,3 @@
-
 import { Link } from '@inertiajs/react';
 import { ArrowRight, CalendarDays, Users } from 'lucide-react';
 
@@ -22,11 +21,7 @@ function formatReservationDate(date) {
     if (!match) return date;
 
     const [, year, month, day] = match;
-    const parsedDate = new Date(
-        Number(year),
-        Number(month) - 1,
-        Number(day),
-    );
+    const parsedDate = new Date(Number(year), Number(month) - 1, Number(day));
 
     // Avoid displaying an incorrect date for invalid input.
     if (
@@ -47,7 +42,6 @@ function formatReservationDate(date) {
 export default function RecentReservations({ reservations = [] }) {
     return (
         <section className="min-w-0 overflow-hidden rounded-2xl border border-stone-200 bg-white shadow-sm dark:border-stone-800 dark:bg-stone-900">
-
             {/* Header */}
             <div className="flex items-center justify-between gap-4 border-b border-stone-100 p-5 sm:p-6 dark:border-stone-800">
                 <div className="flex min-w-0 items-center gap-3">
@@ -127,16 +121,17 @@ export default function RecentReservations({ reservations = [] }) {
                                         className="transition-colors hover:bg-stone-50/80 dark:hover:bg-stone-800/40"
                                     >
                                         <td className="max-w-[180px] truncate px-5 py-4 font-semibold text-stone-900 sm:px-6 dark:text-stone-100">
-                                            {reservation.user?.name ?? 'Unknown'}
+                                            {reservation.user?.name ??
+                                                'Unknown'}
                                         </td>
 
-                                        <td className="whitespace-nowrap px-5 py-4 text-stone-600 sm:px-6 dark:text-stone-300">
+                                        <td className="px-5 py-4 whitespace-nowrap text-stone-600 sm:px-6 dark:text-stone-300">
                                             {formatReservationDate(
                                                 reservation.reservation_date,
                                             )}
                                         </td>
 
-                                        <td className="whitespace-nowrap px-5 py-4 sm:px-6">
+                                        <td className="px-5 py-4 whitespace-nowrap sm:px-6">
                                             <span className="inline-flex items-center gap-2 text-stone-600 dark:text-stone-300">
                                                 <Users
                                                     size={15}
@@ -147,7 +142,7 @@ export default function RecentReservations({ reservations = [] }) {
                                             </span>
                                         </td>
 
-                                        <td className="whitespace-nowrap px-5 py-4 sm:px-6">
+                                        <td className="px-5 py-4 whitespace-nowrap sm:px-6">
                                             <span
                                                 className={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-xs font-semibold capitalize ring-1 ring-inset ${badgeStyle}`}
                                             >
