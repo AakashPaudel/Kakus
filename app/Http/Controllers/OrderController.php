@@ -34,19 +34,53 @@ class OrderController extends Controller
         ]);
     }
 
+
     public function store(
         Request $request,
         OrderService $orderService
     ) {
+        $validated = $request->validate([
+            'fulfillment_type' => [
+                'required',
+                'in:delivery,pickup,dine_in',
+            ],
+
+            'street_address' => [
+                'exclude_unless:fulfillment_type,delivery',
+                'required',
+                'string',
+                'max:255',
+            ],
+
+            'city' => [
+                'exclude_unless:fulfillment_type,delivery',
+                'required',
+                'string',
+                'max:100',
+            ],
+
+            'postal_code' => [
+                'exclude_unless:fulfillment_type,delivery',
+                'required',
+                'string',
+                'max:20',
+            ],
+
+            'delivery_notes' => [
+                'exclude_unless:fulfillment_type,delivery',
+                'nullable',
+                'string',
+                'max:1000',
+            ],
+        ]);
+
         try {
             $orderService->createOrder(
-                $request->user()
+                $request->user(),
+                $validated
             );
         } catch (RuntimeException $e) {
-            return back()->with(
-                'error',
-                $e->getMessage()
-            );
+            return back()->with('error', $e->getMessage());
         }
 
         return back()->with(
@@ -54,6 +88,7 @@ class OrderController extends Controller
             'Order placed successfully.'
         );
     }
+
 
     public function updateStatus(
         Request $request,

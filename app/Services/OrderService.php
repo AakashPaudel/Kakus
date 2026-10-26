@@ -16,10 +16,101 @@ class OrderService
         //
     }
 
-    public function createOrder(User $user): Order
-    {
-        return DB::transaction(function () use ($user) {
+    // public function createOrder(User $user): Order
+    // {
+    //     return DB::transaction(function () use ($user) {
 
+    //         $cart = $user->cart;
+
+    //         if (! $cart) {
+    //             throw new RuntimeException(
+    //                 'You do not have a cart.'
+    //             );
+    //         }
+
+    //         $cart->load('cartItems.menuItem');
+
+    //         if ($cart->cartItems->isEmpty()) {
+    //             throw new RuntimeException(
+    //                 'Your cart is empty.'
+    //             );
+    //         }
+
+    //         foreach ($cart->cartItems as $cartItem) {
+    //             if (! $cartItem->menuItem->is_available) {
+    //                 throw new RuntimeException(
+    //                     "The menu item '{$cartItem->menuItem->name}' is no longer available."
+    //                 );
+    //             }
+    //         }
+
+    //         $subtotal = $cart->cartItems->sum(
+    //             fn($cartItem) => $cartItem->subtotal
+    //         );
+
+    //         $discount = 0;
+    //         $tax = 0;
+    //         $deliveryFee = 0;
+
+    //         $total = $subtotal
+    //             - $discount
+    //             + $tax
+    //             + $deliveryFee;
+
+    //         $order = $user->orders()->create([
+    //             'status' => 'pending',
+    //             'subtotal' => $subtotal,
+    //             'discount' => $discount,
+    //             'tax' => $tax,
+    //             'delivery_fee' => $deliveryFee,
+    //             'total' => $total,
+    //         ]);
+
+    //         /*
+    //      * Create order items and deduct inventory.
+    //      *
+    //      * InventoryService uses lockForUpdate(), so the
+    //      * inventory row remains locked until this transaction
+    //      * finishes.
+    //      */
+    //         foreach ($cart->cartItems as $cartItem) {
+
+    //             $order->orderItems()->create([
+    //                 'menu_item_id' => $cartItem->menu_item_id,
+    //                 'name' => $cartItem->menuItem->name,
+    //                 'quantity' => $cartItem->quantity,
+    //                 'unit_price' => $cartItem->unit_price,
+    //                 'subtotal' => $cartItem->subtotal,
+    //             ]);
+
+    //             $this->inventoryService->deductStock(
+    //                 $cartItem->menuItem,
+    //                 $cartItem->quantity,
+    //                 $order
+    //             );
+    //         }
+
+    //         $cart->cartItems()->delete();
+
+    //         /*
+    //      * Dispatch only after the order and its order items
+    //      * have successfully been created.
+    //      */
+    //         OrderCreated::dispatch($order);
+
+    //         return $order;
+    //     });
+    // }
+
+
+    public function createOrder(
+        User $user,
+        array $checkoutData
+    ): Order {
+        return DB::transaction(function () use (
+            $user,
+            $checkoutData
+        ) {
             $cart = $user->cart;
 
             if (! $cart) {
@@ -50,7 +141,10 @@ class OrderService
 
             $discount = 0;
             $tax = 0;
-            $deliveryFee = 0;
+
+            $deliveryFee = $checkoutData['fulfillment_type'] === 'delivery'
+                ? 0
+                : 0;
 
             $total = $subtotal
                 - $discount
@@ -59,6 +153,23 @@ class OrderService
 
             $order = $user->orders()->create([
                 'status' => 'pending',
+
+                'fulfillment_type' => $checkoutData['fulfillment_type'],
+
+                'street_address' => $checkoutData['street_address'] ?? null,
+                'city' => $checkoutData['city'] ?? null,
+                'postal_code' => $checkoutData['postal_code'] ?? null,
+                'delivery_notes' => $checkoutData['delivery_notes'] ?? null,
+
+                // Preserve compatibility with existing code.
+                'delivery_address' => $checkoutData['fulfillment_type'] === 'delivery'
+                    ? implode(', ', array_filter([
+                        $checkoutData['street_address'] ?? null,
+                        $checkoutData['city'] ?? null,
+                        $checkoutData['postal_code'] ?? null,
+                    ]))
+                    : null,
+
                 'subtotal' => $subtotal,
                 'discount' => $discount,
                 'tax' => $tax,
@@ -68,13 +179,8 @@ class OrderService
 
             /*
          * Create order items and deduct inventory.
-         *
-         * InventoryService uses lockForUpdate(), so the
-         * inventory row remains locked until this transaction
-         * finishes.
          */
             foreach ($cart->cartItems as $cartItem) {
-
                 $order->orderItems()->create([
                     'menu_item_id' => $cartItem->menu_item_id,
                     'name' => $cartItem->menuItem->name,
@@ -93,14 +199,16 @@ class OrderService
             $cart->cartItems()->delete();
 
             /*
-         * Dispatch only after the order and its order items
-         * have successfully been created.
+         * Dispatch after the transaction commits.
          */
-            OrderCreated::dispatch($order);
+            DB::afterCommit(function () use ($order) {
+                OrderCreated::dispatch($order);
+            });
 
             return $order;
         });
     }
+
 
     public function updateStatus(
         User $user,

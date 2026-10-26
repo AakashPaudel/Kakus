@@ -20,6 +20,12 @@ class Order extends Model
         'delivery_fee',
         'total',
         'delivery_address',
+        'fulfillment_type',
+        'street_address',
+        'city',
+        'postal_code',
+        'delivery_notes',
+        
     ];
 
     public function user(): BelongsTo
