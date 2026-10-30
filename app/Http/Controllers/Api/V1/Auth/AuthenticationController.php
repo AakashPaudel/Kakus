@@ -196,4 +196,20 @@ class AuthenticationController extends Controller
     {
         return 'api-auth:two-factor:'.hash('sha256', $challengeId);
     }
+
+    public function me(Request $request): JsonResponse
+    {
+        return response()->json([
+            'user' => $this->safeUser($request->user()),
+        ]);
+    }
+
+    public function logout(Request $request): JsonResponse
+    {
+        $request->user()->currentAccessToken()->delete();
+
+        return response()->json([
+            'message' => 'Successfully logged out.',
+        ]);
+    }
 }
