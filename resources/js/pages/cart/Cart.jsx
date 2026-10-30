@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { Link, router, useForm } from '@inertiajs/react';
 
