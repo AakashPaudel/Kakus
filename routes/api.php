@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\V1\Auth\AuthenticationController;
 use App\Http\Controllers\Api\V1\MenuItemController;
 use App\Http\Controllers\Api\V1\OrderController;
+use App\Http\Controllers\Api\V1\ReservationController;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('v1')->group(function (): void {
@@ -33,5 +34,11 @@ Route::prefix('v1')->group(function (): void {
 
         Route::get('orders/{order}', [OrderController::class, 'show'])
             ->name('api.v1.orders.show');
+
+        Route::get('reservations', [ReservationController::class, 'index'])
+            ->name('api.v1.reservations.index');
+
+        Route::get('reservations/{reservation}', [ReservationController::class, 'show'])
+            ->name('api.v1.reservations.show');
     });
 });
