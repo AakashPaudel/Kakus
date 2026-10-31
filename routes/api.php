@@ -51,11 +51,26 @@ Route::prefix('v1')->group(function (): void {
         Route::post('orders', [OrderController::class, 'store'])
             ->name('api.v1.orders.store');
 
+        Route::patch('orders/{order}/status', [OrderController::class, 'updateStatus'])
+            ->name('api.v1.orders.update-status');
+
         Route::get('orders/{order}', [OrderController::class, 'show'])
             ->name('api.v1.orders.show');
 
         Route::get('reservations', [ReservationController::class, 'index'])
             ->name('api.v1.reservations.index');
+
+        Route::post('reservations', [ReservationController::class, 'store'])
+            ->name('api.v1.reservations.store');
+
+        Route::patch('reservations/{reservation}', [ReservationController::class, 'update'])
+            ->name('api.v1.reservations.update');
+
+        Route::post('reservations/{reservation}/cancel', [ReservationController::class, 'cancel'])
+            ->name('api.v1.reservations.cancel');
+
+        Route::patch('reservations/{reservation}/status', [ReservationController::class, 'updateStatus'])
+            ->name('api.v1.reservations.update-status');
 
         Route::get('reservations/{reservation}', [ReservationController::class, 'show'])
             ->name('api.v1.reservations.show');

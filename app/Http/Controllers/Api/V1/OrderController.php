@@ -91,4 +91,36 @@ class OrderController extends Controller
             ->response()
             ->setStatusCode(201);
     }
+
+    public function updateStatus(
+        Request $request,
+        Order $order,
+        OrderService $orderService
+    ): OrderResource|JsonResponse {
+        Gate::forUser($request->user())->authorize('updateStatus', $order);
+
+        $validated = $request->validate([
+            'status' => [
+                'required',
+                'string',
+                'in:pending,confirmed,preparing,ready,completed,cancelled',
+            ],
+        ]);
+
+        try {
+            $order = $orderService->updateStatus(
+                $request->user(),
+                $order,
+                $validated['status']
+            );
+        } catch (RuntimeException $exception) {
+            return response()->json([
+                'message' => $exception->getMessage(),
+            ], 422);
+        }
+
+        $order->load('orderItems.menuItem');
+
+        return new OrderResource($order);
+    }
 }

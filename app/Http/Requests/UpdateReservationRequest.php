@@ -3,15 +3,13 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Validator;
 
 class UpdateReservationRequest extends FormRequest
 {
     public function authorize(): bool
     {
-        return Auth::check()
-            && $this->user()->can('update', $this->route('reservation'));
+        return $this->user()?->can('update', $this->route('reservation')) ?? false;
     }
 
     /** @return array<string, array<int, mixed>|string> */
