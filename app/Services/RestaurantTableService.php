@@ -10,6 +10,7 @@ use RuntimeException;
 
 class RestaurantTableService
 {
+    /** @return Collection<int, RestaurantTable> */
     public function getAllTables(): Collection
     {
         return RestaurantTable::query()

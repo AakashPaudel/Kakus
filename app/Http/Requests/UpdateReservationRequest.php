@@ -14,6 +14,7 @@ class UpdateReservationRequest extends FormRequest
             && $this->user()->can('update', $this->route('reservation'));
     }
 
+    /** @return array<string, array<int, mixed>|string> */
     public function rules(): array
     {
         return [

@@ -12,6 +12,7 @@ class UpdateRestaurantTableRequest extends FormRequest
         return true;
     }
 
+    /** @return array<string, array<int, mixed>|string> */
     public function rules(): array
     {
         $table = $this->route('restaurantTable');

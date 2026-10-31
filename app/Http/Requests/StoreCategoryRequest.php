@@ -12,6 +12,7 @@ class StoreCategoryRequest extends FormRequest
         return $this->user()?->role === 'admin';
     }
 
+    /** @return array<string, array<int, mixed>|string> */
     public function rules(): array
     {
         return [

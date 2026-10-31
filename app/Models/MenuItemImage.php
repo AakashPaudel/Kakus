@@ -13,6 +13,7 @@ class MenuItemImage extends Model
         'is_primary',
     ];
 
+    /** @return BelongsTo<MenuItem, $this> */
     public function menuItem(): BelongsTo
     {
         return $this->belongsTo(MenuItem::class);

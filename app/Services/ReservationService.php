@@ -13,6 +13,7 @@ use RuntimeException;
 
 class ReservationService
 {
+    /** @param array<string, mixed> $data */
     public function createReservation(
         User $user,
         array $data
@@ -121,7 +122,7 @@ class ReservationService
 
             if (! in_array(
                 $newStatus->value,
-                $allowedTransitions[$currentStatus->value] ?? [],
+                $allowedTransitions[$currentStatus->value],
                 true
             )) {
                 throw new RuntimeException(
@@ -143,6 +144,7 @@ class ReservationService
         });
     }
 
+    /** @param array<string, mixed> $data */
     public function updateReservation(
         Reservation $reservation,
         array $data

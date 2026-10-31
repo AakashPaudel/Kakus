@@ -52,16 +52,19 @@ class User extends Authenticatable implements PasskeyUser
         ];
     }
 
+    /** @return HasOne<Cart, $this> */
     public function cart(): HasOne
     {
         return $this->hasOne(Cart::class);
     }
 
+    /** @return HasMany<Order, $this> */
     public function orders(): HasMany
     {
         return $this->hasMany(Order::class);
     }
 
+    /** @return HasMany<OrderStatusHistory, $this> */
     public function orderStatusHistories(): HasMany
     {
         return $this->hasMany(
@@ -70,6 +73,7 @@ class User extends Authenticatable implements PasskeyUser
         );
     }
 
+    /** @return HasMany<Reservation, $this> */
     public function reservations(): HasMany
     {
         return $this->hasMany(Reservation::class);

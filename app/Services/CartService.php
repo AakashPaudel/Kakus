@@ -6,7 +6,6 @@ use App\Models\Cart;
 use App\Models\CartItem;
 use App\Models\MenuItem;
 use App\Models\User;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\DB;
 use RuntimeException;
@@ -17,7 +16,7 @@ class CartService
         User $user,
         MenuItem $menuItem,
         int $quantity = 1
-    ): Model {
+    ): CartItem {
         if (! $menuItem->is_available) {
             throw new RuntimeException(
                 'This menu item is currently unavailable.'

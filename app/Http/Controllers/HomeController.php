@@ -64,6 +64,7 @@ class HomeController extends Controller
         ]);
     }
 
+    /** @return array<string, mixed> */
     private function formatSpecial(DailySpecial $special): array
     {
         $item = $special->menuItem;

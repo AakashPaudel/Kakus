@@ -16,6 +16,7 @@ class StoreReservationRequest extends FormRequest
         return Auth::check();
     }
 
+    /** @return array<string, array<int, mixed>|string> */
     public function rules(): array
     {
         return [

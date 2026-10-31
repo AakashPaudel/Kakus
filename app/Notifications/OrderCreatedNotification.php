@@ -16,11 +16,13 @@ class OrderCreatedNotification extends Notification implements ShouldQueue
         public Order $order
     ) {}
 
+    /** @return array<int, string> */
     public function via(object $notifiable): array
     {
         return ['database', 'mail'];
     }
 
+    /** @return array<string, int|string> */
     public function toDatabase(object $notifiable): array
     {
         return [

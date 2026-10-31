@@ -60,7 +60,9 @@ class OrderCreationTest extends TestCase
         ]);
 
         $response = $this->actingAs($user)
-            ->post('/orders');
+            ->post('/orders', [
+                'fulfillment_type' => 'dine_in',
+            ]);
 
         $response->assertRedirect();
 
@@ -116,7 +118,9 @@ class OrderCreationTest extends TestCase
         ]);
 
         $response = $this->actingAs($user)
-            ->post('/orders');
+            ->post('/orders', [
+                'fulfillment_type' => 'dine_in',
+            ]);
 
         $response->assertRedirect();
 
@@ -149,7 +153,9 @@ class OrderCreationTest extends TestCase
         ]);
 
         $response = $this->actingAs($user)
-            ->post('/orders');
+            ->post('/orders', [
+                'fulfillment_type' => 'dine_in',
+            ]);
 
         $response->assertRedirect();
 
@@ -180,7 +186,9 @@ class OrderCreationTest extends TestCase
         $user = User::factory()->create();
 
         $response = $this->actingAs($user)
-            ->post('/orders');
+            ->post('/orders', [
+                'fulfillment_type' => 'dine_in',
+            ]);
 
         $response->assertRedirect();
 
@@ -237,7 +245,9 @@ class OrderCreationTest extends TestCase
         ]);
 
         $response = $this->actingAs($user)
-            ->post('/orders');
+            ->post('/orders', [
+                'fulfillment_type' => 'dine_in',
+            ]);
 
         $response->assertRedirect();
 

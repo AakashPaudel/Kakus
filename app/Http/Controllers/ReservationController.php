@@ -53,7 +53,7 @@ class ReservationController extends Controller
         );
     }
 
-    public function indexCustomer(Request $request)
+    public function indexCustomer(Request $request): Response
     {
         $reservations = Reservation::query()
             ->where('user_id', $request->user()->id)

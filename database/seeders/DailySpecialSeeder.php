@@ -17,7 +17,7 @@ class DailySpecialSeeder extends Seeder
             ->get();
 
         if ($items->count() < 3) {
-            $this->command?->warn(
+            $this->command->warn(
                 'You need at least 3 menu items to run this seeder.'
             );
 

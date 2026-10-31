@@ -8,6 +8,7 @@ use Illuminate\Support\Str;
 
 class MenuItemService
 {
+    /** @param array<string, mixed> $data */
     public function create(array $data): MenuItem
     {
         return DB::transaction(function () use ($data): MenuItem {
@@ -30,6 +31,7 @@ class MenuItemService
         });
     }
 
+    /** @param array<string, mixed> $data */
     public function update(MenuItem $menuItem, array $data): MenuItem
     {
         return DB::transaction(function () use ($menuItem, $data): MenuItem {

@@ -11,6 +11,7 @@ class UpdateInventoryRequest extends FormRequest
         return in_array($this->user()?->role, ['admin', 'staff'], true);
     }
 
+    /** @return array<string, array<int, mixed>|string> */
     public function rules(): array
     {
         return [

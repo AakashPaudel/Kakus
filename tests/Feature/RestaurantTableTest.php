@@ -275,7 +275,7 @@ class RestaurantTableTest extends TestCase
         $response = $this->actingAs($admin)
             ->delete($url);
 
-        $response->dump();
+        // $response->dump();
 
         $response->assertRedirect(route('admin.tables.index'));
 

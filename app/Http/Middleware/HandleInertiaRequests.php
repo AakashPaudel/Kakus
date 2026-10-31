@@ -48,7 +48,7 @@ class HandleInertiaRequests extends Middleware
             'cart' => fn () => $request->user()
                 ? [
                     'cartCount' => fn () => (int) (
-                        Cart::where('user_id', $request->user()?->id)
+                        Cart::where('user_id', $request->user()->id)
                             ->first()
                             ?->cartItems()
                             ->sum('quantity') ?? 0

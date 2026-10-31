@@ -4,13 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Models\Order;
 use App\Services\OrderService;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
+use Inertia\Response;
 use RuntimeException;
 
 class OrderController extends Controller
 {
-    public function index(Request $request)
+    public function index(Request $request): Response
     {
         $orders = $request->user()
             ->orders()
@@ -23,7 +25,7 @@ class OrderController extends Controller
         ]);
     }
 
-    public function show(Request $request, Order $order)
+    public function show(Request $request, Order $order): Response
     {
         Gate::authorize('view', $order);
 
@@ -37,7 +39,7 @@ class OrderController extends Controller
     public function store(
         Request $request,
         OrderService $orderService
-    ) {
+    ): RedirectResponse {
         $validated = $request->validate([
             'fulfillment_type' => [
                 'required',
@@ -92,7 +94,7 @@ class OrderController extends Controller
         Request $request,
         Order $order,
         OrderService $orderService
-    ) {
+    ): RedirectResponse {
         Gate::authorize('updateStatus', $order);
 
         $validated = $request->validate([

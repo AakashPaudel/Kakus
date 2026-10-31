@@ -5,12 +5,14 @@ namespace App\Http\Controllers;
 use App\Models\CartItem;
 use App\Models\MenuItem;
 use App\Services\CartService;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Inertia\Response;
 use RuntimeException;
 
 class CartController extends Controller
 {
-    public function index(Request $request)
+    public function index(Request $request): Response
     {
         $cart = $request->user()
             ->cart()
@@ -42,14 +44,16 @@ class CartController extends Controller
         ]);
     }
 
-    public function store(Request $request, CartService $cartService)
+    public function store(Request $request, CartService $cartService): RedirectResponse
     {
         $validated = $request->validate([
             'menu_item_id' => ['required', 'integer', 'exists:menu_items,id'],
             'quantity' => ['required', 'integer', 'min:1'],
         ]);
 
-        $menuItem = MenuItem::findOrFail($validated['menu_item_id']);
+        $menuItem = MenuItem::query()->findOrFail(
+            $request->integer('menu_item_id')
+        );
 
         try {
             $cartService->addItem(
@@ -71,7 +75,7 @@ class CartController extends Controller
         Request $request,
         CartItem $cartItem,
         CartService $cartService
-    ) {
+    ): RedirectResponse {
         $validated = $request->validate([
             'quantity' => ['required', 'integer', 'min:1'],
         ]);
@@ -93,7 +97,7 @@ class CartController extends Controller
         CartItem $cartItem,
         Request $request,
         CartService $cartService
-    ) {
+    ): RedirectResponse {
         try {
             $cartService->removeItem(
                 $request->user(),
@@ -109,7 +113,7 @@ class CartController extends Controller
     public function clear(
         Request $request,
         CartService $cartService
-    ) {
+    ): RedirectResponse {
         $cartService->clearCart(
             $request->user()
         );

@@ -54,7 +54,9 @@ class OrderLowStockTest extends TestCase
         ]);
 
         $this->actingAs($customer)
-            ->post('/orders')
+            ->post('/orders', [
+                'fulfillment_type' => 'dine_in',
+            ])
             ->assertRedirect();
 
         Notification::assertSentTo(
@@ -94,7 +96,9 @@ class OrderLowStockTest extends TestCase
         ]);
 
         $this->actingAs($customer)
-            ->post('/orders')
+            ->post('/orders', [
+                'fulfillment_type' => 'dine_in',
+            ])
             ->assertRedirect();
 
         Queue::assertPushed(

@@ -102,6 +102,9 @@ class OrderService
     //     });
     // }
 
+    /**
+     * @param  array<string, mixed>  $checkoutData
+     */
     public function createOrder(
         User $user,
         array $checkoutData
@@ -109,7 +112,7 @@ class OrderService
         return DB::transaction(function () use (
             $user,
             $checkoutData
-        ) {
+        ): Order {
             $cart = $user->cart;
 
             if (! $cart) {
