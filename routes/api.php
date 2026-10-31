@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\V1\Auth\AuthenticationController;
+use App\Http\Controllers\Api\V1\CartController;
 use App\Http\Controllers\Api\V1\MenuItemController;
 use App\Http\Controllers\Api\V1\OrderController;
 use App\Http\Controllers\Api\V1\ReservationController;
@@ -29,8 +30,26 @@ Route::prefix('v1')->group(function (): void {
         Route::post('auth/logout', [AuthenticationController::class, 'logout'])
             ->name('api.v1.auth.logout');
 
+        Route::get('cart', [CartController::class, 'index'])
+            ->name('api.v1.cart.index');
+
+        Route::post('cart/items', [CartController::class, 'store'])
+            ->name('api.v1.cart.items.store');
+
+        Route::patch('cart/items/{cartItem}', [CartController::class, 'update'])
+            ->name('api.v1.cart.items.update');
+
+        Route::delete('cart/items/{cartItem}', [CartController::class, 'destroy'])
+            ->name('api.v1.cart.items.destroy');
+
+        Route::delete('cart', [CartController::class, 'clear'])
+            ->name('api.v1.cart.clear');
+
         Route::get('orders', [OrderController::class, 'index'])
             ->name('api.v1.orders.index');
+
+        Route::post('orders', [OrderController::class, 'store'])
+            ->name('api.v1.orders.store');
 
         Route::get('orders/{order}', [OrderController::class, 'show'])
             ->name('api.v1.orders.show');
