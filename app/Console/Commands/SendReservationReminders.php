@@ -2,9 +2,9 @@
 
 namespace App\Console\Commands;
 
-use App\ReservationStatus;
 use App\Models\Reservation;
 use App\Notifications\ReservationReminderNotification;
+use App\ReservationStatus;
 use Illuminate\Console\Command;
 
 class SendReservationReminders extends Command

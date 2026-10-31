@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\DailySpecial;
+use App\Models\MenuItem;
 use Carbon\Carbon;
 use Inertia\Inertia;
 use Inertia\Response;
-use App\Models\Category;
-use App\Models\MenuItem;
 
 class HomeController extends Controller
 {
@@ -43,7 +43,7 @@ class HomeController extends Controller
 
         // Find today's dish from the same schedule.
         $todaysSpecial = $weeklySpecials->first(
-            fn($special) => $special->special_date->toDateString()
+            fn ($special) => $special->special_date->toDateString()
                 === $today->toDateString()
         );
         // dd($weeklySpecials->toArray());
@@ -57,7 +57,7 @@ class HomeController extends Controller
                 : null,
 
             'weeklySpecials' => $weeklySpecials
-                ->map(fn($special) => $this->formatSpecial($special))
+                ->map(fn ($special) => $this->formatSpecial($special))
                 ->values(),
             'galleryItems' => $galleryItems,
             'categories' => $categories,
@@ -79,7 +79,7 @@ class HomeController extends Controller
                 'price' => $item->price,
 
                 'image_url' => $item->images->first()
-                    ? asset('storage/' . $item->images->first()->image_path)
+                    ? asset('storage/'.$item->images->first()->image_path)
                     : null,
             ],
         ];

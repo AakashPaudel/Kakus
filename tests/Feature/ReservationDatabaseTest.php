@@ -2,10 +2,10 @@
 
 namespace Tests\Feature;
 
-use App\ReservationStatus;
 use App\Models\Reservation;
 use App\Models\RestaurantTable;
 use App\Models\User;
+use App\ReservationStatus;
 use Carbon\CarbonImmutable;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;

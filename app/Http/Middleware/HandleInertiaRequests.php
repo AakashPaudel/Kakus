@@ -2,9 +2,9 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\Cart;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
-use App\Models\Cart;
 
 class HandleInertiaRequests extends Middleware
 {
@@ -40,24 +40,24 @@ class HandleInertiaRequests extends Middleware
             ...parent::share($request),
             'name' => config('app.name'),
             'auth' => [
-                'user' => fn() => $request->user()
+                'user' => fn () => $request->user()
                     ? $request->user()->only('id', 'name', 'email', 'role')
                     : null,
             ],
             'sidebarOpen' => ! $request->hasCookie('sidebar_state') || $request->cookie('sidebar_state') === 'true',
-            'cart' => fn() => $request->user()
+            'cart' => fn () => $request->user()
                 ? [
-                    'cartCount' => fn() => (int) (
+                    'cartCount' => fn () => (int) (
                         Cart::where('user_id', $request->user()?->id)
-                        ->first()
-                        ?->cartItems()
-                        ->sum('quantity') ?? 0
+                            ->first()
+                            ?->cartItems()
+                            ->sum('quantity') ?? 0
                     ),
                 ]
                 : null,
             'flash' => [
-                'success' => fn() => $request->session()->get('success'),
-                'id' => fn() => $request->session()->get('flash_id'),
+                'success' => fn () => $request->session()->get('success'),
+                'id' => fn () => $request->session()->get('flash_id'),
                 // 'error' => fn() => $request->session()->get('error'),
             ],
         ];

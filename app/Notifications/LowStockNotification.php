@@ -2,12 +2,12 @@
 
 namespace App\Notifications;
 
+use App\Models\Inventory;
+use App\Models\MenuItem;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
-use App\Models\MenuItem;
-use App\Models\Inventory;
 
 class LowStockNotification extends Notification implements ShouldQueue
 {

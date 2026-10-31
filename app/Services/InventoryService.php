@@ -2,12 +2,11 @@
 
 namespace App\Services;
 
+use App\Events\LowStockDetected;
 use App\Models\Inventory;
 use App\Models\MenuItem;
-use Illuminate\Support\Facades\DB;
-use RuntimeException;
-use App\Events\LowStockDetected;
 use App\Models\Order;
+use RuntimeException;
 
 class InventoryService
 {
@@ -71,7 +70,7 @@ class InventoryService
          */
         $isLowStock = $inventory->quantity <= $inventory->reorder_level;
 
-        if (!$wasLowStock && $isLowStock) {
+        if (! $wasLowStock && $isLowStock) {
             LowStockDetected::dispatch(
                 $menuItem,
                 $inventory

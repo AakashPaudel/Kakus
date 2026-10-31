@@ -2,7 +2,7 @@
 
 namespace App;
 
-enum RestaurantTableStatus:string
+enum RestaurantTableStatus: string
 {
     //
     case Available = 'available';

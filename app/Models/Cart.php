@@ -7,14 +7,23 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
+/**
+ * @property-read float $subtotal
+ */
 class Cart extends Model
 {
+    /** @use HasFactory<\Database\Factories\CartFactory> */
     use HasFactory;
 
     protected $fillable = [
         'user_id',
     ];
 
+    /**
+     * Get the user who owns this cart.
+     *
+     * @return BelongsTo<User, $this>
+     */
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
@@ -22,6 +31,8 @@ class Cart extends Model
 
     /**
      * Get all cart items for this cart.
+     *
+     * @return HasMany<CartItem, $this>
      */
     public function cartItems(): HasMany
     {
@@ -30,8 +41,8 @@ class Cart extends Model
 
     public function getSubtotalAttribute(): float
     {
-        return $this->cartItems->sum(function ($item) {
-            return $item->subtotal;
-        });
+        return (float) $this->cartItems->sum(
+            fn (CartItem $item): float => $item->subtotal
+        );
     }
 }

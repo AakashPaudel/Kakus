@@ -34,7 +34,6 @@ class OrderController extends Controller
         ]);
     }
 
-
     public function store(
         Request $request,
         OrderService $orderService
@@ -88,7 +87,6 @@ class OrderController extends Controller
             'Order placed successfully.'
         );
     }
-
 
     public function updateStatus(
         Request $request,

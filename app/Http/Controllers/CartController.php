@@ -60,7 +60,7 @@ class CartController extends Controller
         } catch (RuntimeException $e) {
             return back()->with('error', $e->getMessage());
         }
-        
+
         $request->session()->flash('flash_id', uniqid());
 
         return back()->with('success', 'Item added to cart.');

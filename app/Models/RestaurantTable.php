@@ -2,10 +2,10 @@
 
 namespace App\Models;
 
+use App\RestaurantTableStatus;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use App\RestaurantTableStatus;
 
 class RestaurantTable extends Model
 {

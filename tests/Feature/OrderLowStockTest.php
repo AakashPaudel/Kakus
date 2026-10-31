@@ -2,20 +2,18 @@
 
 namespace Tests\Feature;
 
+use App\Listeners\SendLowStockNotification;
 use App\Models\Cart;
 use App\Models\CartItem;
 use App\Models\Inventory;
 use App\Models\MenuItem;
 use App\Models\User;
+use App\Notifications\LowStockNotification;
+use Illuminate\Events\CallQueuedListener;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Notification;
-use App\Notifications\LowStockNotification;
-use Tests\TestCase;
 use Illuminate\Support\Facades\Queue;
-use App\Events\LowStockDetected;
-use Illuminate\Events\CallQueuedListener;
-use App\Listeners\SendLowStockNotification;
-
+use Tests\TestCase;
 
 class OrderLowStockTest extends TestCase
 {
@@ -65,7 +63,6 @@ class OrderLowStockTest extends TestCase
         );
     }
 
-
     public function test_low_stock_listener_is_queued(): void
     {
         Queue::fake();
@@ -95,7 +92,6 @@ class OrderLowStockTest extends TestCase
             'quantity' => 1,
             'unit_price' => 450.00,
         ]);
-
 
         $this->actingAs($customer)
             ->post('/orders')

@@ -5,7 +5,6 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Validator;
- 
 
 class StoreReservationRequest extends FormRequest
 {
@@ -75,5 +74,3 @@ class StoreReservationRequest extends FormRequest
         });
     }
 }
-
-

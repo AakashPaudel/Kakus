@@ -2,10 +2,10 @@
 
 namespace Database\Seeders;
 
-use App\ReservationStatus;
 use App\Models\Reservation;
 use App\Models\RestaurantTable;
 use App\Models\User;
+use App\ReservationStatus;
 use Illuminate\Database\Seeder;
 
 class ReservationSeeder extends Seeder
@@ -20,7 +20,7 @@ class ReservationSeeder extends Seeder
             ->where('status', 'available')
             ->first();
 
-        if (!$customer || !$table) {
+        if (! $customer || ! $table) {
             return;
         }
 

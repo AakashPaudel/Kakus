@@ -3,10 +3,9 @@
 namespace App\Listeners;
 
 use App\Events\LowStockDetected;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Queue\InteractsWithQueue;
-use App\Notifications\LowStockNotification;
 use App\Models\User;
+use App\Notifications\LowStockNotification;
+use Illuminate\Contracts\Queue\ShouldQueue;
 
 class SendLowStockNotification implements ShouldQueue
 {
@@ -38,14 +37,11 @@ class SendLowStockNotification implements ShouldQueue
         }
     }
 }
-{
-    /**
-     * Create the event listener.
-     */
-   
 
-    /**
-     * Handle the event.
-     */
-    
-}
+/**
+ * Create the event listener.
+ */
+
+/**
+ * Handle the event.
+ */

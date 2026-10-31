@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 
-use App\RestaurantTableStatus;
 use App\Models\RestaurantTable;
+use App\RestaurantTableStatus;
 use Illuminate\Database\Seeder;
 
 class RestaurantTableSeeder extends Seeder

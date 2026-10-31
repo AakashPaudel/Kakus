@@ -3,11 +3,12 @@
 namespace Database\Factories;
 
 // use App\Enums\RestaurantTableStatus;
-use Illuminate\Database\Eloquent\Factories\Factory;
+use App\Models\RestaurantTable;
 use App\RestaurantTableStatus;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends Factory<\App\Models\RestaurantTable>
+ * @extends Factory<RestaurantTable>
  */
 class RestaurantTableFactory extends Factory
 {

@@ -5,14 +5,13 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreRestaurantTableRequest;
 use App\Http\Requests\UpdateRestaurantTableRequest;
 use App\Models\RestaurantTable;
+use App\RestaurantTableStatus;
 use App\Services\RestaurantTableService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
-use Inertia\Response;
-use App\RestaurantTableStatus;
 use Illuminate\Validation\Rule;
-
+use Inertia\Response;
 
 class RestaurantTableController extends Controller
 {

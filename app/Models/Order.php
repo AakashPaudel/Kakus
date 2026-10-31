@@ -25,7 +25,7 @@ class Order extends Model
         'city',
         'postal_code',
         'delivery_notes',
-        
+
     ];
 
     public function user(): BelongsTo

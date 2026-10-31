@@ -2,7 +2,6 @@
 
 namespace Tests\Feature;
 
-use App\Models\Cart;
 use App\Models\Inventory;
 use App\Models\MenuItem;
 use App\Models\Order;

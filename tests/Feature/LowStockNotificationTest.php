@@ -47,7 +47,7 @@ class LowStockNotificationTest extends TestCase
             $inventory
         );
 
-        $listener = new SendLowStockNotification();
+        $listener = new SendLowStockNotification;
 
         $listener->handle($event);
 
@@ -90,7 +90,7 @@ class LowStockNotificationTest extends TestCase
             $inventory
         );
 
-        $listener = new SendLowStockNotification();
+        $listener = new SendLowStockNotification;
 
         $listener->handle($event);
 

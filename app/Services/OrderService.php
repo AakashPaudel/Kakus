@@ -102,7 +102,6 @@ class OrderService
     //     });
     // }
 
-
     public function createOrder(
         User $user,
         array $checkoutData
@@ -136,7 +135,7 @@ class OrderService
             }
 
             $subtotal = $cart->cartItems->sum(
-                fn($cartItem) => $cartItem->subtotal
+                fn ($cartItem) => $cartItem->subtotal
             );
 
             $discount = 0;
@@ -209,7 +208,6 @@ class OrderService
         });
     }
 
-
     public function updateStatus(
         User $user,
         Order $order,
@@ -231,7 +229,7 @@ class OrderService
 
             $currentStatus = $order->status;
 
-            if (!in_array(
+            if (! in_array(
                 $newStatus,
                 $allowedTransitions[$currentStatus] ?? []
             )) {

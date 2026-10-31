@@ -24,12 +24,10 @@ class ReservationStatusNotification extends Notification
         return [
             'reservation_id' => $this->reservation->id,
             'status' => $this->reservation->status->value,
-            'reservation_date' =>
-                $this->reservation->reservation_date->format('Y-m-d'),
+            'reservation_date' => $this->reservation->reservation_date->format('Y-m-d'),
             'start_time' => $this->reservation->start_time,
             'end_time' => $this->reservation->end_time,
-            'message' =>
-                "Your reservation status is now {$this->reservation->status->value}.",
+            'message' => "Your reservation status is now {$this->reservation->status->value}.",
         ];
     }
 }

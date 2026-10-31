@@ -2,16 +2,14 @@
 
 namespace App\Events;
 
+use App\Models\Inventory;
+use App\Models\MenuItem;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
-use Illuminate\Broadcasting\PresenceChannel;
 use Illuminate\Broadcasting\PrivateChannel;
-use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
+use Illuminate\Contracts\Events\ShouldDispatchAfterCommit;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
-use App\Models\MenuItem;
-use App\Models\Inventory;
-use Illuminate\Contracts\Events\ShouldDispatchAfterCommit;
 
 class LowStockDetected implements ShouldDispatchAfterCommit
 {
@@ -20,7 +18,7 @@ class LowStockDetected implements ShouldDispatchAfterCommit
     /**
      * Create a new event instance.
      */
-    public function __construct(public MenuItem $menuItem,public Inventory $inventory)
+    public function __construct(public MenuItem $menuItem, public Inventory $inventory)
     {
         //
     }
