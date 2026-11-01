@@ -8,6 +8,7 @@ use App\Http\Resources\CartResource;
 use App\Models\CartItem;
 use App\Models\MenuItem;
 use App\Services\CartService;
+use Dedoc\Scramble\Attributes\Response;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use RuntimeException;
@@ -28,6 +29,7 @@ class CartController extends Controller
         return new CartResource($cart);
     }
 
+    #[Response(status: 422, type: 'array{message:string}')]
     public function store(Request $request, CartService $cartService): CartItemResource|JsonResponse
     {
         $validated = $request->validate([
@@ -46,8 +48,11 @@ class CartController extends Controller
                 $validated['quantity']
             );
         } catch (RuntimeException $exception) {
+            /** @var string $message */
+            $message = (string) $exception->getMessage();
+
             return response()->json([
-                'message' => $exception->getMessage(),
+                'message' => $message,
             ], 422);
         }
 
@@ -58,6 +63,7 @@ class CartController extends Controller
             ->setStatusCode(201);
     }
 
+    #[Response(status: 422, type: 'array{message:string}')]
     public function update(
         Request $request,
         CartItem $cartItem,
@@ -74,8 +80,11 @@ class CartController extends Controller
                 $validated['quantity']
             );
         } catch (RuntimeException $exception) {
+            /** @var string $message */
+            $message = (string) $exception->getMessage();
+
             return response()->json([
-                'message' => $exception->getMessage(),
+                'message' => $message,
             ], 422);
         }
 
@@ -84,6 +93,7 @@ class CartController extends Controller
         return new CartItemResource($cartItem);
     }
 
+    #[Response(status: 422, type: 'array{message:string}')]
     public function destroy(
         Request $request,
         CartItem $cartItem,
@@ -95,8 +105,11 @@ class CartController extends Controller
                 $cartItem
             );
         } catch (RuntimeException $exception) {
+            /** @var string $message */
+            $message = (string) $exception->getMessage();
+
             return response()->json([
-                'message' => $exception->getMessage(),
+                'message' => $message,
             ], 422);
         }
 

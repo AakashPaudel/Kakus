@@ -20,7 +20,10 @@ class SendOrderCreatedNotification
      */
     public function handle(OrderCreated $event): void
     {
-        //
-        $event->order->user->notify(new OrderCreatedNotification($event->order));
+        $event->order->loadMissing('orderItems');
+
+        $event->order->user->notify(
+            (new OrderCreatedNotification($event->order))->afterCommit()
+        );
     }
 }

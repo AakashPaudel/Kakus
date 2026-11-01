@@ -4,6 +4,7 @@ namespace App\Notifications;
 
 use App\Models\Inventory;
 use App\Models\MenuItem;
+use App\Models\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
@@ -28,19 +29,25 @@ class LowStockNotification extends Notification implements ShouldQueue
      */
     public function via(object $notifiable): array
     {
-        return ['mail'];
+        $channels = ['database'];
+
+        if ($notifiable instanceof User && filter_var($notifiable->email, FILTER_VALIDATE_EMAIL)) {
+            $channels[] = 'mail';
+        }
+
+        return $channels;
     }
 
-    /**
-     * Get the mail representation of the notification.
-     */
-    // public function toMail(object $notifiable): MailMessage
-    // {
-    //     return (new MailMessage)
-    //         ->line('The introduction to the notification.')
-    //         ->action('Notification Action', url('/'))
-    //         ->line('Thank you for using our application!');
-    // }
+    public function toMail(object $notifiable): MailMessage
+    {
+        return (new MailMessage)
+            ->subject("Low Stock Alert: {$this->menuItem->name}")
+            ->greeting('Low stock alert')
+            ->line("The menu item '{$this->menuItem->name}' has reached its low-stock threshold.")
+            ->line("Current quantity: {$this->inventory->quantity}")
+            ->line("Reorder level: {$this->inventory->reorder_level}")
+            ->line('Please review the inventory and restock this item when appropriate.');
+    }
 
     /**
      * Get the array representation of the notification.
@@ -50,7 +57,7 @@ class LowStockNotification extends Notification implements ShouldQueue
     public function toDatabase(object $notifiable): array
     {
         return [
-            //
+            'inventory_id' => $this->inventory->id,
             'menu_item_id' => $this->menuItem->id,
             'menu_item_name' => $this->menuItem->name,
             'current_quantity' => $this->inventory->quantity,

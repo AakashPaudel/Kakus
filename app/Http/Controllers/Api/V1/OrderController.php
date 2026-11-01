@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\OrderResource;
 use App\Models\Order;
 use App\Services\OrderService;
+use Dedoc\Scramble\Attributes\BodyParameter;
+use Dedoc\Scramble\Attributes\Response;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
@@ -14,6 +16,9 @@ use RuntimeException;
 
 class OrderController extends Controller
 {
+    /**
+     * List the authenticated user's orders, newest first, with up to 50 items per page.
+     */
     public function index(Request $request): AnonymousResourceCollection
     {
         $validated = $request->validate([
@@ -39,6 +44,16 @@ class OrderController extends Controller
         return new OrderResource($order);
     }
 
+    /**
+     * Create an order from the authenticated user's cart. Delivery address fields are
+     * required only when the fulfillment type is delivery.
+     */
+    #[BodyParameter(
+        'fulfillment_type',
+        description: 'Order fulfillment mode: delivery, pickup, or dine_in.',
+        type: 'string',
+    )]
+    #[Response(status: 422, type: 'array{message:string}')]
     public function store(
         Request $request,
         OrderService $orderService
@@ -80,8 +95,11 @@ class OrderController extends Controller
                 $validated
             );
         } catch (RuntimeException $exception) {
+            /** @var string $message */
+            $message = (string) $exception->getMessage();
+
             return response()->json([
-                'message' => $exception->getMessage(),
+                'message' => $message,
             ], 422);
         }
 
@@ -92,6 +110,7 @@ class OrderController extends Controller
             ->setStatusCode(201);
     }
 
+    #[Response(status: 422, type: 'array{message:string}')]
     public function updateStatus(
         Request $request,
         Order $order,
@@ -114,8 +133,11 @@ class OrderController extends Controller
                 $validated['status']
             );
         } catch (RuntimeException $exception) {
+            /** @var string $message */
+            $message = (string) $exception->getMessage();
+
             return response()->json([
-                'message' => $exception->getMessage(),
+                'message' => $message,
             ], 422);
         }
 

@@ -29,19 +29,11 @@ class SendLowStockNotification implements ShouldQueue
 
         foreach ($users as $user) {
             $user->notify(
-                new LowStockNotification(
+                (new LowStockNotification(
                     $event->menuItem,
                     $event->inventory
-                )
+                ))->afterCommit()
             );
         }
     }
 }
-
-/**
- * Create the event listener.
- */
-
-/**
- * Handle the event.
- */

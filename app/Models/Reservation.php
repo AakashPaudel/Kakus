@@ -12,6 +12,7 @@ use Illuminate\Support\Carbon;
 /**
  * @property ReservationStatus $status
  * @property Carbon $reservation_date
+ * @property Carbon|null $reminder_sent_at
  */
 class Reservation extends Model
 {
@@ -37,6 +38,7 @@ class Reservation extends Model
             'status' => ReservationStatus::class,
             'start_time' => 'datetime:H:i',
             'end_time' => 'datetime:H:i',
+            'reminder_sent_at' => 'datetime',
         ];
     }
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\V1\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use Dedoc\Scramble\Attributes\Response;
 use Illuminate\Contracts\Cache\LockTimeoutException;
 use Illuminate\Contracts\Encryption\DecryptException;
 use Illuminate\Http\JsonResponse;
@@ -14,6 +15,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Laravel\Fortify\Contracts\TwoFactorAuthenticationProvider;
 use Laravel\Fortify\Fortify;
+use Laravel\Sanctum\NewAccessToken;
 
 class AuthenticationController extends Controller
 {
@@ -25,6 +27,13 @@ class AuthenticationController extends Controller
         private readonly TwoFactorAuthenticationProvider $twoFactorProvider,
     ) {}
 
+    /**
+     * Authenticate a user and issue a Sanctum bearer token, or begin a two-factor challenge.
+     */
+    #[Response(
+        status: 200,
+        type: 'array{token:string,user:array{id:mixed,name:string,email:string,role:string}}',
+    )]
     public function store(Request $request): JsonResponse
     {
         $validated = $request->validate([
@@ -67,14 +76,19 @@ class AuthenticationController extends Controller
             ], 202);
         }
 
+        /** @var NewAccessToken $token */
         $token = $user->createToken('mobile-api', ['api:access']);
+        $plainTextToken = (string) $token->plainTextToken;
 
         return response()->json([
-            'token' => $token->plainTextToken,
+            'token' => $plainTextToken,
             'user' => $this->safeUser($user),
         ]);
     }
 
+    /**
+     * Complete a pending two-factor challenge with either a TOTP or recovery code.
+     */
     public function twoFactorChallenge(Request $request): JsonResponse
     {
         $validated = $request->validate([
@@ -119,10 +133,12 @@ class AuthenticationController extends Controller
                             return [];
                         }
 
+                        /** @var NewAccessToken $token */
                         $token = $user->createToken('mobile-api', ['api:access']);
+                        $plainTextToken = (string) $token->plainTextToken;
 
                         return [
-                            'token' => $token->plainTextToken,
+                            'token' => $plainTextToken,
                             'user' => $this->safeUser($user),
                         ];
                     });

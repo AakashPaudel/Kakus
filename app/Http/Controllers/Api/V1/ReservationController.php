@@ -10,6 +10,7 @@ use App\Http\Resources\ReservationResource;
 use App\Models\Reservation;
 use App\ReservationStatus;
 use App\Services\ReservationService;
+use Dedoc\Scramble\Attributes\Response;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
@@ -19,6 +20,9 @@ use RuntimeException;
 
 class ReservationController extends Controller
 {
+    /**
+     * List the authenticated user's reservations, newest first, with up to 50 items per page.
+     */
     public function index(Request $request): AnonymousResourceCollection
     {
         $validated = $request->validate([
@@ -44,6 +48,11 @@ class ReservationController extends Controller
         return new ReservationResource($reservation);
     }
 
+    /**
+     * Create a reservation. The requested date must not be in the past and the end
+     * time must be later than the start time.
+     */
+    #[Response(status: 422, type: 'array{message:string}')]
     public function store(
         StoreReservationRequest $request,
         ReservationService $reservationService
@@ -59,8 +68,11 @@ class ReservationController extends Controller
                 $request->validated()
             );
         } catch (ReservationConflictException|RuntimeException $exception) {
+            /** @var string $message */
+            $message = (string) $exception->getMessage();
+
             return response()->json([
-                'message' => $exception->getMessage(),
+                'message' => $message,
             ], 422);
         }
 
@@ -71,6 +83,7 @@ class ReservationController extends Controller
             ->setStatusCode(201);
     }
 
+    #[Response(status: 422, type: 'array{message:string}')]
     public function update(
         UpdateReservationRequest $request,
         Reservation $reservation,
@@ -84,14 +97,18 @@ class ReservationController extends Controller
                 $request->validated()
             );
         } catch (ReservationConflictException|RuntimeException $exception) {
+            /** @var string $message */
+            $message = (string) $exception->getMessage();
+
             return response()->json([
-                'message' => $exception->getMessage(),
+                'message' => $message,
             ], 422);
         }
 
         return new ReservationResource($reservation);
     }
 
+    #[Response(status: 422, type: 'array{message:string}')]
     public function cancel(
         Request $request,
         Reservation $reservation,
@@ -106,8 +123,11 @@ class ReservationController extends Controller
                 ReservationStatus::Cancelled
             );
         } catch (RuntimeException $exception) {
+            /** @var string $message */
+            $message = (string) $exception->getMessage();
+
             return response()->json([
-                'message' => $exception->getMessage(),
+                'message' => $message,
             ], 422);
         }
 
@@ -116,6 +136,7 @@ class ReservationController extends Controller
         return new ReservationResource($reservation);
     }
 
+    #[Response(status: 422, type: 'array{message:string}')]
     public function updateStatus(
         Request $request,
         Reservation $reservation,
@@ -140,8 +161,11 @@ class ReservationController extends Controller
                 ReservationStatus::from($validated['status'])
             );
         } catch (RuntimeException $exception) {
+            /** @var string $message */
+            $message = (string) $exception->getMessage();
+
             return response()->json([
-                'message' => $exception->getMessage(),
+                'message' => $message,
             ], 422);
         }
 

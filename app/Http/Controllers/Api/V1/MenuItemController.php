@@ -10,6 +10,9 @@ use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 class MenuItemController extends Controller
 {
+    /**
+     * List available menu items from active categories with optional search and pagination.
+     */
     public function index(Request $request): AnonymousResourceCollection
     {
         $validated = $request->validate([

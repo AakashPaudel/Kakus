@@ -10,4 +10,7 @@ Artisan::command('inspire', function () {
 use Illuminate\Support\Facades\Schedule;
 
 Schedule::command('reservations:send-reminders')
-    ->dailyAt('18:00');
+    ->dailyAt('18:00')
+    ->timezone(config('app.timezone'))
+    ->withoutOverlapping()
+    ->onOneServer();

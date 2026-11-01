@@ -2,11 +2,11 @@
 
 namespace App\Services;
 
+use App\Events\ReservationStatusChanged;
 use App\Exceptions\ReservationConflictException;
 use App\Models\Reservation;
 use App\Models\RestaurantTable;
 use App\Models\User;
-use App\Notifications\ReservationStatusNotification;
 use App\ReservationStatus;
 use Illuminate\Support\Facades\DB;
 use RuntimeException;
@@ -93,7 +93,6 @@ class ReservationService
         ReservationStatus $newStatus
     ): Reservation {
         return DB::transaction(function () use (
-
             $reservation,
             $newStatus
         ) {
@@ -134,13 +133,17 @@ class ReservationService
                 'status' => $newStatus,
             ]);
 
-            $reservation->user->notify(
-                new ReservationStatusNotification(
-                    $reservation->fresh()
-                )
+            $updatedReservation = $reservation->fresh([
+                'restaurantTable',
+            ]);
+
+            ReservationStatusChanged::dispatch(
+                $updatedReservation,
+                $currentStatus,
+                $newStatus
             );
 
-            return $reservation->fresh();
+            return $updatedReservation;
         });
     }
 
