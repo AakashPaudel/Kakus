@@ -1,2 +1,10 @@
 *
 !.gitignore
+!menu-items/
+!hero-section/
+
+menu-items/*
+!menu-items/*.jpg
+
+hero-section/*
+!hero-section/*.jpg

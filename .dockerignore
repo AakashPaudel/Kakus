@@ -1,0 +1,31 @@
+# Git
+.git
+.github
+
+# Local dependencies
+/vendor
+/node_modules
+
+# Local environment and secrets
+.env
+.env.*
+!.env.example
+
+# Generated frontend files
+/public/build
+/public/hot
+
+# Laravel generated files
+/bootstrap/cache/*.php
+/public/storage
+
+# Logs and temporary files
+/storage/logs/*
+/storage/framework/cache/*
+/storage/framework/sessions/*
+/storage/framework/views/*
+/storage/framework/testing/*
+
+# Local editor files
+.idea
+.vscode
