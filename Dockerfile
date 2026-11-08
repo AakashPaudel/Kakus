@@ -92,11 +92,13 @@ RUN npm ci
 COPY . .
 
 # --------------------------------------------------
-# 9. Generate optimized Laravel autoload files
-# --------------------------------------------------
+# Receive the frontend application name from Render
+ARG VITE_APP_NAME
+
+# Build React frontend assets
 RUN APP_ENV=production \
     APP_KEY=base64:AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA= \
-    composer dump-autoload --no-dev --optimize --no-scripts
+    npm run build
 
 # --------------------------------------------------
 # 10. Discover Laravel packages
